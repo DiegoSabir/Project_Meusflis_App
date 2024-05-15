@@ -1,5 +1,6 @@
 package com.example.meusflis;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -8,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvForgotPassword, tvSignUp;
     private Button btnSignIn, btnSignUp, btnBackSignIn, btnSendForgotPassword, btnBackFromForgotPassword;
     private CheckBox chkRememberUsername;
+    DataBase database;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +32,30 @@ public class MainActivity extends AppCompatActivity {
 
         findIdViews();
 
+        database = new DataBase(MainActivity.this);
+        //Comprobacion de conexion a la base de datos
+        if (database.getReadableDatabase() != null) {
+            Toast.makeText(MainActivity.this, "La base de datos está conectada", Toast.LENGTH_SHORT).show();
+        }
+
         changeVisibilities();
+
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = etEmail.getText().toString();
+                String password = etPassword.getText().toString();
+
+                if (database.checkUser(email, password)) {
+                    Intent intent = new Intent(MainActivity.this, Catalogue.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void findIdViews() {

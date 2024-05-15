@@ -61,6 +61,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="15dp"
             android:text="SIGN IN"
+            android:onClick="onClick"
             android:layout_gravity="center_horizontal"/>
 
         <LinearLayout
@@ -136,6 +137,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="15dp"
             android:text="SEND"
+            android:onClick="onClick"
             android:layout_gravity="center_horizontal"/>
 
         <Button

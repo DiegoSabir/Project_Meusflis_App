@@ -25,6 +25,10 @@
             android:name=".MainActivity">
 
         </activity>
+        <activity
+            android:name=".Catalogue"
+            android:exported="false" >
+        </activity>
     </application>
 
 </manifest>
