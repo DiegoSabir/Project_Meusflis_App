@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/option_profile" android:title="My Profile"/>
+
+    <item android:id="@+id/option_filter" android:title="Filter" >
+        <menu>
+            <item android:id="@+id/option_by_author" android:title="Author"/>
+            <item android:id="@+id/option_by_demography" android:title="Demography"/>
+            <item android:id="@+id/option_by_genre" android:title="Genre"/>
+        </menu>
+    </item>
+
+    <item android:id="@+id/option_exit" android:title="Exit"/>
+
+</menu>

@@ -29,6 +29,10 @@
             android:name=".Catalogue"
             android:exported="false" >
         </activity>
+        <activity
+            android:name=".Profile"
+            android:exported="false" >
+        </activity>
     </application>
 
 </manifest>

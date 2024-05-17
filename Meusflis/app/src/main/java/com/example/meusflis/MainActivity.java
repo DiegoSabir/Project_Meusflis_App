@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (database.checkUser(email, password)) {
                     Intent intent = new Intent(MainActivity.this, Catalogue.class);
+                    intent.putExtra("email", email);
                     startActivity(intent);
                     finish();
                 }
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                         showMaxAttemptsDialog();
                     }
                     else {
-                        Toast.makeText(MainActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Incorrect credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -155,11 +156,11 @@ public class MainActivity extends AppCompatActivity {
                 String card = etCardSignUp.getText().toString();
 
                 if (email.isEmpty() || password.isEmpty() || name.isEmpty() || telephone.isEmpty() || card.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Please, complete all fields", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     if (database.addUser(email, password, name, telephone, card)) {
-                        Toast.makeText(MainActivity.this, "¡Usuario registrado exitosamente!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "User successfully added!", Toast.LENGTH_SHORT).show();
 
                         // Limpiar campos de entrada después del registro
                         etEmailSignUp.setText("");
@@ -173,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                         llSignIn.setVisibility(View.VISIBLE);
                     }
                     else {
-                        Toast.makeText(MainActivity.this, "Error al registrar el usuario", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Error adding user", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
