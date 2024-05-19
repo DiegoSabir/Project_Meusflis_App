@@ -1,28 +1,17 @@
 package com.example.meusflis;
 
-public class ListElement {
-    public String color;
+public class MultimediaContent {
     public String title;
     public String genre;
     public String author;
     public String demographicCategories;
 
-    public ListElement(String color, String title, String genre, String author, String demographicCategories) {
-        this.color = color;
+    public MultimediaContent(String title, String genre, String author, String demographicCategories) {
         this.title = title;
         this.genre = genre;
         this.author = author;
         this.demographicCategories = demographicCategories;
     }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public String getTitle() {
         return title;
     }

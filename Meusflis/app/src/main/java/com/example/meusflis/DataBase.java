@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
-
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.util.ArrayList;
@@ -17,52 +16,33 @@ public class DataBase extends SQLiteAssetHelper {
     private static final String DATABASE_NAME = "BBDD.db";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_USER = "user";
-    private static final String COLUMN_EMAIL= "email";
+    private static final String COLUMN_EMAIL = "email";
     private static final String COLUMN_PASSWORD = "password";
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_TELEPHONE = "telephone";
-    private static final String COLUMN_CARD= "card";
-    private static final String TABLE_CONTENT = "content";
+    private static final String COLUMN_CARD = "card";
     private final Context context;
     SQLiteDatabase bbdd;
     Cursor consulta;
 
-    /**
-     * Constructor para crear una instancia de la clase DataBase.
-     * @param context El contexto de la aplicación.
-     */
     public DataBase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
 
-    /**
-     * Obtiene una instancia de la base de datos en modo lectura.
-     * @return Una instancia de SQLiteDatabase en modo lectura.
-     */
     @Override
     public synchronized SQLiteDatabase getReadableDatabase() {
         return super.getReadableDatabase();
     }
 
-    /**
-     * Obtiene una instancia de la base de datos en modo escritura.
-     * @return Una instancia de SQLiteDatabase en modo escritura.
-     */
     @Override
     public synchronized SQLiteDatabase getWritableDatabase() {
         return super.getWritableDatabase();
     }
 
-    /**
-     * Verifica si un usuario existe en la base de datos con el email y contraseña proporcionados.
-     * @param email El email del usuario.
-     * @param password La contraseña del usuario.
-     * @return true si el usuario existe, false en caso contrario.
-     */
     public boolean checkUser(String email, String password) {
         bbdd = this.getReadableDatabase();
-        try{
+        try {
             consulta = bbdd.query(TABLE_USER, null, COLUMN_EMAIL + "=? AND " + COLUMN_PASSWORD + "=?", new String[]{email, password}, null, null, null);
             boolean exists = consulta.getCount() > 0;
             return exists;
@@ -77,11 +57,6 @@ public class DataBase extends SQLiteAssetHelper {
         }
     }
 
-    /**
-     * Obtiene los detalles de un usuario a partir de su email.
-     * @param email El email del usuario.
-     * @return Un HashMap con los detalles del usuario.
-     */
     public HashMap<String, String> getUserDetails(String email) {
         HashMap<String, String> userDetails = new HashMap<>();
         bbdd = this.getReadableDatabase();
@@ -109,15 +84,6 @@ public class DataBase extends SQLiteAssetHelper {
         return userDetails;
     }
 
-    /**
-     * Agrega un nuevo usuario a la base de datos.
-     * @param email El email del usuario.
-     * @param password La contraseña del usuario.
-     * @param name El nombre del usuario.
-     * @param telephone El teléfono del usuario.
-     * @param card El número de tarjeta del usuario.
-     * @return true si el usuario fue agregado exitosamente, false en caso contrario.
-     */
     public boolean addUser(String email, String password, String name, String telephone, String card) {
         bbdd = this.getWritableDatabase();
         try {
@@ -139,15 +105,6 @@ public class DataBase extends SQLiteAssetHelper {
         }
     }
 
-    /**
-     * Actualiza los detalles de un usuario existente en la base de datos.
-     * @param email El email del usuario.
-     * @param password La nueva contraseña del usuario.
-     * @param name El nuevo nombre del usuario.
-     * @param telephone El nuevo teléfono del usuario.
-     * @param card El nuevo número de tarjeta del usuario.
-     * @return true si los detalles del usuario fueron actualizados exitosamente, false en caso contrario.
-     */
     public boolean updateUserDetails(String email, String password, String name, String telephone, String card) {
         bbdd = this.getWritableDatabase();
         try {
@@ -167,25 +124,67 @@ public class DataBase extends SQLiteAssetHelper {
         }
     }
 
-    /**
-     * Obtiene una lista de elementos de contenido de la base de datos.
-     * @return Una lista de objetos `ListElement` que representan el contenido de la tabla content
-     */
-    public List<ListElement> getContents() {
-        List<ListElement> elements = new ArrayList<>();
+    public List<String> getGenreNames() {
+        List<String> genreNames = new ArrayList<>();
+        bbdd = this.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            cursor = bbdd.query("genre", new String[]{"name"}, null, null, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    genreNames.add(cursor.getString(cursor.getColumnIndex("name")));
+                }
+                while (cursor.moveToNext());
+            }
+        }
+        finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            bbdd.close();
+        }
+        return genreNames;
+    }
+
+    public List<MultimediaContent> getFilteredContents(String selectedGenre, String selectedDemographicCategory) {
+        List<MultimediaContent> filteredElements = new ArrayList<>();
         bbdd = this.getReadableDatabase();
         Cursor cursorContent = null;
         Cursor cursorGenre = null;
 
+        String query = "SELECT id, title, author, demographic_category FROM multimedia_content";
+
+        // Construir la consulta con los filtros si se han seleccionado valores en los Spinners
+        if (!selectedGenre.equals("All") || !selectedDemographicCategory.equals("All")) {
+            query += " WHERE";
+
+            if (!selectedGenre.equals("All")) {
+                query += " id IN (SELECT multimedia_content_id FROM multimedia_content_genre WHERE genre_id = (SELECT id FROM genre WHERE name = '" + selectedGenre + "'))";
+            }
+
+            if (!selectedDemographicCategory.equals("All")) {
+                if (!selectedGenre.equals("All")) {
+                    query += " AND";
+                }
+                query += " demographic_category = '" + selectedDemographicCategory + "'";
+            }
+        }
+
         try {
-            cursorContent = bbdd.rawQuery("SELECT title, author, demography FROM content", null);
+            cursorContent = bbdd.rawQuery(query, null);
             if (cursorContent.moveToFirst()) {
                 do {
                     String title = cursorContent.getString(cursorContent.getColumnIndex("title"));
                     String author = cursorContent.getString(cursorContent.getColumnIndex("author"));
-                    String demography = cursorContent.getString(cursorContent.getColumnIndex("demography"));
+                    String demographicCategory = cursorContent.getString(cursorContent.getColumnIndex("demographic_category"));
 
-                    cursorGenre = bbdd.rawQuery("SELECT g.name FROM genre g JOIN content_genre cg ON g.id_genre = cg.id_genre WHERE cg.title = ?", new String[]{title});
+                    cursorGenre = bbdd.rawQuery(
+                            "SELECT g.name FROM genre g " +
+                                    "JOIN multimedia_content_genre mcg ON g.id = mcg.genre_id " +
+                                    "WHERE mcg.multimedia_content_id = (SELECT id FROM multimedia_content WHERE title = ?)",
+                            new String[]{title}
+                    );
                     List<String> genres = new ArrayList<>();
                     if (cursorGenre.moveToFirst()) {
                         do {
@@ -195,7 +194,7 @@ public class DataBase extends SQLiteAssetHelper {
                     }
                     String genreString = TextUtils.join(", ", genres);
 
-                    elements.add(new ListElement("#FFFFFF", title, genreString, author, demography));
+                    filteredElements.add(new MultimediaContent(title, genreString, author, demographicCategory));
                 }
                 while (cursorContent.moveToNext());
             }
@@ -209,6 +208,7 @@ public class DataBase extends SQLiteAssetHelper {
             }
             bbdd.close();
         }
-        return elements;
+        return filteredElements;
     }
+
 }

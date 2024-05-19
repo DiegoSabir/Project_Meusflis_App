@@ -28,8 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences loginSharedPreferences;
     private static final int MAX_FAILED_ATTEMPTS = 3;
     private int failedAttempts = 0;
-    DataBase database;
-
+    private DataBase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,26 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
         loginSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // Evitar que el teclado aparezca automáticamente al iniciar la actividad
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         initViews();
 
-        String savedEmail = loginSharedPreferences.getString("email", "");
-        if (!savedEmail.isEmpty()) {
-            etEmail.setText(savedEmail);
-        }
-        else {
-            etEmail.setHint("Email");
-        }
+        checkSavedEmail();
 
-        //Comprobacion de conexion a la base de datos
-        database = new DataBase(MainActivity.this);
-        if (database.getReadableDatabase() != null) {
-            Toast.makeText(MainActivity.this, "La base de datos está conectada", Toast.LENGTH_SHORT).show();
-        }
-
-        changeVisibilities();
+        checkDatabaseConnection();
 
         setupListeners();
     }
@@ -88,113 +74,154 @@ public class MainActivity extends AppCompatActivity {
         chkRememberUsername = findViewById(R.id.chkRememberUsername);
     }
 
-    private void changeVisibilities(){
-        tvForgotPassword.setOnClickListener(view -> {
-            llForgotPass.setVisibility(View.VISIBLE);
-            llSignIn.setVisibility(View.GONE);
-        });
-
-        btnBackFromForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                llForgotPass.setVisibility(View.GONE);
-                llSignIn.setVisibility(View.VISIBLE);
-            }
-        });
-
-        tvSignUp.setOnClickListener(view -> {
-            llSignUp.setVisibility(View.VISIBLE);
-            llSignIn.setVisibility(View.GONE);
-        });
-
-        btnBackSignIn.setOnClickListener(view -> {
-            llSignUp.setVisibility(View.GONE);
-            llSignIn.setVisibility(View.VISIBLE);
-        });
+    private void checkSavedEmail() {
+        String savedEmail = loginSharedPreferences.getString("email", "");
+        if (!savedEmail.isEmpty()) {
+            etEmail.setText(savedEmail);
+        }
+        else {
+            etEmail.setHint("Email");
+        }
     }
 
-    private void setupListeners(){
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = etEmail.getText().toString();
-                String password = etPassword.getText().toString();
+    private void checkDatabaseConnection() {
+        database = new DataBase(MainActivity.this);
+        if (database.getReadableDatabase() != null) {
+            Toast.makeText(MainActivity.this, "Database connected", Toast.LENGTH_SHORT).show();
+        }
+    }
 
-                // Guardar el email en las preferencias compartidas si el CheckBox está marcado
-                if (chkRememberUsername.isChecked()) {
-                    SharedPreferences.Editor editor = loginSharedPreferences.edit();
-                    editor.putString("email", email);
-                    editor.apply();
-                }
+    private void setupListeners() {
+        setupVisibilityListeners();
+        setupSignInButtonListener();
+        setupSignUpButtonListener();
+    }
 
-                if (database.checkUser(email, password)) {
-                    Intent intent = new Intent(MainActivity.this, Catalogue.class);
-                    intent.putExtra("email", email);
-                    startActivity(intent);
-                    finish();
-                }
+    private void setupVisibilityListeners() {
+        tvForgotPassword.setOnClickListener(view -> showForgotPasswordLayout());
+        btnBackFromForgotPassword.setOnClickListener(view -> showSignInLayout());
+        tvSignUp.setOnClickListener(view -> showSignUpLayout());
+        btnBackSignIn.setOnClickListener(view -> showSignInLayout());
+    }
 
-                else {
-                    failedAttempts++;
-                    if (failedAttempts >= MAX_FAILED_ATTEMPTS) {
-                        showMaxAttemptsDialog();
-                    }
-                    else {
-                        Toast.makeText(MainActivity.this, "Incorrect credentials", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
+    private void showForgotPasswordLayout() {
+        llForgotPass.setVisibility(View.VISIBLE);
+        llSignIn.setVisibility(View.GONE);
+    }
 
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = etEmailSignUp.getText().toString();
-                String password = etPasswordSignUp.getText().toString();
-                String name = etNameSignUp.getText().toString();
-                String telephone = etTelephoneSignUp.getText().toString();
-                String card = etCardSignUp.getText().toString();
+    private void showSignInLayout() {
+        llForgotPass.setVisibility(View.GONE);
+        llSignIn.setVisibility(View.VISIBLE);
+        llSignUp.setVisibility(View.GONE);
+    }
 
-                if (email.isEmpty() || password.isEmpty() || name.isEmpty() || telephone.isEmpty() || card.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Please, complete all fields", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    if (database.addUser(email, password, name, telephone, card)) {
-                        Toast.makeText(MainActivity.this, "User successfully added!", Toast.LENGTH_SHORT).show();
+    private void showSignUpLayout() {
+        llSignUp.setVisibility(View.VISIBLE);
+        llSignIn.setVisibility(View.GONE);
+    }
 
-                        // Limpiar campos de entrada después del registro
-                        etEmailSignUp.setText("");
-                        etPasswordSignUp.setText("");
-                        etNameSignUp.setText("");
-                        etTelephoneSignUp.setText("");
-                        etCardSignUp.setText("");
+    private void setupSignInButtonListener() {
+        btnSignIn.setOnClickListener(view -> handleSignIn());
+    }
 
-                        // Cambiar a la vista de inicio de sesión
-                        llSignUp.setVisibility(View.GONE);
-                        llSignIn.setVisibility(View.VISIBLE);
-                    }
-                    else {
-                        Toast.makeText(MainActivity.this, "Error adding user", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
+    private void handleSignIn() {
+        String email = etEmail.getText().toString();
+        String password = etPassword.getText().toString();
+
+        if (chkRememberUsername.isChecked()) {
+            saveEmailToPreferences(email);
+        }
+
+        if (database.checkUser(email, password)) {
+            navigateToCatalogue(email);
+        }
+        else {
+            handleFailedSignInAttempt();
+        }
+    }
+
+    private void saveEmailToPreferences(String email) {
+        SharedPreferences.Editor editor = loginSharedPreferences.edit();
+        editor.putString("email", email);
+        editor.apply();
+    }
+
+    private void navigateToCatalogue(String email) {
+        Intent intent = new Intent(MainActivity.this, Catalogue.class);
+        intent.putExtra("email", email);
+        startActivity(intent);
+        finish();
+    }
+
+    private void handleFailedSignInAttempt() {
+        failedAttempts++;
+        if (failedAttempts >= MAX_FAILED_ATTEMPTS) {
+            showMaxAttemptsDialog();
+        } else {
+            Toast.makeText(MainActivity.this, "Incorrect credentials", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void showMaxAttemptsDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Número máximo de intentos alcanzado")
+        new AlertDialog.Builder(this)
+                .setTitle("Maximum number of attempts reached")
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage("Se ha excedido el número máximo de intentos de inicio de sesión fallidos.\n " +
-                        "La aplicación se cerrará.")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        failedAttempts = 0;
-                        finish();
-                    }
+                .setMessage("The maximum number of failed login attempts has been exceeded.\nThe application will close.")
+                .setPositiveButton("Ok", (dialog, which) -> {
+                    failedAttempts = 0;
+                    finish();
                 })
                 .setCancelable(false)
                 .show();
+    }
+
+    private void setupSignUpButtonListener() {
+        btnSignUp.setOnClickListener(view -> handleSignUp());
+    }
+
+    private void handleSignUp() {
+        String email = etEmailSignUp.getText().toString();
+        String password = etPasswordSignUp.getText().toString();
+        String name = etNameSignUp.getText().toString();
+        String telephone = etTelephoneSignUp.getText().toString();
+        String card = etCardSignUp.getText().toString();
+
+        if (validateSignUpFields(email, password, name, telephone, card)) {
+            if (database.addUser(email, password, name, telephone, card)) {
+                showSignUpSuccessMessage();
+                clearSignUpFields();
+                showSignInLayout();
+            }
+            else {
+                showSignUpErrorMessage();
+            }
+        }
+        else {
+            showIncompleteFieldsMessage();
+        }
+    }
+
+    private boolean validateSignUpFields(String email, String password, String name, String telephone, String card) {
+        return !email.isEmpty() && !password.isEmpty() && !name.isEmpty() && !telephone.isEmpty() && !card.isEmpty();
+    }
+
+    private void showSignUpSuccessMessage() {
+        Toast.makeText(MainActivity.this, "User successfully added!", Toast.LENGTH_SHORT).show();
+    }
+
+    private void clearSignUpFields() {
+        etEmailSignUp.setText("");
+        etPasswordSignUp.setText("");
+        etNameSignUp.setText("");
+        etTelephoneSignUp.setText("");
+        etCardSignUp.setText("");
+    }
+
+    private void showSignUpErrorMessage() {
+        Toast.makeText(MainActivity.this, "Error adding user", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showIncompleteFieldsMessage() {
+        Toast.makeText(MainActivity.this, "Please, complete all fields", Toast.LENGTH_SHORT).show();
     }
 }

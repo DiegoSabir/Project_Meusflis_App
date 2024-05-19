@@ -5,11 +5,10 @@
 
     <item android:id="@+id/option_profile" android:title="My Profile"/>
 
-    <item android:id="@+id/option_filter" android:title="Filter" >
+    <item android:id="@+id/option_lenguages" android:title="Lenguages" >
         <menu>
-            <item android:id="@+id/option_by_author" android:title="Author"/>
-            <item android:id="@+id/option_by_demography" android:title="Demography"/>
-            <item android:id="@+id/option_by_genre" android:title="Genre"/>
+            <item android:id="@+id/option_spanish" android:title="Author"/>
+            <item android:id="@+id/option_galician" android:title="Demography"/>
         </menu>
     </item>
 
