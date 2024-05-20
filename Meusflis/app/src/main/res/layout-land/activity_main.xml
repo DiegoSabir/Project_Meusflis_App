@@ -16,13 +16,13 @@
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/etTextSize"
+        android:textSize="20sp"
         android:textStyle="bold"/>
 
     <ImageView
-        android:layout_width="@dimen/ivBtnWidth"
-        android:layout_height="@dimen/ivBtnHeight"
-        android:layout_marginTop="@dimen/ivMarginTop"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/account_icon"
         android:transitionName="splash_text"
         android:layout_gravity="center_horizontal"/>
@@ -38,43 +38,44 @@
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/etEmail"
+            android:hint="Email"
             android:textColor="@color/black"
-            android:textSize="@dimen/etTextSize"
-            android:padding="@dimen/paddings"
+            android:textSize="20sp"
+            android:padding="20dp"
             android:inputType="text"/>
 
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
-            android:hint="@string/etPassword"
+            android:layout_marginTop="15dp"
+            android:hint="Password"
             android:textColor="@color/black"
-            android:textSize="@dimen/etTextSize"
-            android:padding="@dimen/paddings"
+            android:textSize="20sp"
+            android:padding="20dp"
             android:inputType="textPassword"/>
 
         <Button
             android:id="@+id/btnSignIn"
-            android:layout_width="@dimen/btnWidth"
-            android:layout_height="@dimen/btnHeight"
-            android:layout_marginTop="@dimen/marginTop"
-            android:text="@string/btnSignIn"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:text="SIGN IN"
+            android:onClick="onClick"
             android:layout_gravity="center_horizontal"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/paddings">
+            android:padding="10dp">
 
             <CheckBox
                 android:id="@+id/chkRememberUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/chkRememberUsername" />
+                android:text="Remember me?" />
 
             <TextView
                 android:id="@+id/tvForgotPassword"
@@ -82,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:gravity="end"
-                android:text="@string/tvForgotPassword"
+                android:text="Forgot Password"
                 android:textStyle="bold"
                 android:textColor="@color/black" />
 
@@ -93,19 +94,18 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:padding="@dimen/paddings">
+            android:padding="10dp">
 
             <TextView
-                android:id="@+id/tvSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tvSignUp"/>
+                android:text="New to Meusflis?"/>
 
             <TextView
                 android:id="@+id/tvSignUp2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tvSignUp2"
+                android:text="Sign up now"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginStart="10dp"/>
@@ -125,26 +125,27 @@
             android:id="@+id/etEmailForgot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/etEmailForgot"
+            android:hint="Email"
             android:textColor="@color/black"
-            android:textSize="@dimen/etTextSize"
-            android:padding="@dimen/paddings"
+            android:textSize="20sp"
+            android:padding="20dp"
             android:inputType="text"/>
 
         <Button
             android:id="@+id/btnSendForgotPassword"
-            android:layout_width="@dimen/btnWidth"
-            android:layout_height="@dimen/btnHeight"
-            android:layout_marginTop="@dimen/marginTop"
-            android:text="@string/btnSendForgotPassword"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:text="SEND"
+            android:onClick="onClick"
             android:layout_gravity="center_horizontal"/>
 
         <Button
             android:id="@+id/btnBackFromForgotPassword"
-            android:layout_width="@dimen/btnWidth"
-            android:layout_height="@dimen/btnHeight"
-            android:layout_marginTop="@dimen/marginTop"
-            android:text="@string/btnBackFromForgotPassword"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:text="BACK"
             android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>
@@ -160,65 +161,65 @@
             android:id="@+id/etEmailSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/etEmailSignUp"
+            android:hint="Email"
             android:textColor="@color/black"
-            android:textSize="@dimen/etTextSize"
+            android:textSize="20sp"
             android:inputType="text"/>
 
         <EditText
             android:id="@+id/etPasswordSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
-            android:hint="@string/etPasswordSignUp"
+            android:layout_marginTop="10dp"
+            android:hint="Password"
             android:textColor="@color/black"
-            android:textSize="@dimen/etTextSize"
+            android:textSize="20sp"
             android:inputType="textPassword"/>
 
         <EditText
             android:id="@+id/etNameSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
-            android:hint="@string/etNameSignUp"
+            android:layout_marginTop="10dp"
+            android:hint="Name"
             android:textColor="@color/black"
-            android:textSize="@dimen/etTextSize"
+            android:textSize="20sp"
             android:inputType="textCapWords"/>
 
         <EditText
             android:id="@+id/etTelephoneSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
-            android:hint="@string/etTelephoneSignUp"
+            android:layout_marginTop="10dp"
+            android:hint="Telephone"
             android:textColor="@color/black"
-            android:textSize="@dimen/etTextSize"
+            android:textSize="20sp"
             android:inputType="text"/>
 
         <EditText
             android:id="@+id/etCardSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
-            android:hint="@string/etCardSignUp"
+            android:layout_marginTop="10dp"
+            android:hint="Card"
             android:textColor="@color/black"
-            android:textSize="@dimen/etTextSize"
+            android:textSize="20sp"
             android:inputType="textCapCharacters"/>
 
         <Button
             android:id="@+id/btnSignUp"
-            android:layout_width="@dimen/btnWidth"
-            android:layout_height="@dimen/btnHeight"
-            android:layout_marginTop="@dimen/marginTop"
-            android:text="@string/btnSignUp"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:text="SIGN UP"
             android:layout_gravity="center_horizontal"/>
 
         <Button
             android:id="@+id/btnBackSignIn"
-            android:layout_width="@dimen/btnWidth"
-            android:layout_height="@dimen/btnHeight"
-            android:layout_marginTop="@dimen/marginTop"
-            android:text="@string/btnBackSignIn"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:text="BACK"
             android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>

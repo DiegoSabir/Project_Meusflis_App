@@ -27,7 +27,7 @@ public class Catalogue extends MenuActivity implements SearchView.OnQueryTextLis
     private List<MultimediaContent> elements;
     private String email;
     private ListAdapter listAdapter;
-    private DataBase db;
+    private Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class Catalogue extends MenuActivity implements SearchView.OnQueryTextLis
 
         initViews();
         initViewFlipper();
-        db = new DataBase(this);
+        db = new Database(this);
 
         initSpinners();
         initListeners();
@@ -165,8 +165,8 @@ public class Catalogue extends MenuActivity implements SearchView.OnQueryTextLis
     private void showExitDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setIcon(android.R.drawable.ic_menu_close_clear_cancel)
-                .setTitle("Exit App")
-                .setMessage("¿Do you want to exit the app or log out?")
+                .setTitle(getString(R.string.exit_dialog_title)) // Obtener el título desde strings.xml
+                .setMessage(getString(R.string.exit_dialog_message)) // Obtener el mensaje desde strings.xml
                 .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -181,6 +181,7 @@ public class Catalogue extends MenuActivity implements SearchView.OnQueryTextLis
                 })
                 .show();
     }
+
 
     private void logOut() {
         Intent intent = new Intent(Catalogue.this, MainActivity.class);

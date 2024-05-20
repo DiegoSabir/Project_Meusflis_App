@@ -1,0 +1,65 @@
+<resources>
+    <!-- Nome da aplicación -->
+    <string name="app_name">Meusflis</string>
+
+
+    <!-- activity_main.xml -->
+    <string name="etEmail">Correo electrónico</string>
+    <string name="etPassword">Contrasinal</string>
+    <string name="btnSignIn">INICIAR SESIÓN</string>
+    <string name="chkRememberUsername">¿Lembrarme?</string>
+    <string name="tvForgotPassword">¿Esqueceches o contrasinal?</string>
+    <string name="tvSignUp">¿Novo en Meusflis?</string>
+    <string name="tvSignUp2">Rexístrate agora</string>
+    <string name="etEmailForgot">Correo electrónico</string>
+    <string name="btnSendForgotPassword">ENVIAR</string>
+    <string name="btnBackFromForgotPassword">VOLTAR</string>
+    <string name="etEmailSignUp">Correo electrónico</string>
+    <string name="etPasswordSignUp">Contrasinal</string>
+    <string name="etNameSignUp">Nome</string>
+    <string name="etTelephoneSignUp">Teléfono</string>
+    <string name="etCardSignUp">Tarxeta</string>
+    <string name="btnSignUp">REXISTRARSE</string>
+    <string name="btnBackSignIn">VOLTAR</string>
+
+
+    <!-- MainActivity.java -->
+    <string name="toast_incorrect_credentials">Credenciais incorrectas</string>
+    <string name="dialog_max_attempts_title">Máximo número de intentos alcanzado</string>
+    <string name="dialog_max_attempts_message">Excedeu o número máximo de intentos de inicio de sesión fallidos.\nA aplicación pecharase.</string>
+    <string name="dialog_positive_button">Aceptar</string>
+    <string name="toast_user_added">¡Usuario engadido con éxito!</string>
+    <string name="toast_error_adding_user">Erro ao engadir usuario</string>
+    <string name="toast_complete_all_fields">Por favor, completa todos os campos</string>
+    <string name="toast_email_not_found">Correo electrónico non atopado na base de datos</string>
+    <string name="toast_enter_email">Por favor, introduce o teu correo electrónico</string>
+    <string name="notification_title">Recuperación de contrasinal</string>
+    <string name="notification_content">O teu contrasinal é: %s</string>
+
+
+    <!-- activity_catalogue.xml -->
+    <string name="tvPopular">MÁIS VALORADAS</string>
+    <string name="tvCatalogue">Catálogo</string>
+    <string name="tvSpinnerGenre">Xénero:</string>
+    <string name="tvSpinnerCategory">Categoría:</string>
+
+
+    <!-- Catalogue.java -->
+    <string name="exit_dialog_title">Saír da aplicación</string>
+    <string name="exit_dialog_message">¿Queres saír da aplicación ou pechar sesión?</string>
+
+
+    <!-- activity_profile.xml -->
+    <string name="etEmailProfile">Correo electrónico</string>
+    <string name="etPasswordProfile">Contrasinal</string>
+    <string name="etNameProfile">Nome</string>
+    <string name="etTelephoneProfile">Teléfono</string>
+    <string name="etCardProfile">Tarxeta</string>
+    <string name="btnSaveChangesProfile">GARDAR CAMBIOS</string>
+    <string name="btnBackProfile">VOLTAR</string>
+
+
+    <!-- Profile.java -->
+    <string name="profile_update_success">Perfil actualizado con éxito</string>
+    <string name="profile_update_failed">Erro ao actualizar o perfil</string>
+</resources>

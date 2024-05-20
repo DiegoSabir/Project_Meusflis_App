@@ -11,23 +11,23 @@
         android:id="@+id/tvPopular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MOST RATED"
+        android:text="@string/tvPopular"
         android:textColor="@android:color/black"
-        android:textSize="30sp"
+        android:textSize="@dimen/textViewsTitles"
         android:textStyle="bold"/>
     
     <ViewFlipper
         android:id="@+id/vfCarousel"
         android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+        android:layout_height="@dimen/viewFlipperHeight"/>
 
     <TextView
         android:id="@+id/tvCatalogue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Catalogue"
+        android:text="@string/tvCatalogue"
         android:textColor="@android:color/black"
-        android:textSize="30sp"
+        android:textSize="@dimen/textViewsTitles"
         android:textStyle="bold"/>
 
     <androidx.appcompat.widget.SearchView
@@ -47,27 +47,27 @@
             android:id="@+id/tvSpinnerGenre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Genre:"
-            android:textSize="15sp"
+            android:text="@string/tvSpinnerGenre"
+            android:textSize="@dimen/llSpinnersTextViews"
             android:textStyle="bold"/>
 
         <Spinner
             android:id="@+id/spGenre"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="50dp"/>
 
         <TextView
             android:id="@+id/tvSpinnerCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Category:"
-            android:textSize="15sp"
+            android:text="@string/tvSpinnerCategory"
+            android:textSize="@dimen/llSpinnersTextViews"
             android:textStyle="bold"/>
 
         <Spinner
             android:id="@+id/spDemographicCategories"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="50dp"/>
 
     </LinearLayout>
 

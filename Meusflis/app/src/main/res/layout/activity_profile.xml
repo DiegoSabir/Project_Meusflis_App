@@ -8,9 +8,9 @@
     android:gravity="center">
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="@dimen/ivBtnWidth"
+        android:layout_height="@dimen/ivBtnHeight"
+        android:layout_marginTop="@dimen/ivMarginTop"
         android:src="@drawable/account_icon"
         android:transitionName="splash_text"
         android:layout_gravity="center_horizontal"/>
@@ -25,71 +25,71 @@
             android:id="@+id/etEmailProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/etEmailProfile"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:padding="20dp"
+            android:textSize="@dimen/etTextSize"
+            android:padding="@dimen/paddings"
             android:inputType="text"/>
 
         <EditText
             android:id="@+id/etPasswordProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:hint="Password"
+            android:layout_marginTop="@dimen/marginTop"
+            android:hint="@string/etPasswordProfile"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:padding="20dp"
+            android:textSize="@dimen/etTextSize"
+            android:padding="@dimen/paddings"
             android:inputType="text"/>
 
         <EditText
             android:id="@+id/etNameProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:hint="Name"
+            android:layout_marginTop="@dimen/marginTop"
+            android:hint="@string/etNameProfile"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:padding="20dp"
+            android:textSize="@dimen/etTextSize"
+            android:padding="@dimen/paddings"
             android:inputType="textCapWords"/>
 
         <EditText
             android:id="@+id/etTelephoneProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:hint="Telephone"
+            android:layout_marginTop="@dimen/marginTop"
+            android:hint="@string/etTelephoneProfile"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:padding="20dp"
+            android:textSize="@dimen/etTextSize"
+            android:padding="@dimen/paddings"
             android:inputType="text"/>
 
         <EditText
             android:id="@+id/etCardProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:hint="Card"
+            android:layout_marginTop="@dimen/marginTop"
+            android:hint="@string/etCardProfile"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:padding="20dp"
+            android:textSize="@dimen/etTextSize"
+            android:padding="@dimen/paddings"
             android:inputType="textCapCharacters"/>
 
         <Button
             android:id="@+id/btnSaveChangesProfile"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="15dp"
-            android:text="SAVE CHANGES"
+            android:layout_width="@dimen/btnWidth"
+            android:layout_height="@dimen/btnHeight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:text="@string/btnSaveChangesProfile"
             android:layout_gravity="center_horizontal"
             android:visibility="gone"/>
 
         <Button
             android:id="@+id/btnBackProfile"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="15dp"
-            android:text="BACK"
+            android:layout_width="@dimen/btnWidth"
+            android:layout_height="@dimen/btnHeight"
+            android:layout_marginTop="@dimen/marginTop"
+            android:text="@string/btnBackProfile"
             android:layout_gravity="center_horizontal"
             android:visibility="visible"/>
 

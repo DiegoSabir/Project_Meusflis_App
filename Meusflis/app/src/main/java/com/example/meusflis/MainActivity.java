@@ -1,11 +1,13 @@
 package com.example.meusflis;
 
-import android.content.DialogInterface;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -17,6 +19,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout llSignIn, llSignUp, llForgotPass;
@@ -28,26 +33,29 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences loginSharedPreferences;
     private static final int MAX_FAILED_ATTEMPTS = 3;
     private int failedAttempts = 0;
-    private DataBase database;
+    private Database database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Obtiene las preferencias compartidas por defecto de la aplicación
         loginSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+        // Configura la actividad para que el teclado virtual no aparezca automáticamente al iniciar
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         initViews();
-
         checkSavedEmail();
-
-        checkDatabaseConnection();
-
         setupListeners();
     }
 
+
+
+    /**
+     * Inicializa las vistas vinculando los elementos de diseño a las variables de Java.
+     */
     private void initViews() {
         llSignIn = findViewById(R.id.llSignIn);
         llSignUp = findViewById(R.id.llSignUp);
@@ -63,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         etEmailForgot = findViewById(R.id.etEmailForgot);
 
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
-        tvSignUp = findViewById(R.id.tvSignUp);
+        tvSignUp = findViewById(R.id.tvSignUp2);
 
         btnSignIn = findViewById(R.id.btnSignIn);
         btnSignUp = findViewById(R.id.btnSignUp);
@@ -74,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
         chkRememberUsername = findViewById(R.id.chkRememberUsername);
     }
 
+
+
+    /**
+     * Comprueba si un correo electrónico está guardado en SharedPreferences y lo configura en
+     * el correo electrónico EditText.
+     */
     private void checkSavedEmail() {
         String savedEmail = loginSharedPreferences.getString("email", "");
         if (!savedEmail.isEmpty()) {
@@ -84,19 +98,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void checkDatabaseConnection() {
-        database = new DataBase(MainActivity.this);
-        if (database.getReadableDatabase() != null) {
-            Toast.makeText(MainActivity.this, "Database connected", Toast.LENGTH_SHORT).show();
-        }
-    }
 
+
+    /**
+     * Configura oyentes para varios elementos de la interfaz de usuario.
+     */
     private void setupListeners() {
         setupVisibilityListeners();
         setupSignInButtonListener();
         setupSignUpButtonListener();
+        setupForgotPasswordButtonListener();
     }
 
+
+
+    /**
+     * Configura oyentes para manejar cambios de visibilidad entre diferentes diseños.
+     */
     private void setupVisibilityListeners() {
         tvForgotPassword.setOnClickListener(view -> showForgotPasswordLayout());
         btnBackFromForgotPassword.setOnClickListener(view -> showSignInLayout());
@@ -104,26 +122,51 @@ public class MainActivity extends AppCompatActivity {
         btnBackSignIn.setOnClickListener(view -> showSignInLayout());
     }
 
+
+
+    /**
+     * Muestra el diseño de contraseña olvidada y oculta el diseño de inicio de sesión.
+     */
     private void showForgotPasswordLayout() {
         llForgotPass.setVisibility(View.VISIBLE);
         llSignIn.setVisibility(View.GONE);
     }
 
+
+
+    /**
+     * Muestra el diseño de inicio de sesión y oculta los diseños de registro y contraseña olvidada.
+     */
     private void showSignInLayout() {
         llForgotPass.setVisibility(View.GONE);
         llSignIn.setVisibility(View.VISIBLE);
         llSignUp.setVisibility(View.GONE);
     }
 
+
+
+    /**
+     * Muestra el diseño de registro y oculta el diseño de inicio de sesión.
+     */
     private void showSignUpLayout() {
         llSignUp.setVisibility(View.VISIBLE);
         llSignIn.setVisibility(View.GONE);
     }
 
+
+
+    /**
+     * Configura el oyente para el botón de inicio de sesión.
+     */
     private void setupSignInButtonListener() {
         btnSignIn.setOnClickListener(view -> handleSignIn());
     }
 
+
+
+    /**
+     * Maneja el proceso de inicio de sesión, incluida la validación y la navegación.
+     */
     private void handleSignIn() {
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
@@ -140,12 +183,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
+    /**
+     * Guarda el correo electrónico en SharedPreferences si la casilla de verificación recordar
+     * nombre de usuario está marcada.
+     * @param email el correo electrónico para guardar
+     */
     private void saveEmailToPreferences(String email) {
         SharedPreferences.Editor editor = loginSharedPreferences.edit();
         editor.putString("email", email);
         editor.apply();
     }
 
+
+
+    /**
+     * Navega a la actividad del catálogo y pasa el correo electrónico como extra.
+     * @param email el correo electrónico para pasar a la siguiente actividad
+     */
     private void navigateToCatalogue(String email) {
         Intent intent = new Intent(MainActivity.this, Catalogue.class);
         intent.putExtra("email", email);
@@ -153,21 +209,34 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+
+
+    /**
+     * Maneja un intento fallido de inicio de sesión aumentando el contador y
+     * mostrando los mensajes apropiados.
+     */
     private void handleFailedSignInAttempt() {
         failedAttempts++;
         if (failedAttempts >= MAX_FAILED_ATTEMPTS) {
             showMaxAttemptsDialog();
-        } else {
-            Toast.makeText(MainActivity.this, "Incorrect credentials", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(MainActivity.this, R.string.toast_incorrect_credentials, Toast.LENGTH_SHORT).show();
         }
     }
 
+
+
+    /**
+     * Muestra un cuadro de diálogo cuando se alcanza el número máximo de intentos fallidos
+     * de inicio de sesión.
+     */
     private void showMaxAttemptsDialog() {
         new AlertDialog.Builder(this)
-                .setTitle("Maximum number of attempts reached")
+                .setTitle(R.string.dialog_max_attempts_title)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage("The maximum number of failed login attempts has been exceeded.\nThe application will close.")
-                .setPositiveButton("Ok", (dialog, which) -> {
+                .setMessage(R.string.dialog_max_attempts_message)
+                .setPositiveButton(R.string.dialog_positive_button, (dialog, which) -> {
                     failedAttempts = 0;
                     finish();
                 })
@@ -175,10 +244,20 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
+
+
+    /**
+     * Configura el oyente para el botón de registro.
+     */
     private void setupSignUpButtonListener() {
         btnSignUp.setOnClickListener(view -> handleSignUp());
     }
 
+
+
+    /**
+     * Maneja el proceso de registro, incluida la validación y la creación de usuarios.
+     */
     private void handleSignUp() {
         String email = etEmailSignUp.getText().toString();
         String password = etPasswordSignUp.getText().toString();
@@ -188,27 +267,39 @@ public class MainActivity extends AppCompatActivity {
 
         if (validateSignUpFields(email, password, name, telephone, card)) {
             if (database.addUser(email, password, name, telephone, card)) {
-                showSignUpSuccessMessage();
+                Toast.makeText(MainActivity.this, R.string.toast_user_added, Toast.LENGTH_SHORT).show();
                 clearSignUpFields();
                 showSignInLayout();
             }
             else {
-                showSignUpErrorMessage();
+                Toast.makeText(MainActivity.this, R.string.toast_error_adding_user, Toast.LENGTH_SHORT).show();
             }
         }
         else {
-            showIncompleteFieldsMessage();
+            Toast.makeText(MainActivity.this, R.string.toast_complete_all_fields, Toast.LENGTH_SHORT).show();
         }
     }
 
+
+
+    /**
+     * Valida los campos de registro para garantizar que ninguno esté vacío.
+     * @param email el correo electrónico
+     * @param password la contraseña
+     * @param name el nombre
+     * @param telephone el teléfono
+     * @param card el numero de tarjeta del banco
+     * @return verdadero si todos los campos están llenos, falso en caso contrario
+     */
     private boolean validateSignUpFields(String email, String password, String name, String telephone, String card) {
         return !email.isEmpty() && !password.isEmpty() && !name.isEmpty() && !telephone.isEmpty() && !card.isEmpty();
     }
 
-    private void showSignUpSuccessMessage() {
-        Toast.makeText(MainActivity.this, "User successfully added!", Toast.LENGTH_SHORT).show();
-    }
 
+
+    /**
+     * Borra los campos de registro después de un registro exitoso.
+     */
     private void clearSignUpFields() {
         etEmailSignUp.setText("");
         etPasswordSignUp.setText("");
@@ -217,11 +308,63 @@ public class MainActivity extends AppCompatActivity {
         etCardSignUp.setText("");
     }
 
-    private void showSignUpErrorMessage() {
-        Toast.makeText(MainActivity.this, "Error adding user", Toast.LENGTH_SHORT).show();
+
+
+    /**
+     * Configura el oyente para el botón de contraseña olvidada.
+     */
+    private void setupForgotPasswordButtonListener() {
+        btnSendForgotPassword.setOnClickListener(view -> handleForgotPassword());
     }
 
-    private void showIncompleteFieldsMessage() {
-        Toast.makeText(MainActivity.this, "Please, complete all fields", Toast.LENGTH_SHORT).show();
+
+
+    /**
+     * Maneja el proceso de olvido de contraseña, incluida la recuperación y notificación al usuario de su contraseña.
+     */
+    private void handleForgotPassword() {
+        String email = etEmailForgot.getText().toString();
+
+        if (!email.isEmpty()) {
+            HashMap<String, String> userDetails = database.getUserDetails(email);
+            if (userDetails != null && !userDetails.isEmpty()) {
+                String password = userDetails.get("password");
+                sendPasswordNotification(password);
+            }
+            else {
+                Toast.makeText(MainActivity.this, R.string.toast_email_not_found, Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            Toast.makeText(MainActivity.this, R.string.toast_enter_email, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
+    /**
+     * Envía una notificación que contiene la contraseña del usuario.
+     * @param password la contraseña a incluir en la notificación
+     */
+    private void sendPasswordNotification(String password) {
+        String channelId = "password_recovery_channel";
+        String channelName = getString(R.string.notification_title);
+        int notificationId = 1;
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setContentTitle(getString(R.string.notification_title))
+                .setContentText(getString(R.string.notification_content, password))
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true);
+
+        notificationManager.notify(notificationId, builder.build());
     }
 }

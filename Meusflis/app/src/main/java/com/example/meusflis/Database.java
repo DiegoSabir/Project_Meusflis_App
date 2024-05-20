@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class DataBase extends SQLiteAssetHelper {
+public class Database extends SQLiteAssetHelper {
     private static final String DATABASE_NAME = "BBDD.db";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_USER = "user";
@@ -25,7 +25,7 @@ public class DataBase extends SQLiteAssetHelper {
     SQLiteDatabase bbdd;
     Cursor consulta;
 
-    public DataBase(Context context) {
+    public Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }

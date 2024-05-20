@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- activity_main.xml -->
+    <dimen name="ivBtnWidth">150dp</dimen>
+    <dimen name="ivBtnHeight">150dp</dimen>
+    <dimen name="ivMarginTop">30dp</dimen>
+    <dimen name="paddings">10dp</dimen>
+    <dimen name="etTextSize">21sp</dimen>
+    <dimen name="btnWidth">300dp</dimen>
+    <dimen name="btnHeight">60dp</dimen>
+    <dimen name="marginTop">10dp</dimen>
+
+
+    <!-- activity_catalogue.xml -->
+    <dimen name="textViewsTitles">30sp</dimen>
+    <dimen name="viewFlipperHeight">200sp</dimen>
+    <dimen name="llSpinnersTextViews">20sp</dimen>
+    <dimen name="spinnersHeight">50dp</dimen>
+</resources>

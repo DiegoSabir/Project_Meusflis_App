@@ -17,7 +17,7 @@ public class Profile extends AppCompatActivity {
     private EditText etEmailProfile, etPasswordProfile, etNameProfile, etTelephoneProfile, etCardProfile;
     private Button btnBackProfile, btnSaveChangesProfile;
     private boolean isDataChanged = false;
-    private DataBase bbdd;
+    private Database bbdd;
     private String email;
 
     @Override
@@ -58,7 +58,7 @@ public class Profile extends AppCompatActivity {
      * los campos EditText apropiados.
      */
     private void loadUserProfile() {
-        bbdd = new DataBase(this);
+        bbdd = new Database(this);
         HashMap<String, String> userDetails = bbdd.getUserDetails(email);
         etEmailProfile.setText(userDetails.get("email"));
         etPasswordProfile.setText(userDetails.get("password"));
@@ -124,10 +124,10 @@ public class Profile extends AppCompatActivity {
 
         if (isUpdated) {
             btnSaveChangesProfile.setVisibility(View.GONE);
-            Toast.makeText(Profile.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Profile.this, getString(R.string.profile_update_success), Toast.LENGTH_SHORT).show();
         }
         else {
-            Toast.makeText(Profile.this, "Profile update failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Profile.this, getString(R.string.profile_update_failed), Toast.LENGTH_SHORT).show();
         }
     }
 
