@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        database = new Database(this);
+
         // Obtiene las preferencias compartidas por defecto de la aplicación
         loginSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -50,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
         checkSavedEmail();
         setupListeners();
     }
-
-
 
     /**
      * Inicializa las vistas vinculando los elementos de diseño a las variables de Java.

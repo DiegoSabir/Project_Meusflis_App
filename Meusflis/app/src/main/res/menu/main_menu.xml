@@ -3,12 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/option_profile" android:title="My Profile"/>
+    <item android:id="@+id/option_profile" android:title="@string/option_profile"/>
 
-    <item android:id="@+id/option_lenguages" android:title="Lenguages" >
+    <item android:id="@+id/option_lenguages" android:title="@string/option_lenguages" >
         <menu>
-            <item android:id="@+id/option_spanish" android:title="Author"/>
-            <item android:id="@+id/option_galician" android:title="Demography"/>
+            <item android:id="@+id/option_spanish" android:title="@string/option_spanish" android:icon="@drawable/spanish"/>/>
+            <item android:id="@+id/option_galician" android:title="@string/option_galician" android:icon="@drawable/galician"/>
+            <item android:id="@+id/option_japanese" android:title="@string/option_japanese" android:icon="@drawable/japanese"/>
         </menu>
     </item>
 

@@ -147,6 +147,10 @@ public class Catalogue extends MenuActivity implements SearchView.OnQueryTextLis
 
                 return true;
 
+            case R.id.option_japanese:
+
+                return true;
+
             case R.id.option_exit:
                 showExitDialog();
                 return true;

@@ -62,4 +62,12 @@
     <!-- Profile.java -->
     <string name="profile_update_success">Perfil actualizado exitosamente</string>
     <string name="profile_update_failed">Error al actualizar el perfil</string>
+
+
+    <!-- main_menu.xml -->
+    <string name="option_profile">Mi perfil</string>
+    <string name="option_lenguages">Idiomas</string>
+    <string name="option_spanish">Español</string>
+    <string name="option_galician">Gallego</string>
+    <string name="option_japanese">Japones</string>
 </resources>
