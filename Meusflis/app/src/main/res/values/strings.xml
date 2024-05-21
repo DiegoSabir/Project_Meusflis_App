@@ -39,7 +39,7 @@
 
     <!-- activity_catalogue.xml -->
     <string name="tvPopular">MOST RATED</string>
-    <string name="tvCatalogue">Catalogue</string>
+    <string name="tvCatalogue">CATALOGUE</string>
     <string name="tvSpinnerGenre">Genre:</string>
     <string name="tvSpinnerCategory">Category:</string>
 

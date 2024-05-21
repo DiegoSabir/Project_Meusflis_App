@@ -4,7 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/paddings">
+
+    <TextView
+        android:id="@+id/tvChapters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHAPTERS"
+        android:textSize="@dimen/textViewsTitles"
+        android:textStyle="bold"/>
 
     <ListView
         android:id="@+id/lvManga"

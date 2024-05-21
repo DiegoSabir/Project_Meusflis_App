@@ -25,15 +25,20 @@ public class Database extends SQLiteAssetHelper {
     SQLiteDatabase bbdd;
     Cursor consulta;
 
+
     public Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
 
+
+
     @Override
     public synchronized SQLiteDatabase getReadableDatabase() {
         return super.getReadableDatabase();
     }
+
+
 
     @Override
     public synchronized SQLiteDatabase getWritableDatabase() {
@@ -56,6 +61,8 @@ public class Database extends SQLiteAssetHelper {
             }
         }
     }
+
+
 
     public HashMap<String, String> getUserDetails(String email) {
         HashMap<String, String> userDetails = new HashMap<>();
@@ -84,6 +91,8 @@ public class Database extends SQLiteAssetHelper {
         return userDetails;
     }
 
+
+
     public boolean addUser(String email, String password, String name, String telephone, String card) {
         bbdd = this.getWritableDatabase();
         try {
@@ -105,6 +114,8 @@ public class Database extends SQLiteAssetHelper {
         }
     }
 
+
+
     public boolean updateUserDetails(String email, String password, String name, String telephone, String card) {
         bbdd = this.getWritableDatabase();
         try {
@@ -123,6 +134,8 @@ public class Database extends SQLiteAssetHelper {
             }
         }
     }
+
+
 
     public List<String> getGenreNames() {
         List<String> genreNames = new ArrayList<>();
@@ -146,6 +159,8 @@ public class Database extends SQLiteAssetHelper {
         }
         return genreNames;
     }
+
+
 
     public List<MultimediaContent> getFilteredContents(String selectedGenre, String selectedDemographicCategory) {
         List<MultimediaContent> filteredElements = new ArrayList<>();
@@ -210,5 +225,4 @@ public class Database extends SQLiteAssetHelper {
         }
         return filteredElements;
     }
-
 }

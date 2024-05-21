@@ -7,7 +7,8 @@
     android:background="@color/background"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:padding="@dimen/paddings">
 
     <TextView
         android:layout_width="match_parent"
@@ -23,6 +24,7 @@
         android:layout_width="@dimen/ivBtnWidth"
         android:layout_height="@dimen/ivBtnHeight"
         android:layout_marginTop="@dimen/ivMarginTop"
+        android:layout_marginBottom="@dimen/ivMarginBottom"
         android:src="@drawable/account_icon"
         android:transitionName="splash_text"
         android:layout_gravity="center_horizontal"/>
@@ -74,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/chkRememberUsername" />
+                android:text="@string/chkRememberUsername"/>
 
             <TextView
                 android:id="@+id/tvForgotPassword"
