@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="demographic_array">
+        <item>All</item>
+        <item>Kodomo</item>
+        <item>Josei</item>
+        <item>Seinen</item>
+        <item>Shoujo</item>
+        <item>Shounen</item>
+    </string-array>
+</resources>

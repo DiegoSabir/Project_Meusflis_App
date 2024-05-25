@@ -13,6 +13,8 @@ CREATE TABLE "multimedia_content" (
 	"title"	TEXT NOT NULL,
 	"author"	TEXT NOT NULL,
 	"demographic_category"	TEXT NOT NULL,
+	"cover"	BLOB,
+	"likes"	INTEGER,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 

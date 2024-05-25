@@ -1,7 +1,7 @@
 package com.example.meusflis.model;
 
 public class User {
-    String email, password, name, telephone, card;
+    public String email, password, name, telephone, card;
 
     public User() {
     }
