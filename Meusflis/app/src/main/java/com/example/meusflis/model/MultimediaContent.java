@@ -1,14 +1,14 @@
 package com.example.meusflis.model;
 
 public class MultimediaContent {
-    public String title, genre, author;
-    private byte[] cover;
-    public int like, demographicCategories;
+    public String title, genre, author, demographicCategories;
+    public byte[] cover;
+    public int like;
 
     public MultimediaContent() {
     }
 
-    public MultimediaContent(String title, String genre, String author, int demographicCategories, byte[] cover, int like) {
+    public MultimediaContent(String title, String genre, String author, String demographicCategories, byte[] cover, int like) {
         this.title = title;
         this.genre = genre;
         this.author = author;
@@ -41,11 +41,11 @@ public class MultimediaContent {
         this.author = author;
     }
 
-    public int getDemographicCategories() {
+    public String getDemographicCategories() {
         return demographicCategories;
     }
 
-    public void setDemographicCategories(int demographicCategories) {
+    public void setDemographicCategories(String demographicCategories) {
         this.demographicCategories = demographicCategories;
     }
 
