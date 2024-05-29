@@ -1,12 +1,7 @@
 package com.example.meusflis.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -16,8 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.meusflis.R;
-import com.example.meusflis.activity.ForgetActivity;
-import com.example.meusflis.activity.LoginActivity;
 import com.example.meusflis.model.MultimediaContent;
 
 import java.util.ArrayList;
@@ -37,7 +30,6 @@ public class MultimediaContentAdapter extends ArrayAdapter {
         TextView tvTitle;
         TextView tvAuthor;
         TextView tvGenre;
-
     }
 
     @NonNull

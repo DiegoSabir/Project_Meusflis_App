@@ -39,9 +39,9 @@ public class CatalogueActivity extends MenuActivity {
     ImageSlider isTopMultimediaContent;
     SearchView svSearchMultimediaContent;
     ListView lvCatalogue;
+    ArrayList<MultimediaContent> listContent;
     String email;
     private static final int TELEPHONE_CALL = 1;
-    ArrayList<MultimediaContent> listContent;
     DatabaseHelper databaseHelper;
 
     @Override
@@ -56,22 +56,37 @@ public class CatalogueActivity extends MenuActivity {
         initializeViews();
         saveEmail();
         loadTopContentCovers();
-        obtenerDatos();
+        setupMultimediaContentList();
         setupSearchView();
         setupContextMenu();
     }
 
+
+
+    /**
+     * Método para inicializar las vistas de la actividad.
+     */
     private void initializeViews() {
         isTopMultimediaContent = findViewById(R.id.isTopMultimediaContent);
         svSearchMultimediaContent = findViewById(R.id.svSearchMultimediaContent);
         lvCatalogue = findViewById(R.id.lvCatalogue);
     }
 
+
+
+    /**
+     * Método para guardar el email en las preferencias compartidas.
+     */
     private void saveEmail() {
         SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
         email = preferences.getString("email", "");
     }
 
+
+
+    /**
+     * Método para cargar las portadas de los contenidos más valorados en el ImageSlider.
+     */
     private void loadTopContentCovers() {
         List<byte[]> topContentCovers = databaseHelper.getTopLikedContentCovers(5);
 
@@ -91,6 +106,13 @@ public class CatalogueActivity extends MenuActivity {
         isTopMultimediaContent.setImageList(slideModels, ScaleTypes.FIT);
     }
 
+
+
+    /**
+     * Método para guardar una imagen en el caché y obtener su URI.
+     * @param bitmap El bitmap de la imagen a guardar.
+     * @return URI de la imagen guardada.
+     */
     private Uri saveImageToCache(Bitmap bitmap) {
         try {
             File cacheDir = getCacheDir();
@@ -99,18 +121,29 @@ public class CatalogueActivity extends MenuActivity {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
             fos.close();
             return Uri.fromFile(tempFile);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    private void obtenerDatos() {
+
+
+    /**
+     * Método para obtener datos del contenido multimedia de la base de datos.
+     */
+    private void setupMultimediaContentList() {
         listContent = databaseHelper.getMultimediaContentData();
         MultimediaContentAdapter multimediaContentAdapter = new MultimediaContentAdapter(this, listContent);
         lvCatalogue.setAdapter(multimediaContentAdapter);
     }
 
+
+
+    /**
+     * Método para configurar el SearchView y su listener.
+     */
     private void setupSearchView() {
         svSearchMultimediaContent.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -130,6 +163,11 @@ public class CatalogueActivity extends MenuActivity {
 
 
 
+    /**
+     * Método para manejar la selección de un ítem del menú.
+     * @param item El ítem del menú seleccionado.
+     * @return true si el ítem fue manejado, false de lo contrario.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
@@ -171,18 +209,28 @@ public class CatalogueActivity extends MenuActivity {
 
 
 
+    /**
+     * Método para realizar una llamada telefónica.
+     */
     private void makePhoneCall() {
         String phoneNumber = getResources().getString(R.string.contactUsPhone);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
             Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));
             startActivity(callIntent);
-        } else {
+        }
+        else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, TELEPHONE_CALL);
         }
     }
 
 
 
+    /**
+     * Método para manejar el resultado de la solicitud de permisos.
+     * @param requestCode El código de solicitud.
+     * @param permissions Los permisos solicitados.
+     * @param grantResults Los resultados de la solicitud de permisos.
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -199,6 +247,9 @@ public class CatalogueActivity extends MenuActivity {
 
 
 
+    /**
+     * Método para mostrar un diálogo de confirmación al salir de la aplicación.
+     */
     private void showExitDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setIcon(android.R.drawable.ic_menu_close_clear_cancel)
@@ -224,6 +275,9 @@ public class CatalogueActivity extends MenuActivity {
 
 
 
+    /**
+     * Método para configurar el menú contextual para los elementos del ListView.
+     */
     private void setupContextMenu() {
         lvCatalogue.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
@@ -235,6 +289,11 @@ public class CatalogueActivity extends MenuActivity {
 
 
 
+    /**
+     * Método para manejar la selección de un ítem del menú contextual.
+     * @param item El ítem del menú contextual seleccionado.
+     * @return true si el ítem fue manejado, false de lo contrario.
+     */
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         Intent intent;

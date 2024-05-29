@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- activity_login.xml -->
+    <dimen name="loginCardView_layoutMargin">30dp</dimen>
+    <dimen name="loginCardView_cardCornerRadius">30dp</dimen>
+    <dimen name="loginCardView_cardElevation">20dp</dimen>
+    <dimen name="loginPadding">20dp</dimen>
+    <dimen name="loginTvTitleSize">35sp</dimen>
+    <dimen name="loginEt_layoutHeight">50dp</dimen>
+    <dimen name="loginEt_layoutMarginTop">40dp</dimen>
+    <dimen name="loginEt_drawablePadding">10dp</dimen>
+    <dimen name="loginEt_padding">10dp</dimen>
+    <dimen name="loginBtn_layoutHeight">50dp</dimen>
+    <dimen name="loginBtn_layoutMarginTop">40dp</dimen>
+    <dimen name="loginBtn_cornerRadius">20dp</dimen>
+    <dimen name="loginBtn_textSize">20sp</dimen>
+    <dimen name="loginTvSignUp_layoutMarginTop">10dp</dimen>
+    <dimen name="loginTvSignUp_textSize">20sp</dimen>
+    <dimen name="loginTvSignUp_padding">10dp</dimen>
+
+    <!-- activity_catalogue.xml -->
+    <dimen name="menuPadding">10dp</dimen>
+
+    <!-- activity_catalogue.xml -->
+    <dimen name="catalogueCardView_layoutHeight">200dp</dimen>
+    <dimen name="catalogueCardView_layoutMarginTop">30dp</dimen>
+    <dimen name="catalogueCardView_layoutMarginEnd">20dp</dimen>
+    <dimen name="catalogueCardView_layoutMarginStart">20dp</dimen>
+    <dimen name="catalogueCardView_cardElevation">20dp</dimen>
+    <dimen name="catalogueCardView_cardCornerRadius">20dp</dimen>
+    <dimen name="imageSlider_layoutHeight">200dp</dimen>
+    <dimen name="searchView_layoutMarginTop">10dp</dimen>
+    <dimen name="listView_layoutMarginTop">20dp</dimen>
+
+    <!-- listview_item.xml -->
+    <dimen name="listViewItemCardView_cardCornerRadius">20dp</dimen>
+    <dimen name="listViewItemCardView_cardElevation">5dp</dimen>
+    <dimen name="listViewItem_padding">5dp</dimen>
+    <dimen name="imageView_layoutWidth">60dp</dimen>
+    <dimen name="imageView_layoutHeight">60dp</dimen>
+    <dimen name="llData_layoutMarginStart">5dp</dimen>
+    <dimen name="llData_layoutMarginEnd">5dp</dimen>
+    <dimen name="tvTitle_textSize">20sp</dimen>
+    <dimen name="tvAuthor_textSize">15sp</dimen>
+    <dimen name="tvGenre_textSize">15sp</dimen>
+</resources>

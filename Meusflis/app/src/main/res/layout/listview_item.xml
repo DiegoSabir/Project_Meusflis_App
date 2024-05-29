@@ -7,8 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="5dp"
+    app:cardCornerRadius="@dimen/listViewItemCardView_cardCornerRadius"
+    app:cardElevation="@dimen/listViewItemCardView_cardElevation"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -21,22 +21,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="@dimen/listViewItem_padding">
 
             <ImageView
                 android:id="@+id/ivCover"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="@dimen/imageView_layoutWidth"
+                android:layout_height="@dimen/imageView_layoutHeight"
                 android:layout_gravity="center_vertical" />
 
             <LinearLayout
                 android:id="@+id/llDataMultimediaContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
                 android:layout_weight="1"
+                android:layout_marginStart="@dimen/llData_layoutMarginStart"
+                android:layout_marginEnd="@dimen/llData_layoutMarginEnd"
+                android:layout_gravity="center_vertical"
                 android:orientation="vertical">
 
                 <TextView
@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/tvTitle_textSize"
                     android:textStyle="bold" />
 
                 <TextView
@@ -52,14 +52,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/tvAuthor_textSize" />
 
                 <TextView
                     android:id="@+id/tvGenre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:textSize="@dimen/tvGenre_textSize" />
 
             </LinearLayout>
 

@@ -16,6 +16,7 @@ import com.example.meusflis.R;
 import com.example.meusflis.database.DatabaseHelper;
 
 public class SignUpActivity extends AppCompatActivity {
+
     EditText etSignUpEmail, etSignUpPassword, etSignUpName, etSignUpTelephone, etSignUpCard;
     Button btnSignUp;
     TextView tvLoginRedirect;
@@ -136,10 +137,8 @@ public class SignUpActivity extends AppCompatActivity {
      * @return true si el número de teléfono es válido, false de lo contrario.
      */
     private boolean isValidTelephone(String telephone) {
-        // Elimina cualquier espacio en blanco
         telephone = telephone.replaceAll("\\s", "");
 
-        // Verifica si el número de teléfono tiene el formato correcto
         return telephone.matches("\\+\\d{1,3}\\d{9}");
     }
 

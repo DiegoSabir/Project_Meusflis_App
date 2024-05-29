@@ -15,6 +15,12 @@
     <string name="setListenerUserNotExists">Invalid email or password</string>
     <string name="validateEmailIsEmpty">Email cannot be empty</string>
     <string name="validatePasswordIsEmpty">Password cannot be empty</string>
+    <string name="titleAttemptDialog">Warning</string>
+    <string name="messageAttemptDialog">You have one try left.\nYou can close the app to reset the number of attempts or try again.</string>
+    <string name="lastMessageAttemptDialog">Maximum number of attempts reached.\nThe application will close.</string>
+    <string name="optionTryAttemptDialog">Try Again</string>
+    <string name="optionExitAttemptDialog">Exit</string>
+    <string name="optionOkAttemptDialog">Ok</string>
 
     <!-- activity_forget.xml -->
     <string name="tvTitleForgetActivity">Forget Password</string>
@@ -62,7 +68,6 @@
     <string name="callPermisionDenied">Call permission denied</string>
     <string name="optionExit">Exit</string>
     <string name="optionLogOut">Log out</string>
-
 
     <!-- main_menu.xml -->
     <string name="option_profile">My Profile</string>

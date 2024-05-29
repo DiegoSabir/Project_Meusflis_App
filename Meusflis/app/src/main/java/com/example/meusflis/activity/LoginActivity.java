@@ -47,6 +47,11 @@ public class LoginActivity extends AppCompatActivity {
         setListeners();
     }
 
+
+
+    /**
+     * Método para inicializar las vistas de la actividad.
+     */
     private void initViews() {
         etLoginEmail = findViewById(R.id.etLoginEmail);
         etLoginPassword = findViewById(R.id.etLoginPassword);
@@ -56,6 +61,11 @@ public class LoginActivity extends AppCompatActivity {
         tvSignUpRedirect = findViewById(R.id.tvSignUpRedirect);
     }
 
+
+
+    /**
+     * Método para cargar las preferencias guardadas.
+     */
     private void loadPreferences() {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String savedEmail = preferences.getString(PREF_EMAIL, null);
@@ -65,6 +75,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+
+    /**
+     * Método para configurar los listeners de los elementos de la UI.
+     */
     private void setListeners() {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +101,8 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtra("email", email);
                     startActivity(intent);
                     finish();
-                } else {
+                }
+                else {
                     incrementAttempts();
                 }
             }
@@ -108,18 +124,30 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
+
+    /**
+     * Método para guardar las preferencias del usuario.
+     * @param email Email del usuario.
+     */
     private void savePreferences(String email) {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
         if (chkRemember.isChecked()) {
             editor.putString(PREF_EMAIL, email);
-        } else {
+        }
+        else {
             editor.remove(PREF_EMAIL);
         }
         editor.apply();
     }
 
+
+
+    /**
+     * Método para incrementar el conteo de intentos fallidos de inicio de sesión.
+     */
     private void incrementAttempts() {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         int attempts = preferences.getInt(PREF_ATTEMPTS, 0) + 1;
@@ -138,6 +166,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+
+    /**
+     * Método para reiniciar el conteo de intentos fallidos de inicio de sesión.
+     */
     private void resetAttempts() {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -145,17 +178,22 @@ public class LoginActivity extends AppCompatActivity {
         editor.apply();
     }
 
+
+
+    /**
+     * Método para mostrar un diálogo advirtiendo del penúltimo intento de inicio de sesión.
+     */
     private void showPenultimateAttemptDialog() {
         new AlertDialog.Builder(this)
                 .setIcon(R.drawable.baseline_warning_24)
-                .setTitle("Warning")
-                .setMessage("You have one try left.\n You can close the app to reset the number of attempts or try again.")
-                .setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
+                .setTitle(getString(R.string.titleAttemptDialog))
+                .setMessage(getString(R.string.messageAttemptDialog))
+                .setPositiveButton(getString(R.string.optionTryAttemptDialog), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 })
-                .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.optionExitAttemptDialog), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finishAffinity();
@@ -164,12 +202,17 @@ public class LoginActivity extends AppCompatActivity {
                 .show();
     }
 
+
+
+    /**
+     * Método para mostrar un diálogo cuando se ha alcanzado el máximo número de intentos de inicio de sesión.
+     */
     private void showMaxAttemptsReachedDialog() {
         new AlertDialog.Builder(this)
                 .setIcon(R.drawable.baseline_warning_24)
-                .setTitle("Warning")
-                .setMessage("Maximum number of attempts reached.\n The application will close.")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setTitle(getString(R.string.titleAttemptDialog))
+                .setMessage(getString(R.string.lastMessageAttemptDialog))
+                .setPositiveButton(getString(R.string.optionOkAttemptDialog), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finishAffinity();
@@ -178,6 +221,11 @@ public class LoginActivity extends AppCompatActivity {
                 .show();
     }
 
+
+
+    /**
+     * Método para manejar la acción de "Olvidé mi contraseña".
+     */
     private void handleForgotPassword() {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         int attempts = preferences.getInt(PREF_ATTEMPTS, 0);
@@ -191,6 +239,12 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+
+    /**
+     * Método para validar el campo de email.
+     * @return true si el email es válido, false en caso contrario.
+     */
     public Boolean validateEmail() {
         String validation = etLoginEmail.getText().toString();
         if (validation.isEmpty()) {
@@ -203,6 +257,12 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+
+    /**
+     * Método para validar el campo de contraseña.
+     * @return true si la contraseña es válida, false en caso contrario.
+     */
     public Boolean validatePassword() {
         String validation = etLoginPassword.getText().toString();
         if (validation.isEmpty()) {

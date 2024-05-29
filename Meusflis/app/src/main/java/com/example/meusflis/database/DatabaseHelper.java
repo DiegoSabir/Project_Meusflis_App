@@ -37,7 +37,12 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 
 
 
-    // Método para verificar si el usuario existe
+    /**
+     * Método para verificar si el usuario existe.
+     * @param email El correo electrónico del usuario.
+     * @param password La contraseña del usuario.
+     * @return true si el usuario existe, false de lo contrario.
+     */
     public boolean checkUser(String email, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = { DatabaseConstants.COLUMN_EMAIL };
@@ -71,7 +76,15 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 
 
 
-    // Método para insertar un nuevo usuario
+    /**
+     * Método para insertar un nuevo usuario.
+     * @param email El correo electrónico del usuario.
+     * @param password La contraseña del usuario.
+     * @param name El nombre del usuario.
+     * @param telephone El número de teléfono del usuario.
+     * @param card La tarjeta del usuario.
+     * @return true si el usuario fue insertado exitosamente, false de lo contrario.
+     */
     public boolean insertUser(String email, String password, String name, String telephone, String card) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -89,6 +102,11 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 
 
 
+    /**
+     * Método para obtener la contraseña a través del email.
+     * @param email El correo electrónico del usuario.
+     * @return La contraseña del usuario, o null si no se encuentra.
+     */
     public String getPasswordByEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = { DatabaseConstants.COLUMN_PASSWORD };
@@ -120,6 +138,11 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 
 
 
+    /**
+     * Método para obtener las portadas de los contenidos multimedia con más "me gusta".
+     * @param limit El número máximo de portadas a obtener.
+     * @return Una lista de arrays de bytes que representan las portadas.
+     */
     public List<byte[]> getTopLikedContentCovers(int limit) {
         List<byte[]> coverList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -154,6 +177,12 @@ public class DatabaseHelper extends SQLiteAssetHelper {
     }
 
 
+
+    /**
+     * Método para obtener todos los datos del usuario.
+     * @param email El correo electrónico del usuario.
+     * @return Un HashMap con los detalles del usuario.
+     */
     public HashMap<String, String> getUserDetails(String email) {
         HashMap<String, String> userDetails = new HashMap<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -194,6 +223,11 @@ public class DatabaseHelper extends SQLiteAssetHelper {
     }
 
 
+
+    /**
+     * Método para obtener los datos del contenido multimedia.
+     * @return Una lista de objetos MultimediaContent.
+     */
     public ArrayList<MultimediaContent> getMultimediaContentData() {
         ArrayList<MultimediaContent> multimediaContents = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -267,6 +301,11 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 
 
 
+    /**
+     * Método para filtrar contenido multimedia por título.
+     * @param titulo El título a buscar.
+     * @return Una lista de objetos MultimediaContent que coinciden con el título.
+     */
     public ArrayList<MultimediaContent> filterByTitle(String titulo) {
         ArrayList<MultimediaContent> multimediaContents = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -298,7 +337,6 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                         byte[] coverBytes = cursorContent.getBlob(coverIndex);
                         int likes = cursorContent.getInt(likesIndex);
 
-                        // Fetch genres for the current multimedia content
                         String genreQuery = "SELECT g.name AS genre " +
                                 "FROM genre g " +
                                 "JOIN multimedia_content_genre mcg ON g.id = mcg.genre_id " +
@@ -343,6 +381,15 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 
 
 
+    /**
+     * Método para actualizar los datos del usuario.
+     * @param email El correo electrónico del usuario.
+     * @param password La nueva contraseña del usuario.
+     * @param name El nuevo nombre del usuario.
+     * @param telephone El nuevo número de teléfono del usuario.
+     * @param card La nueva tarjeta del usuario.
+     * @return true si los detalles del usuario fueron actualizados exitosamente, false de lo contrario.
+     */
     public boolean updateUserDetails(String email, String password, String name, String telephone, String card) {
         SQLiteDatabase db = this.getWritableDatabase();
         try {
@@ -359,6 +406,4 @@ public class DatabaseHelper extends SQLiteAssetHelper {
             db.close();
         }
     }
-
-
 }
