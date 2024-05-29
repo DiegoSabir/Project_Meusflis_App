@@ -59,17 +59,17 @@ public class ForgetActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = etForgetEmail.getText().toString().trim();
                 if (!email.isEmpty()) {
-                    databaseHelper = new DatabaseHelper(ForgetActivity.this); // Asegúrate de inicializar correctamente DatabaseHelper
+                    databaseHelper = new DatabaseHelper(ForgetActivity.this);
                     String password = databaseHelper.getPasswordByEmail(email);
                     if (password != null) {
                         showNotification(password);
                     }
                     else {
-                        Toast.makeText(ForgetActivity.this, "Ese email no existe", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ForgetActivity.this, getString(R.string.tvEmailForgetNotExist), Toast.LENGTH_SHORT).show();
                     }
                 }
                 else {
-                    Toast.makeText(ForgetActivity.this, "Por favor, introduce un email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgetActivity.this, getString(R.string.tvEmailForgetIsEmpty), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -103,8 +103,8 @@ public class ForgetActivity extends AppCompatActivity {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.baseline_info_24)
-                .setContentTitle("Recuperación de contraseña")
-                .setContentText("Password: " + password)
+                .setContentTitle(getString(R.string.notifyTitleForgetPass))
+                .setContentText(getString(R.string.notifyMessageForgetPass) + password)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         notificationManager.notify(notificationId, builder.build());

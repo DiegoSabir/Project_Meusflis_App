@@ -1,18 +1,20 @@
 package com.example.meusflis.model;
 
+import android.graphics.Bitmap;
+
 public class MultimediaContent {
-    public String title, genre, author, demographicCategories;
-    public byte[] cover;
-    public int like;
+    private String title;
+    private String genre;
+    private String author;
+    private String demographicCategory;
+    private Bitmap cover;
+    private int like;
 
-    public MultimediaContent() {
-    }
-
-    public MultimediaContent(String title, String genre, String author, String demographicCategories, byte[] cover, int like) {
+    public MultimediaContent(String title, String genre, String author, String demographicCategory, Bitmap cover, int like) {
         this.title = title;
         this.genre = genre;
         this.author = author;
-        this.demographicCategories = demographicCategories;
+        this.demographicCategory = demographicCategory;
         this.cover = cover;
         this.like = like;
     }
@@ -41,19 +43,19 @@ public class MultimediaContent {
         this.author = author;
     }
 
-    public String getDemographicCategories() {
-        return demographicCategories;
+    public String getDemographicCategory() {
+        return demographicCategory;
     }
 
-    public void setDemographicCategories(String demographicCategories) {
-        this.demographicCategories = demographicCategories;
+    public void setDemographicCategory(String demographicCategory) {
+        this.demographicCategory = demographicCategory;
     }
 
-    public byte[] getCover() {
+    public Bitmap getCover() {
         return cover;
     }
 
-    public void setCover(byte[] cover) {
+    public void setCover(Bitmap cover) {
         this.cover = cover;
     }
 

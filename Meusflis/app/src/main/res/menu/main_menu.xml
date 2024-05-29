@@ -3,16 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/option_profile" android:title="My Profile"/>
+    <item android:id="@+id/option_profile" android:title="@string/option_profile"/>
 
-    <item android:id="@+id/option_lenguages" android:title="Lenguages" >
+    <item android:id="@+id/option_languages" android:title="@string/option_languages" >
         <menu>
-            <item android:id="@+id/option_spanish" android:title="Spanish" android:icon="@drawable/spanish"/>/>
-            <item android:id="@+id/option_galician" android:title="Galician" android:icon="@drawable/galician"/>
-            <item android:id="@+id/option_japanese" android:title="Japanese" android:icon="@drawable/japanese"/>
+            <item android:id="@+id/option_english" android:title="@string/option_english" android:icon="@drawable/english"/>
+            <item android:id="@+id/option_spanish" android:title="@string/option_spanish" android:icon="@drawable/spanish"/>
+            <item android:id="@+id/option_galician" android:title="@string/option_galician" android:icon="@drawable/galician"/>
+            <item android:id="@+id/option_japanese" android:title="@string/option_japanese" android:icon="@drawable/japanese"/>
         </menu>
     </item>
 
-    <item android:id="@+id/option_exit" android:title="Exit"/>
+    <item android:id="@+id/option_contact" android:title="@string/option_contact"/>
+
+    <item android:id="@+id/option_exit" android:title="@string/option_exit"/>
 
 </menu>

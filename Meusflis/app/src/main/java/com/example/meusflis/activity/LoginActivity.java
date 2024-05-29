@@ -43,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         setListeners();
     }
 
+
+
     /**
      * Inicializa todas las vistas.
      */
@@ -54,6 +56,8 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         tvSignUpRedirect = findViewById(R.id.tvSignUpRedirect);
     }
+
+
 
     /**
      * Carga las preferencias del archivo de SharedPreferences y rellena el campo de email si hay un email guardado.
@@ -67,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             chkRemember.setChecked(true);
         }
     }
+
 
 
     /**
@@ -86,13 +91,15 @@ public class LoginActivity extends AppCompatActivity {
                 boolean userExists = databaseHelper.checkUser(email, password);
 
                 if (userExists) {
-                    Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.btnSignUpSuccessful), Toast.LENGTH_SHORT).show();
                     savePreferences(email);
                     Intent intent = new Intent(LoginActivity.this, CatalogueActivity.class);
+                    intent.putExtra("email", email);
                     startActivity(intent);
+                    finish();
                 }
                 else {
-                    Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getString(R.string.btnSignUpFailed), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -115,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Guarda o elimina el email en SharedPreferences basado en si el checkbox está marcado o no.
      * @param email El email del usuario que se guardará o eliminará en las preferencias.
@@ -132,6 +140,8 @@ public class LoginActivity extends AppCompatActivity {
         editor.apply();
     }
 
+
+
     /**
      * Valida que el campo de email no esté vacío y muestra un error si es necesario.
      * @return true si el email es válido, false en caso contrario.
@@ -139,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
     public Boolean validateEmail() {
         String validation = etLoginEmail.getText().toString();
         if (validation.isEmpty()) {
-            etLoginEmail.setError("Username cannot be empty");
+            etLoginEmail.setError(getString(R.string.validateEmailIsEmpty));
             return false;
         }
         else {
@@ -148,6 +158,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+
     /**
      * Valida que el campo de contraseña no esté vacío y muestra un error si es necesario.
      * @return true si la contraseña es válida, false en caso contrario.
@@ -155,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
     public Boolean validatePassword() {
         String validation = etLoginPassword.getText().toString();
         if (validation.isEmpty()) {
-            etLoginPassword.setError("Password cannot be empty");
+            etLoginPassword.setError(getString(R.string.validatePasswordIsEmpty));
             return false;
         }
         else {

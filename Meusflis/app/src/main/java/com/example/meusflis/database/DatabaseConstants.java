@@ -38,4 +38,11 @@ public class DatabaseConstants {
     public static final String COLUMN_GENRE_NAME = "name";
 
 
+    /**
+     * MULTIMEDIA_CONTENT_GENRE TABLE CONSTANTS
+     */
+    public static final String COLUMN_MULTIMEDIA_CONTENT_ID = "multimedia_content_id";
+    public static final String COLUMN_GENRE_ID = "genre_id";
+
+
 }

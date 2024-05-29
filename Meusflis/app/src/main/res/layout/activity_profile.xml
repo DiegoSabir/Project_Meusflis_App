@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/lavender"
+    tools:context=".activity.ProfileActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="24dp"
+            android:background="@drawable/lavender_border">
+
+            <EditText
+                android:id="@+id/etEmailProfile"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:drawableStart="@drawable/baseline_email_24"
+                android:drawablePadding="8dp"
+                android:hint="@string/etEmailProfile"
+                android:textColor="@color/black"
+                android:background="@drawable/lavender_border"
+                android:padding="8dp"/>
+
+            <EditText
+                android:id="@+id/etPasswordProfile"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:drawableStart="@drawable/baseline_lock_24"
+                android:drawablePadding="8dp"
+                android:hint="@string/etPasswordProfile"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:background="@drawable/lavender_border"
+                android:padding="8dp"/>
+
+            <EditText
+                android:id="@+id/etNameProfile"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:drawableStart="@drawable/baseline_person_24"
+                android:drawablePadding="8dp"
+                android:hint="@string/etNameProfile"
+                android:textColor="@color/black"
+                android:background="@drawable/lavender_border"
+                android:padding="8dp"/>
+
+            <EditText
+                android:id="@+id/etTelephoneProfile"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:drawableStart="@drawable/baseline_smartphone_24"
+                android:drawablePadding="8dp"
+                android:hint="@string/etTelephoneProfile"
+                android:textColor="@color/black"
+                android:background="@drawable/lavender_border"
+                android:padding="8dp"/>
+
+            <EditText
+                android:id="@+id/etCardProfile"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:drawableStart="@drawable/baseline_credit_card_24"
+                android:drawablePadding="8dp"
+                android:hint="@string/etCardProfile"
+                android:textColor="@color/black"
+                android:background="@drawable/lavender_border"
+                android:padding="8dp"/>
+
+            <Button
+                android:id="@+id/btnSaveChangesProfile"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/btnSaveChangesProfile"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/btnBackCatalogueFromProfile"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/btnBackCatalogueFromProfile"
+                android:layout_gravity="center_horizontal"
+                android:visibility="visible"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

@@ -1,0 +1,90 @@
+<resources>
+    <!-- Nombre de la aplicación -->
+    <string name="app_name">Meusflis</string>
+
+    <!-- activity_login.xml -->
+    <string name="etLoginEmail">Email</string>
+    <string name="etLoginPassword">Contraseña</string>
+    <string name="btnSignIn">Iniciar sesión</string>
+    <string name="chkRemember">Recordarme</string>
+    <string name="tvForgotPassword">¿Olvidaste la contraseña?</string>
+    <string name="tvSignUpRedirect">¿Aún no estás registrado? Regístrate</string>
+
+    <!-- LoginActivity.java -->
+    <string name="setListenerUserExists">Inicio de sesión exitoso</string>
+    <string name="setListenerUserNotExists">Email o contraseña inválidos</string>
+    <string name="validateEmailIsEmpty">El email no puede estar vacío</string>
+    <string name="validatePasswordIsEmpty">La contraseña no puede estar vacía</string>
+
+    <!-- activity_forget.xml -->
+    <string name="tvTitleForgetActivity">Olvidar Contraseña</string>
+    <string name="etForgetEmail">Email</string>
+    <string name="btnSend">Enviar</string>
+    <string name="tvLoginRedirect">Volver al inicio de sesión</string>
+
+    <!-- ForgetActivity.java -->
+    <string name="tvEmailForgetNotExist">El email no existe</string>
+    <string name="tvEmailForgetIsEmpty">Por favor, introduce un email</string>
+    <string name="notifyTitleForgetPass">Recuperación de Contraseña</string>
+    <string name="notifyMessageForgetPass">Contraseña: </string>
+
+    <!-- activity_signup.xml -->
+    <string name="tvTitleSignUpActivity">Regístrate</string>
+    <string name="etSignUpEmail">Email</string>
+    <string name="etSignUpPassword">Contraseña</string>
+    <string name="etSignUpName">Nombre</string>
+    <string name="etSignUpTelephone">Teléfono</string>
+    <string name="etSignUpCard">Tarjeta</string>
+    <string name="btnSignUp">Regístrate</string>
+    <string name="tvLoginRedirectFromSignUp">¿Ya eres usuario? Volver al inicio de sesión</string>
+
+    <!-- SignUpActivity.java -->
+    <string name="btnSignUpSuccessful">Registro exitoso</string>
+    <string name="btnSignUpFailed">Registro fallido</string>
+    <string name="validationEmail">Email inválido</string>
+    <string name="validationEmailMessage">Por favor, introduce una dirección de email válida</string>
+    <string name="validationPassword">La contraseña no puede estar vacía</string>
+    <string name="validationPasswordMessage">Por favor, introduce una contraseña</string>
+    <string name="validationName">El nombre no puede estar vacío</string>
+    <string name="validationNameMessage">Por favor, introduce tu nombre</string>
+    <string name="validationTelephone">Número de teléfono inválido</string>
+    <string name="validationTelephoneMessage">Por favor, introduce un número de teléfono válido</string>
+    <string name="validationCard">Número de tarjeta inválido</string>
+    <string name="validationCardMessage">Por favor, introduce un número de tarjeta válido</string>
+
+    <!-- Catalogue.java -->
+    <string name="exitDialogTitle">Salir de la Aplicación</string>
+    <string name="exitDialogMessage">¿Quieres salir de la aplicación o cerrar sesión?</string>
+    <string name="contactUsPhone">+1234567890</string>
+    <string name="callPermisionDenied">Permiso de llamada denegado</string>
+    <string name="optionExit">Salir</string>
+    <string name="optionLogOut">Cerrar sesión</string>
+
+    <!-- main_menu.xml -->
+    <string name="option_profile">Mi Perfil</string>
+    <string name="option_languages">Idiomas</string>
+    <string name="option_english">Inglés</string>
+    <string name="option_spanish">Español</string>
+    <string name="option_galician">Gallego</string>
+    <string name="option_japanese">Japonés</string>
+    <string name="option_contact">Contáctanos</string>
+    <string name="option_exit">Salir</string>
+
+    <!-- contextual_menu.xml -->
+    <string name="ctx_manga">Manga</string>
+    <string name="ctx_anime">Anime</string>
+    <string name="ctx_lightNovel">Novela Ligera</string>
+
+    <!-- activity_profile.xml -->
+    <string name="etEmailProfile">Email</string>
+    <string name="etPasswordProfile">Contraseña</string>
+    <string name="etNameProfile">Nombre</string>
+    <string name="etTelephoneProfile">Teléfono</string>
+    <string name="etCardProfile">Tarjeta</string>
+    <string name="btnSaveChangesProfile">GUARDAR CAMBIOS</string>
+    <string name="btnBackCatalogueFromProfile">VOLVER AL CATÁLOGO</string>
+
+    <!-- ProfileActivity.java -->
+    <string name="updateSuccessfully">Perfil actualizado con éxito</string>
+    <string name="updateFailed">Actualización de perfil fallida</string>
+</resources>

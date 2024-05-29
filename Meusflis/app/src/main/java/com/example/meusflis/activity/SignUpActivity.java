@@ -66,12 +66,12 @@ public class SignUpActivity extends AppCompatActivity {
                     boolean isInserted = databaseHelper.insertUser(email, password, name, telephone, card);
 
                     if (isInserted) {
-                        Toast.makeText(SignUpActivity.this, "Sign Up successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, getString(R.string.setListenerUserExists), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                         startActivity(intent);
                     }
                     else {
-                        Toast.makeText(SignUpActivity.this, "Sign Up failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, getString(R.string.setListenerUserExists), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -101,28 +101,28 @@ public class SignUpActivity extends AppCompatActivity {
         String card = etSignUpCard.getText().toString();
 
         if (TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            etSignUpEmail.setError("Invalid email");
-            Toast.makeText(SignUpActivity.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+            etSignUpEmail.setError(getString(R.string.validationEmail));
+            Toast.makeText(SignUpActivity.this, getString(R.string.validationEmailMessage), Toast.LENGTH_SHORT).show();
             return false;
         }
         if (TextUtils.isEmpty(password)) {
-            etSignUpPassword.setError("Password cannot be empty");
-            Toast.makeText(SignUpActivity.this, "Please enter a password", Toast.LENGTH_SHORT).show();
+            etSignUpPassword.setError(getString(R.string.validationPassword));
+            Toast.makeText(SignUpActivity.this, getString(R.string.validationPasswordMessage), Toast.LENGTH_SHORT).show();
             return false;
         }
         if (TextUtils.isEmpty(name)) {
-            etSignUpName.setError("Name cannot be empty");
-            Toast.makeText(SignUpActivity.this, "Please enter your name", Toast.LENGTH_SHORT).show();
+            etSignUpName.setError(getString(R.string.validationName));
+            Toast.makeText(SignUpActivity.this, getString(R.string.validationNameMessage), Toast.LENGTH_SHORT).show();
             return false;
         }
         if (!isValidTelephone(telephone)) {
-            etSignUpTelephone.setError("Invalid telephone number");
-            Toast.makeText(SignUpActivity.this, "Please enter a valid telephone number", Toast.LENGTH_SHORT).show();
+            etSignUpTelephone.setError(getString(R.string.validationTelephone));
+            Toast.makeText(SignUpActivity.this, getString(R.string.validationTelephoneMessage), Toast.LENGTH_SHORT).show();
             return false;
         }
         if (!isValidCardNumber(card)) {
-            etSignUpCard.setError("Invalid card number");
-            Toast.makeText(SignUpActivity.this, "Please enter a valid card number", Toast.LENGTH_SHORT).show();
+            etSignUpCard.setError(getString(R.string.validationCard));
+            Toast.makeText(SignUpActivity.this, getString(R.string.validationCardMessage), Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -136,7 +136,11 @@ public class SignUpActivity extends AppCompatActivity {
      * @return true si el número de teléfono es válido, false de lo contrario.
      */
     private boolean isValidTelephone(String telephone) {
-        return telephone.matches("\\+?\\d+");
+        // Elimina cualquier espacio en blanco
+        telephone = telephone.replaceAll("\\s", "");
+
+        // Verifica si el número de teléfono tiene el formato correcto
+        return telephone.matches("\\+\\d{1,3}\\d{9}");
     }
 
 

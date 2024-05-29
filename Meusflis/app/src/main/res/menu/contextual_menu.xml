@@ -3,6 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/ctx_acercade" android:title="Acerca de"/>
+    <item android:id="@+id/ctx_manga" android:title="@string/ctx_manga"/>
+
+    <item android:id="@+id/ctx_anime" android:title="@string/ctx_anime"/>
+
+    <item android:id="@+id/ctx_light_novel" android:title="@string/ctx_lightNovel"/>
 
 </menu>
