@@ -52,6 +52,9 @@
     <string name="validationCard">Invalid card number</string>
     <string name="validationCardMessage">Please enter a valid card number</string>
 
+    <!-- activity_catalogue.xml -->
+    <string name="svSearchMultimediaContent">Search Title</string>
+
     <!-- Catalogue.java -->
     <string name="exitDialogTitle">Exit App</string>
     <string name="exitDialogMessage">¿Do you want to exit the app or log out?</string>

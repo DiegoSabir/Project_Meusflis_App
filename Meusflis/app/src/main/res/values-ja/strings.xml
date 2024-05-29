@@ -52,6 +52,9 @@
     <string name="validationCard">無効なカード番号</string>
     <string name="validationCardMessage">有効なカード番号を入力してください</string>
 
+    <!-- activity_catalogue.xml -->
+    <string name="svSearchMultimediaContent">タイトル検索</string>
+
     <!-- Catalogue.java -->
     <string name="exitDialogTitle">アプリを終了</string>
     <string name="exitDialogMessage">アプリを終了しますか、ログアウトしますか？</string>

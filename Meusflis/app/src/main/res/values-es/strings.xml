@@ -52,6 +52,9 @@
     <string name="validationCard">Número de tarjeta inválido</string>
     <string name="validationCardMessage">Por favor, introduce un número de tarjeta válido</string>
 
+    <!-- activity_catalogue.xml -->
+    <string name="svSearchMultimediaContent">Buscar titulo</string>
+
     <!-- Catalogue.java -->
     <string name="exitDialogTitle">Salir de la Aplicación</string>
     <string name="exitDialogMessage">¿Quieres salir de la aplicación o cerrar sesión?</string>

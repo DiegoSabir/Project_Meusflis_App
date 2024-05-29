@@ -52,6 +52,9 @@
     <string name="validationCard">Número de tarxeta non válido</string>
     <string name="validationCardMessage">Por favor, introduce un número de tarxeta válido</string>
 
+    <!-- activity_catalogue.xml -->
+    <string name="svSearchMultimediaContent">Buscar título</string>
+
     <!-- Catalogue.java -->
     <string name="exitDialogTitle">Saír da Aplicación</string>
     <string name="exitDialogMessage">Queres saír da aplicación ou pechar sesión?</string>

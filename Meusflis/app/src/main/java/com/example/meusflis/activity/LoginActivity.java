@@ -1,8 +1,10 @@
 package com.example.meusflis.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     DatabaseHelper databaseHelper;
     private static final String PREFS_NAME = "prefs";
     private static final String PREF_EMAIL = "email";
+    private static final String PREF_ATTEMPTS = "attempts";
+    private static final int MAX_ATTEMPTS = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         setListeners();
     }
 
-
-
-    /**
-     * Inicializa todas las vistas.
-     */
     private void initViews() {
         etLoginEmail = findViewById(R.id.etLoginEmail);
         etLoginPassword = findViewById(R.id.etLoginPassword);
@@ -57,12 +56,6 @@ public class LoginActivity extends AppCompatActivity {
         tvSignUpRedirect = findViewById(R.id.tvSignUpRedirect);
     }
 
-
-
-    /**
-     * Carga las preferencias del archivo de SharedPreferences y rellena el campo de email si hay un email guardado.
-     * Marca el checkbox si hay un email guardado.
-     */
     private void loadPreferences() {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         String savedEmail = preferences.getString(PREF_EMAIL, null);
@@ -72,11 +65,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
-
-    /**
-     * Configura todos los OnClickListener.
-     */
     private void setListeners() {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,13 +81,13 @@ public class LoginActivity extends AppCompatActivity {
                 if (userExists) {
                     Toast.makeText(LoginActivity.this, getString(R.string.btnSignUpSuccessful), Toast.LENGTH_SHORT).show();
                     savePreferences(email);
+                    resetAttempts();
                     Intent intent = new Intent(LoginActivity.this, CatalogueActivity.class);
                     intent.putExtra("email", email);
                     startActivity(intent);
                     finish();
-                }
-                else {
-                    Toast.makeText(LoginActivity.this, getString(R.string.btnSignUpFailed), Toast.LENGTH_SHORT).show();
+                } else {
+                    incrementAttempts();
                 }
             }
         });
@@ -107,8 +95,7 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, ForgetActivity.class);
-                startActivity(intent);
+                handleForgotPassword();
             }
         });
 
@@ -121,31 +108,89 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
-
-    /**
-     * Guarda o elimina el email en SharedPreferences basado en si el checkbox está marcado o no.
-     * @param email El email del usuario que se guardará o eliminará en las preferencias.
-     */
     private void savePreferences(String email) {
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
 
         if (chkRemember.isChecked()) {
             editor.putString(PREF_EMAIL, email);
-        }
-        else {
+        } else {
             editor.remove(PREF_EMAIL);
         }
         editor.apply();
     }
 
+    private void incrementAttempts() {
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        int attempts = preferences.getInt(PREF_ATTEMPTS, 0) + 1;
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(PREF_ATTEMPTS, attempts);
+        editor.apply();
 
+        if (attempts == MAX_ATTEMPTS - 1) {
+            showPenultimateAttemptDialog();
+        }
+        else if (attempts >= MAX_ATTEMPTS) {
+            showMaxAttemptsReachedDialog();
+        }
+        else {
+            Toast.makeText(LoginActivity.this, getString(R.string.btnSignUpFailed), Toast.LENGTH_SHORT).show();
+        }
+    }
 
-    /**
-     * Valida que el campo de email no esté vacío y muestra un error si es necesario.
-     * @return true si el email es válido, false en caso contrario.
-     */
+    private void resetAttempts() {
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(PREF_ATTEMPTS, 0);
+        editor.apply();
+    }
+
+    private void showPenultimateAttemptDialog() {
+        new AlertDialog.Builder(this)
+                .setIcon(R.drawable.baseline_warning_24)
+                .setTitle("Warning")
+                .setMessage("You have one try left.\n You can close the app to reset the number of attempts or try again.")
+                .setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finishAffinity();
+                    }
+                })
+                .show();
+    }
+
+    private void showMaxAttemptsReachedDialog() {
+        new AlertDialog.Builder(this)
+                .setIcon(R.drawable.baseline_warning_24)
+                .setTitle("Warning")
+                .setMessage("Maximum number of attempts reached.\n The application will close.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finishAffinity();
+                    }
+                })
+                .show();
+    }
+
+    private void handleForgotPassword() {
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        int attempts = preferences.getInt(PREF_ATTEMPTS, 0);
+
+        if (attempts >= MAX_ATTEMPTS) {
+            showMaxAttemptsReachedDialog();
+        }
+        else {
+            Intent intent = new Intent(LoginActivity.this, ForgetActivity.class);
+            startActivity(intent);
+        }
+    }
+
     public Boolean validateEmail() {
         String validation = etLoginEmail.getText().toString();
         if (validation.isEmpty()) {
@@ -158,12 +203,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
-
-    /**
-     * Valida que el campo de contraseña no esté vacío y muestra un error si es necesario.
-     * @return true si la contraseña es válida, false en caso contrario.
-     */
     public Boolean validatePassword() {
         String validation = etLoginPassword.getText().toString();
         if (validation.isEmpty()) {
