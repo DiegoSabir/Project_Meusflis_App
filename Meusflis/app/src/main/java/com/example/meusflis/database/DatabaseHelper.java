@@ -85,12 +85,13 @@ public class DatabaseHelper extends SQLiteAssetHelper {
      * @param card La tarjeta del usuario.
      * @return true si el usuario fue insertado exitosamente, false de lo contrario.
      */
-    public boolean insertUser(String email, String password, String name, String telephone, String card) {
+    public boolean insertUser(String email, String password, String name, String birthyear, String telephone, String card) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DatabaseConstants.COLUMN_EMAIL, email);
         values.put(DatabaseConstants.COLUMN_PASSWORD, password);
         values.put(DatabaseConstants.COLUMN_NAME, name);
+        values.put(DatabaseConstants.COLUMN_BIRTHYEAR, birthyear);
         values.put(DatabaseConstants.COLUMN_TELEPHONE, telephone);
         values.put(DatabaseConstants.COLUMN_CARD, card);
 
@@ -234,7 +235,8 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         Cursor cursorContent = null;
         Cursor cursorGenre = null;
 
-        String query = "SELECT id, title, author, demographic_category, cover, likes " + "FROM multimedia_content";
+        String query = "SELECT id, title, author, demographic_category, cover, likes, url_manga, url_anime " +
+                "FROM multimedia_content";
 
         try {
             cursorContent = db.rawQuery(query, null);
@@ -246,9 +248,12 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                     int demographicCategoryIndex = cursorContent.getColumnIndex("demographic_category");
                     int coverIndex = cursorContent.getColumnIndex("cover");
                     int likesIndex = cursorContent.getColumnIndex("likes");
+                    int urlMangaIndex = cursorContent.getColumnIndex("url_manga");
+                    int urlAnimeIndex = cursorContent.getColumnIndex("url_anime");
 
                     if (idIndex != -1 && titleIndex != -1 && authorIndex != -1 &&
-                            demographicCategoryIndex != -1 && coverIndex != -1 && likesIndex != -1) {
+                            demographicCategoryIndex != -1 && coverIndex != -1 && likesIndex != -1 &&
+                            urlMangaIndex != -1 && urlAnimeIndex != -1) {
 
                         String id = cursorContent.getString(idIndex);
                         String title = cursorContent.getString(titleIndex);
@@ -256,6 +261,8 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                         String demographicCategory = cursorContent.getString(demographicCategoryIndex);
                         byte[] coverBytes = cursorContent.getBlob(coverIndex);
                         int likes = cursorContent.getInt(likesIndex);
+                        String urlManga = cursorContent.getString(urlMangaIndex);
+                        String urlAnime = cursorContent.getString(urlAnimeIndex);
 
                         String genreQuery = "SELECT g.name AS genre " +
                                 "FROM genre g " +
@@ -277,7 +284,9 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                         String genreString = TextUtils.join(", ", genres);
 
                         Bitmap cover = BitmapFactory.decodeByteArray(coverBytes, 0, coverBytes.length);
-                        MultimediaContent multimediaContent = new MultimediaContent(title, genreString, author, demographicCategory, cover, likes);
+                        MultimediaContent multimediaContent = new MultimediaContent(title, genreString, author, demographicCategory, cover, likes, urlManga, urlAnime);
+                        multimediaContent.setUrlManga(urlManga);
+                        multimediaContent.setUrlAnime(urlAnime);
                         multimediaContents.add(multimediaContent);
                     }
                 }
@@ -301,6 +310,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 
 
 
+
     /**
      * Método para filtrar contenido multimedia por título.
      * @param titulo El título a buscar.
@@ -312,7 +322,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         Cursor cursorContent = null;
         Cursor cursorGenre = null;
 
-        String query = "SELECT id, title, author, demographic_category, cover, likes " +
+        String query = "SELECT id, title, author, demographic_category, cover, likes, url_manga, url_anime " +
                 "FROM multimedia_content " +
                 "WHERE title LIKE '%" + titulo + "%'";
 
@@ -326,9 +336,12 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                     int demographicCategoryIndex = cursorContent.getColumnIndex("demographic_category");
                     int coverIndex = cursorContent.getColumnIndex("cover");
                     int likesIndex = cursorContent.getColumnIndex("likes");
+                    int urlMangaIndex = cursorContent.getColumnIndex("url_manga");
+                    int urlAnimeIndex = cursorContent.getColumnIndex("url_anime");
 
                     if (idIndex != -1 && titleIndex != -1 && authorIndex != -1 &&
-                            demographicCategoryIndex != -1 && coverIndex != -1 && likesIndex != -1) {
+                            demographicCategoryIndex != -1 && coverIndex != -1 && likesIndex != -1 &&
+                            urlMangaIndex != -1 && urlAnimeIndex != -1) {
 
                         String id = cursorContent.getString(idIndex);
                         String title = cursorContent.getString(titleIndex);
@@ -336,6 +349,8 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                         String demographicCategory = cursorContent.getString(demographicCategoryIndex);
                         byte[] coverBytes = cursorContent.getBlob(coverIndex);
                         int likes = cursorContent.getInt(likesIndex);
+                        String urlManga = cursorContent.getString(urlMangaIndex);
+                        String urlAnime = cursorContent.getString(urlAnimeIndex);
 
                         String genreQuery = "SELECT g.name AS genre " +
                                 "FROM genre g " +
@@ -357,7 +372,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                         String genreString = TextUtils.join(", ", genres);
 
                         Bitmap cover = BitmapFactory.decodeByteArray(coverBytes, 0, coverBytes.length);
-                        MultimediaContent multimediaContent = new MultimediaContent(title, genreString, author, demographicCategory, cover, likes);
+                        MultimediaContent multimediaContent = new MultimediaContent(title, genreString, author, demographicCategory, cover, likes, urlManga, urlAnime);
                         multimediaContents.add(multimediaContent);
                     }
                 }
@@ -405,5 +420,40 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         finally {
             db.close();
         }
+    }
+
+
+
+    /**
+     * Método para obtener todos los años de nacimiento del usuario actual.
+     * @param email El correo electrónico del usuario actual.
+     * @return Una lista de años de nacimiento únicos para el usuario actual.
+     */
+    public List<String> getAllBirthYearsForUser(String email) {
+        List<String> birthYears = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            String query = "SELECT DISTINCT " + DatabaseConstants.COLUMN_BIRTHYEAR + " FROM " +
+                    DatabaseConstants.TABLE_USER + " WHERE " + DatabaseConstants.COLUMN_EMAIL + " = ?";
+            cursor = db.rawQuery(query, new String[]{email});
+
+            if (cursor.moveToFirst()) {
+                do {
+                    String birthYear = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseConstants.COLUMN_BIRTHYEAR));
+                    birthYears.add(birthYear);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return birthYears;
     }
 }

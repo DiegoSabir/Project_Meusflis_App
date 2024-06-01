@@ -296,21 +296,27 @@ public class CatalogueActivity extends MenuActivity {
      */
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        Intent intent;
+        MultimediaContent selectedContent = (MultimediaContent) lvCatalogue.getItemAtPosition(item.getGroupId());
+
         switch (item.getItemId()) {
             case R.id.ctx_manga:
-
+                openWebPage(selectedContent.getUrlManga());
                 break;
 
             case R.id.ctx_anime:
-                intent = new Intent(CatalogueActivity.this, AnimeActivity.class);
-                startActivity(intent);
-                break;
-
-            case R.id.ctx_light_novel:
-
+                openWebPage(selectedContent.getUrlAnime());
                 break;
         }
         return true;
     }
+
+    /**
+     * Método para abrir una página web en un navegador.
+     * @param url La URL de la página web a abrir.
+     */
+    private void openWebPage(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(intent);
+    }
+
 }

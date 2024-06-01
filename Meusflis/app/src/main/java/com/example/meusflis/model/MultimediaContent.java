@@ -9,14 +9,18 @@ public class MultimediaContent {
     private String demographicCategory;
     private Bitmap cover;
     private int like;
+    private String urlManga;
+    private String urlAnime;
 
-    public MultimediaContent(String title, String genre, String author, String demographicCategory, Bitmap cover, int like) {
+    public MultimediaContent(String title, String genre, String author, String demographicCategory, Bitmap cover, int like, String urlManga, String urlAnime) {
         this.title = title;
         this.genre = genre;
         this.author = author;
         this.demographicCategory = demographicCategory;
         this.cover = cover;
         this.like = like;
+        this.urlManga = urlManga;
+        this.urlAnime = urlAnime;
     }
 
     public String getTitle() {
@@ -65,5 +69,21 @@ public class MultimediaContent {
 
     public void setLike(int like) {
         this.like = like;
+    }
+
+    public String getUrlManga() {
+        return urlManga;
+    }
+
+    public void setUrlManga(String urlManga) {
+        this.urlManga = urlManga;
+    }
+
+    public String getUrlAnime() {
+        return urlAnime;
+    }
+
+    public void setUrlAnime(String urlAnime) {
+        this.urlAnime = urlAnime;
     }
 }

@@ -1,15 +1,13 @@
 package com.example.meusflis.model;
 
 public class User {
-    public String email, password, name, telephone, card;
+    public String email, password, name, bithyear, telephone, card;
 
-    public User() {
-    }
-
-    public User(String email, String password, String name, String telephone, String card) {
+    public User(String email, String password, String name, String bithyear, String telephone, String card) {
         this.email = email;
         this.password = password;
         this.name = name;
+        this.bithyear = bithyear;
         this.telephone = telephone;
         this.card = card;
     }
@@ -36,6 +34,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getBithyear() {
+        return bithyear;
+    }
+
+    public void setBithyear(String bithyear) {
+        this.bithyear = bithyear;
     }
 
     public String getTelephone() {

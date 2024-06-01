@@ -73,6 +73,31 @@
                 android:background="@drawable/borders"
                 android:padding="@dimen/loginEt_padding"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/loginEt_layoutHeight"
+                android:layout_marginTop="@dimen/loginEt_layoutMarginTop"
+
+                android:background="@drawable/borders"
+                android:padding="@dimen/loginEt_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableStart="@drawable/baseline_calendar_month_24"
+                    android:drawablePadding="@dimen/loginEt_drawablePadding"
+                    android:hint="Birth year"
+                    android:textSize="18sp"/>
+
+                <Spinner
+                    android:id="@+id/spBirthYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
             <EditText
                 android:id="@+id/etSignUpTelephone"
                 android:layout_width="match_parent"

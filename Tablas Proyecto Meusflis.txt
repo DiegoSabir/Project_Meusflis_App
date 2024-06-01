@@ -3,20 +3,25 @@ CREATE TABLE "user" (
 	"email"	TEXT NOT NULL,
 	"password"	TEXT NOT NULL,
 	"name"	TEXT NOT NULL,
+	"birthyear"	TEXT NOT NULL,
 	"telephone"	TEXT NOT NULL,
 	"card"	TEXT NOT NULL,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
+
 
 CREATE TABLE "multimedia_content" (
 	"id"	INTEGER,
 	"title"	TEXT NOT NULL,
 	"author"	TEXT NOT NULL,
 	"demographic_category"	TEXT NOT NULL,
-	"cover"	BLOB,
-	"likes"	INTEGER,
+	"cover"	BLOB NOT NULL,
+	"likes"	INTEGER NOT NULL,
+	"url_manga"	TEXT,
+	"url_anime"	TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
+
 
 CREATE TABLE "genre" (
 	"id"	INTEGER,
@@ -24,28 +29,11 @@ CREATE TABLE "genre" (
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 
+
 CREATE TABLE "multimedia_content_genre" (
 	"multimedia_content_id"	INTEGER,
 	"genre_id"	INTEGER,
+	FOREIGN KEY("genre_id") REFERENCES "genre"("id"),
+	FOREIGN KEY("multimedia_content_id") REFERENCES "multimedia_content"("id"),
 	PRIMARY KEY("multimedia_content_id","genre_id")
-);
-
-CREATE TABLE "manga" (
-	"multimedia_content_id"	TEXT,
-	"status"	TEXT NOT NULL,
-	PRIMARY KEY("multimedia_content_id"),
-	FOREIGN KEY("multimedia_content_id") REFERENCES "multimedia_content"("id")
-);
-
-CREATE TABLE "chapter" (
-	"id"	INTEGER,
-	"manga_id"	INTEGER,
-	"title"	TEXT NOT NULL,
-	"previous_id"	INTEGER,
-	"next_id"	INTEGER,
-	"cover"	BLOB,
-	FOREIGN KEY("next_id") REFERENCES "chapter"("id"),
-	FOREIGN KEY("manga_id") REFERENCES "manga"("multimedia_content_id"),
-	FOREIGN KEY("previous_id") REFERENCES "chapter"("id"),
-	PRIMARY KEY("id" AUTOINCREMENT)
 );

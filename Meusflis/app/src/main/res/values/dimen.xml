@@ -7,11 +7,11 @@
     <dimen name="loginPadding">20dp</dimen>
     <dimen name="loginTvTitleSize">35sp</dimen>
     <dimen name="loginEt_layoutHeight">50dp</dimen>
-    <dimen name="loginEt_layoutMarginTop">40dp</dimen>
+    <dimen name="loginEt_layoutMarginTop">20dp</dimen>
     <dimen name="loginEt_drawablePadding">10dp</dimen>
     <dimen name="loginEt_padding">10dp</dimen>
     <dimen name="loginBtn_layoutHeight">50dp</dimen>
-    <dimen name="loginBtn_layoutMarginTop">40dp</dimen>
+    <dimen name="loginBtn_layoutMarginTop">20dp</dimen>
     <dimen name="loginBtn_cornerRadius">20dp</dimen>
     <dimen name="loginBtn_textSize">20sp</dimen>
     <dimen name="loginTvSignUp_layoutMarginTop">10dp</dimen>

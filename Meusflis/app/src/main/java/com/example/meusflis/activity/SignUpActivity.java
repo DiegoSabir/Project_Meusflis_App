@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +21,8 @@ import com.example.meusflis.database.DatabaseHelper;
 public class SignUpActivity extends AppCompatActivity {
 
     EditText etSignUpEmail, etSignUpPassword, etSignUpName, etSignUpTelephone, etSignUpCard;
+    Spinner spBirthYear;
+    ArrayAdapter<CharSequence> adapter;
     Button btnSignUp;
     TextView tvLoginRedirect;
     DatabaseHelper databaseHelper;
@@ -30,8 +35,10 @@ public class SignUpActivity extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(this);
 
         initializeViews();
+        setupSpinner();
         setListeners();
     }
+
 
 
 
@@ -44,8 +51,31 @@ public class SignUpActivity extends AppCompatActivity {
         etSignUpName = findViewById(R.id.etSignUpName);
         etSignUpTelephone = findViewById(R.id.etSignUpTelephone);
         etSignUpCard = findViewById(R.id.etSignUpCard);
+        spBirthYear = findViewById(R.id.spBirthYear);
         btnSignUp = findViewById(R.id.btnSignUp);
         tvLoginRedirect = findViewById(R.id.tvLoginRedirect);
+    }
+
+
+
+    private void setupSpinner() {
+        adapter = ArrayAdapter.createFromResource(this, R.array.years, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spBirthYear.setAdapter(adapter);
+
+        spBirthYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String selectedYear = parentView.getItemAtPosition(position).toString();
+                // Puedes hacer algo con el año seleccionado aquí
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // No hay ninguna selección
+            }
+        });
+
     }
 
 
@@ -61,10 +91,11 @@ public class SignUpActivity extends AppCompatActivity {
                     String email = etSignUpEmail.getText().toString();
                     String password = etSignUpPassword.getText().toString();
                     String name = etSignUpName.getText().toString();
+                    String birthYear = spBirthYear.getSelectedItem().toString();
                     String telephone = etSignUpTelephone.getText().toString();
                     String card = etSignUpCard.getText().toString();
 
-                    boolean isInserted = databaseHelper.insertUser(email, password, name, telephone, card);
+                    boolean isInserted = databaseHelper.insertUser(email, password, name, birthYear, telephone, card);
 
                     if (isInserted) {
                         Toast.makeText(SignUpActivity.this, getString(R.string.setListenerUserExists), Toast.LENGTH_SHORT).show();

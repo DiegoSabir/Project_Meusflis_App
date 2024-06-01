@@ -55,16 +55,8 @@
 
         <activity
             android:name=".activity.ProfileActivity"
-            android:exported="false"
-            android:theme="@style/Menu">
+            android:exported="false">
         </activity>
-
-        <activity
-            android:name=".activity.AnimeActivity"
-            android:exported="false"
-            android:theme="@style/Menu">
-        </activity>
-
 
     </application>
 

@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +17,12 @@ import com.example.meusflis.R;
 import com.example.meusflis.database.DatabaseHelper;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
 
     private EditText etEmailProfile, etPasswordProfile, etNameProfile, etTelephoneProfile, etCardProfile;
+    Spinner spBirthYearProfile;
     private Button btnBackProfile, btnSaveChangesProfile;
     private boolean isDataChanged = false;
     private DatabaseHelper databaseHelper;
@@ -48,6 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
         etNameProfile = findViewById(R.id.etNameProfile);
         etTelephoneProfile = findViewById(R.id.etTelephoneProfile);
         etCardProfile = findViewById(R.id.etCardProfile);
+        spBirthYearProfile = findViewById(R.id.spBirthYearProfile);
         btnBackProfile = findViewById(R.id.btnBackCatalogueFromProfile);
         btnSaveChangesProfile = findViewById(R.id.btnSaveChangesProfile);
     }
@@ -60,13 +65,21 @@ public class ProfileActivity extends AppCompatActivity {
      */
     private void loadUserProfile() {
         databaseHelper = new DatabaseHelper(this);
+
         HashMap<String, String> userDetails = databaseHelper.getUserDetails(email);
+
         etEmailProfile.setText(userDetails.get("email"));
         etPasswordProfile.setText(userDetails.get("password"));
         etNameProfile.setText(userDetails.get("name"));
         etTelephoneProfile.setText(userDetails.get("telephone"));
         etCardProfile.setText(userDetails.get("card"));
+
+        List<String> birthYears = databaseHelper.getAllBirthYearsForUser(email);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, birthYears);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spBirthYearProfile.setAdapter(spinnerAdapter);
     }
+
 
 
 

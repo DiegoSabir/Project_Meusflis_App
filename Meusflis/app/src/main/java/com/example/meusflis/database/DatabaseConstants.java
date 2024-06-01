@@ -17,6 +17,7 @@ public class DatabaseConstants {
     public static final String COLUMN_EMAIL = "email";
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_BIRTHYEAR = "birthyear";
     public static final String COLUMN_TELEPHONE = "telephone";
     public static final String COLUMN_CARD = "card";
 
@@ -30,6 +31,8 @@ public class DatabaseConstants {
     public static final String COLUMN_DEMOGRAPHIC_CATEGORY = "demographic_category";
     public static final String COLUMN_COVER = "cover";
     public static final String COLUMN_LIKES = "likes";
+    public static final String COLUMN_URL_MANGA = "url_manga";
+    public static final String COLUMN_URL_ANIME = "url_anime";
 
 
     /**
@@ -43,6 +46,4 @@ public class DatabaseConstants {
      */
     public static final String COLUMN_MULTIMEDIA_CONTENT_ID = "multimedia_content_id";
     public static final String COLUMN_GENRE_ID = "genre_id";
-
-
 }

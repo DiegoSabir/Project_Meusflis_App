@@ -7,6 +7,4 @@
 
     <item android:id="@+id/ctx_anime" android:title="@string/ctx_anime"/>
 
-    <item android:id="@+id/ctx_light_novel" android:title="@string/ctx_lightNovel"/>
-
 </menu>
