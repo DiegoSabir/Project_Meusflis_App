@@ -22,7 +22,7 @@ import java.util.List;
 public class ProfileActivity extends AppCompatActivity {
 
     private EditText etEmailProfile, etPasswordProfile, etNameProfile, etTelephoneProfile, etCardProfile;
-    Spinner spBirthYearProfile;
+    private Spinner spBirthYearProfile;
     private Button btnBackProfile, btnSaveChangesProfile;
     private boolean isDataChanged = false;
     private DatabaseHelper databaseHelper;
@@ -41,11 +41,6 @@ public class ProfileActivity extends AppCompatActivity {
         configureButtons();
     }
 
-
-
-    /**
-     * Inicializa las vistas vinculándolas con sus respectivos ID en el diseño.
-     */
     private void initializeViews() {
         etEmailProfile = findViewById(R.id.etEmailProfile);
         etPasswordProfile = findViewById(R.id.etPasswordProfile);
@@ -55,14 +50,10 @@ public class ProfileActivity extends AppCompatActivity {
         spBirthYearProfile = findViewById(R.id.spBirthYearProfile);
         btnBackProfile = findViewById(R.id.btnBackCatalogueFromProfile);
         btnSaveChangesProfile = findViewById(R.id.btnSaveChangesProfile);
+
+        etEmailProfile.setEnabled(false);
     }
 
-
-
-    /**
-     * Carga los detalles del perfil del usuario desde la base de datos y los establece en
-     * los campos EditText apropiados.
-     */
     private void loadUserProfile() {
         databaseHelper = new DatabaseHelper(this);
 
@@ -80,13 +71,6 @@ public class ProfileActivity extends AppCompatActivity {
         spBirthYearProfile.setAdapter(spinnerAdapter);
     }
 
-
-
-
-    /**
-     * Agrega listeners de TextWatcher a los campos de EditText para monitorear los cambios
-     * y configurar la visibilidad del botón de guardar.
-     */
     private void addTextWatchers() {
         TextWatcher watcher = new TextWatcher() {
             @Override
@@ -101,34 +85,31 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {}
         };
-        etEmailProfile.addTextChangedListener(watcher);
+
         etPasswordProfile.addTextChangedListener(watcher);
         etNameProfile.addTextChangedListener(watcher);
         etTelephoneProfile.addTextChangedListener(watcher);
         etCardProfile.addTextChangedListener(watcher);
     }
 
-
-
-    /**
-     * Configura los detectores de clic en los botones para guardar los cambios y volver al catálogo.
-     */
     private void configureButtons() {
         btnSaveChangesProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isUpdated = databaseHelper.updateUserDetails(email,
-                        etPasswordProfile.getText().toString(),
-                        etNameProfile.getText().toString(),
-                        etTelephoneProfile.getText().toString(),
-                        etCardProfile.getText().toString());
+                if (validateInput()) {
+                    boolean isUpdated = databaseHelper.updateUserDetails(email,
+                            etPasswordProfile.getText().toString(),
+                            etNameProfile.getText().toString(),
+                            etTelephoneProfile.getText().toString(),
+                            etCardProfile.getText().toString());
 
-                if (isUpdated) {
-                    btnSaveChangesProfile.setVisibility(View.GONE);
-                    Toast.makeText(ProfileActivity.this, getString(R.string.updateSuccessfully), Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(ProfileActivity.this, getString(R.string.updateFailed), Toast.LENGTH_SHORT).show();
+                    if (isUpdated) {
+                        btnSaveChangesProfile.setVisibility(View.GONE);
+                        Toast.makeText(ProfileActivity.this, getString(R.string.updateSuccessfully), Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(ProfileActivity.this, getString(R.string.updateFailed), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -141,5 +122,44 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private boolean validateInput() {
+        String telephone = etTelephoneProfile.getText().toString();
+        String card = etCardProfile.getText().toString();
+
+        if (!isValidTelephone(telephone)) {
+            etTelephoneProfile.setError(getString(R.string.validationTelephone));
+            Toast.makeText(ProfileActivity.this, getString(R.string.validationTelephoneMessage), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!isValidCardNumber(card)) {
+            etCardProfile.setError(getString(R.string.validationCard));
+            Toast.makeText(ProfileActivity.this, getString(R.string.validationCardMessage), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidTelephone(String telephone) {
+        telephone = telephone.replaceAll("\\s", "");
+        return telephone.matches("\\+\\d{1,3}\\d{9}");
+    }
+
+    private boolean isValidCardNumber(String cardNumber) {
+        int sum = 0;
+        boolean alternate = false;
+        for (int i = cardNumber.length() - 1; i >= 0; i--) {
+            int n = Integer.parseInt(cardNumber.substring(i, i + 1));
+            if (alternate) {
+                n *= 2;
+                if (n > 9) {
+                    n = (n % 10) + 1;
+                }
+            }
+            sum += n;
+            alternate = !alternate;
+        }
+        return (sum % 10 == 0);
     }
 }

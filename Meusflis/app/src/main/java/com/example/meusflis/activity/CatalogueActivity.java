@@ -310,6 +310,8 @@ public class CatalogueActivity extends MenuActivity {
         return true;
     }
 
+
+
     /**
      * Método para abrir una página web en un navegador.
      * @param url La URL de la página web a abrir.
@@ -318,5 +320,4 @@ public class CatalogueActivity extends MenuActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
     }
-
 }

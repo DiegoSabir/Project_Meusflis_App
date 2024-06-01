@@ -12,15 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import com.example.meusflis.R;
 import com.example.meusflis.database.DatabaseHelper;
 
-/**
- * La actividad ForgetActivity maneja la recuperación de la contraseña de usuario a través del email.
- */
 public class ForgetActivity extends AppCompatActivity {
 
     EditText etForgetEmail;
@@ -65,7 +63,12 @@ public class ForgetActivity extends AppCompatActivity {
                         showNotification(password);
                     }
                     else {
-                        Toast.makeText(ForgetActivity.this, getString(R.string.tvEmailForgetNotExist), Toast.LENGTH_SHORT).show();
+                        new AlertDialog.Builder(ForgetActivity.this)
+                                .setIcon(R.drawable.baseline_warning_24)
+                                .setTitle(getString(R.string.titleAttemptDialog))
+                                .setMessage(getString(R.string.tvEmailForgetNotExist))
+                                .setCancelable(true)
+                                .show();
                     }
                 }
                 else {

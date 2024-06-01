@@ -57,7 +57,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Configura el Spinner para mostrar el array years.
+     */
     private void setupSpinner() {
         adapter = ArrayAdapter.createFromResource(this, R.array.years, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -67,15 +69,12 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String selectedYear = parentView.getItemAtPosition(position).toString();
-                // Puedes hacer algo con el año seleccionado aquí
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // No hay ninguna selección
             }
         });
-
     }
 
 
@@ -98,12 +97,12 @@ public class SignUpActivity extends AppCompatActivity {
                     boolean isInserted = databaseHelper.insertUser(email, password, name, birthYear, telephone, card);
 
                     if (isInserted) {
-                        Toast.makeText(SignUpActivity.this, getString(R.string.setListenerUserExists), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                        Toast.makeText(SignUpActivity.this, getString(R.string.signUpSuccessfully), Toast.LENGTH_SHORT).show();
                         startActivity(intent);
                     }
                     else {
-                        Toast.makeText(SignUpActivity.this, getString(R.string.setListenerUserExists), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, getString(R.string.signUpError), Toast.LENGTH_SHORT).show();
                     }
                 }
             }

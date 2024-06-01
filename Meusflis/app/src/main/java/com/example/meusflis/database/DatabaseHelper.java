@@ -49,9 +49,14 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         String selection = DatabaseConstants.COLUMN_EMAIL + " = ? AND " + DatabaseConstants.COLUMN_PASSWORD + " = ?";
         String[] selectionArgs = { email, password };
         Cursor cursor = null;
+
         try {
             cursor = db.query(
-                    DatabaseConstants.TABLE_USER, columns, selection, selectionArgs, null, null, null);
+                    DatabaseConstants.TABLE_USER,
+                    columns, selection, selectionArgs,
+                    null,
+                    null,
+                    null);
 
             int cursorCount = cursor.getCount();
             cursor.close();
@@ -88,6 +93,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
     public boolean insertUser(String email, String password, String name, String birthyear, String telephone, String card) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+
         values.put(DatabaseConstants.COLUMN_EMAIL, email);
         values.put(DatabaseConstants.COLUMN_PASSWORD, password);
         values.put(DatabaseConstants.COLUMN_NAME, name);
@@ -117,9 +123,15 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         String password = null;
 
         try {
-            cursor = db.query(DatabaseConstants.TABLE_USER, columns, selection, selectionArgs, null, null, null);
+            cursor = db.query(
+                    DatabaseConstants.TABLE_USER,
+                    columns, selection, selectionArgs,
+                    null,
+                    null,
+                    null);
+
             if (cursor != null && cursor.moveToFirst()) {
-                int passwordIndex = cursor.getColumnIndex(DatabaseConstants.COLUMN_PASSWORD);
+                int passwordIndex = cursor.getColumnIndexOrThrow(DatabaseConstants.COLUMN_PASSWORD);
                 if (passwordIndex != -1) {
                     password = cursor.getString(passwordIndex);
                 }
@@ -153,11 +165,12 @@ public class DatabaseHelper extends SQLiteAssetHelper {
             String query = "SELECT " + DatabaseConstants.COLUMN_COVER + " FROM " +
                     DatabaseConstants.TABLE_MULTIMEDIA_CONTENT +
                     " ORDER BY " + DatabaseConstants.COLUMN_LIKES + " DESC LIMIT ?";
+
             cursor = db.rawQuery(query, new String[]{String.valueOf(limit)});
 
             if (cursor.moveToFirst()) {
                 do {
-                    int coverIndex = cursor.getColumnIndex(DatabaseConstants.COLUMN_COVER);
+                    int coverIndex = cursor.getColumnIndexOrThrow(DatabaseConstants.COLUMN_COVER);
                     if (coverIndex != -1) {
                         coverList.add(cursor.getBlob(coverIndex));
                     }
@@ -191,11 +204,11 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         try {
             cursor = db.query(DatabaseConstants.TABLE_USER, null, DatabaseConstants.COLUMN_EMAIL + "=?", new String[]{email}, null, null, null);
             if (cursor != null && cursor.moveToFirst()) {
-                int emailIndex = cursor.getColumnIndex(DatabaseConstants.COLUMN_EMAIL);
-                int passwordIndex = cursor.getColumnIndex(DatabaseConstants.COLUMN_PASSWORD);
-                int nameIndex = cursor.getColumnIndex(DatabaseConstants.COLUMN_NAME);
-                int telephoneIndex = cursor.getColumnIndex(DatabaseConstants.COLUMN_TELEPHONE);
-                int cardIndex = cursor.getColumnIndex(DatabaseConstants.COLUMN_CARD);
+                int emailIndex = cursor.getColumnIndexOrThrow(DatabaseConstants.COLUMN_EMAIL);
+                int passwordIndex = cursor.getColumnIndexOrThrow(DatabaseConstants.COLUMN_PASSWORD);
+                int nameIndex = cursor.getColumnIndexOrThrow(DatabaseConstants.COLUMN_NAME);
+                int telephoneIndex = cursor.getColumnIndexOrThrow(DatabaseConstants.COLUMN_TELEPHONE);
+                int cardIndex = cursor.getColumnIndexOrThrow(DatabaseConstants.COLUMN_CARD);
 
                 if (emailIndex != -1) {
                     userDetails.put(DatabaseConstants.COLUMN_EMAIL, cursor.getString(emailIndex));
@@ -242,14 +255,14 @@ public class DatabaseHelper extends SQLiteAssetHelper {
             cursorContent = db.rawQuery(query, null);
             if (cursorContent.moveToFirst()) {
                 do {
-                    int idIndex = cursorContent.getColumnIndex("id");
-                    int titleIndex = cursorContent.getColumnIndex("title");
-                    int authorIndex = cursorContent.getColumnIndex("author");
-                    int demographicCategoryIndex = cursorContent.getColumnIndex("demographic_category");
-                    int coverIndex = cursorContent.getColumnIndex("cover");
-                    int likesIndex = cursorContent.getColumnIndex("likes");
-                    int urlMangaIndex = cursorContent.getColumnIndex("url_manga");
-                    int urlAnimeIndex = cursorContent.getColumnIndex("url_anime");
+                    int idIndex = cursorContent.getColumnIndexOrThrow("id");
+                    int titleIndex = cursorContent.getColumnIndexOrThrow("title");
+                    int authorIndex = cursorContent.getColumnIndexOrThrow("author");
+                    int demographicCategoryIndex = cursorContent.getColumnIndexOrThrow("demographic_category");
+                    int coverIndex = cursorContent.getColumnIndexOrThrow("cover");
+                    int likesIndex = cursorContent.getColumnIndexOrThrow("likes");
+                    int urlMangaIndex = cursorContent.getColumnIndexOrThrow("url_manga");
+                    int urlAnimeIndex = cursorContent.getColumnIndexOrThrow("url_anime");
 
                     if (idIndex != -1 && titleIndex != -1 && authorIndex != -1 &&
                             demographicCategoryIndex != -1 && coverIndex != -1 && likesIndex != -1 &&
@@ -273,7 +286,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                         List<String> genres = new ArrayList<>();
                         if (cursorGenre.moveToFirst()) {
                             do {
-                                int genreIndex = cursorGenre.getColumnIndex("genre");
+                                int genreIndex = cursorGenre.getColumnIndexOrThrow("genre");
                                 if (genreIndex != -1) {
                                     genres.add(cursorGenre.getString(genreIndex));
                                 }
@@ -330,14 +343,14 @@ public class DatabaseHelper extends SQLiteAssetHelper {
             cursorContent = db.rawQuery(query, null);
             if (cursorContent.moveToFirst()) {
                 do {
-                    int idIndex = cursorContent.getColumnIndex("id");
-                    int titleIndex = cursorContent.getColumnIndex("title");
-                    int authorIndex = cursorContent.getColumnIndex("author");
-                    int demographicCategoryIndex = cursorContent.getColumnIndex("demographic_category");
-                    int coverIndex = cursorContent.getColumnIndex("cover");
-                    int likesIndex = cursorContent.getColumnIndex("likes");
-                    int urlMangaIndex = cursorContent.getColumnIndex("url_manga");
-                    int urlAnimeIndex = cursorContent.getColumnIndex("url_anime");
+                    int idIndex = cursorContent.getColumnIndexOrThrow("id");
+                    int titleIndex = cursorContent.getColumnIndexOrThrow("title");
+                    int authorIndex = cursorContent.getColumnIndexOrThrow("author");
+                    int demographicCategoryIndex = cursorContent.getColumnIndexOrThrow("demographic_category");
+                    int coverIndex = cursorContent.getColumnIndexOrThrow("cover");
+                    int likesIndex = cursorContent.getColumnIndexOrThrow("likes");
+                    int urlMangaIndex = cursorContent.getColumnIndexOrThrow("url_manga");
+                    int urlAnimeIndex = cursorContent.getColumnIndexOrThrow("url_anime");
 
                     if (idIndex != -1 && titleIndex != -1 && authorIndex != -1 &&
                             demographicCategoryIndex != -1 && coverIndex != -1 && likesIndex != -1 &&
@@ -352,7 +365,8 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                         String urlManga = cursorContent.getString(urlMangaIndex);
                         String urlAnime = cursorContent.getString(urlAnimeIndex);
 
-                        String genreQuery = "SELECT g.name AS genre " +
+                        String genreQuery =
+                                "SELECT g.name AS genre " +
                                 "FROM genre g " +
                                 "JOIN multimedia_content_genre mcg ON g.id = mcg.genre_id " +
                                 "WHERE mcg.multimedia_content_id = ?";
@@ -361,7 +375,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                         List<String> genres = new ArrayList<>();
                         if (cursorGenre.moveToFirst()) {
                             do {
-                                int genreIndex = cursorGenre.getColumnIndex("genre");
+                                int genreIndex = cursorGenre.getColumnIndexOrThrow("genre");
                                 if (genreIndex != -1) {
                                     genres.add(cursorGenre.getString(genreIndex));
                                 }
@@ -453,7 +467,6 @@ public class DatabaseHelper extends SQLiteAssetHelper {
             }
             db.close();
         }
-
         return birthYears;
     }
 }

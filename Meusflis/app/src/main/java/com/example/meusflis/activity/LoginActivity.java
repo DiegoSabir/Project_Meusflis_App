@@ -27,8 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     DatabaseHelper databaseHelper;
     private static final String PREFS_NAME = "prefs";
     private static final String PREF_EMAIL = "email";
-    private static final String PREF_ATTEMPTS = "attempts";
     private static final int MAX_ATTEMPTS = 5;
+    private int attemptCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,16 +149,12 @@ public class LoginActivity extends AppCompatActivity {
      * Método para incrementar el conteo de intentos fallidos de inicio de sesión.
      */
     private void incrementAttempts() {
-        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        int attempts = preferences.getInt(PREF_ATTEMPTS, 0) + 1;
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt(PREF_ATTEMPTS, attempts);
-        editor.apply();
+        attemptCount++;
 
-        if (attempts == MAX_ATTEMPTS - 1) {
+        if (attemptCount == MAX_ATTEMPTS - 1) {
             showPenultimateAttemptDialog();
         }
-        else if (attempts >= MAX_ATTEMPTS) {
+        else if (attemptCount >= MAX_ATTEMPTS) {
             showMaxAttemptsReachedDialog();
         }
         else {
@@ -172,10 +168,7 @@ public class LoginActivity extends AppCompatActivity {
      * Método para reiniciar el conteo de intentos fallidos de inicio de sesión.
      */
     private void resetAttempts() {
-        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt(PREF_ATTEMPTS, 0);
-        editor.apply();
+        attemptCount = 0;
     }
 
 
@@ -191,6 +184,7 @@ public class LoginActivity extends AppCompatActivity {
                 .setPositiveButton(getString(R.string.optionTryAttemptDialog), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        // El usuario intentará de nuevo
                     }
                 })
                 .setNegativeButton(getString(R.string.optionExitAttemptDialog), new DialogInterface.OnClickListener() {
@@ -227,10 +221,7 @@ public class LoginActivity extends AppCompatActivity {
      * Método para manejar la acción de "Olvidé mi contraseña".
      */
     private void handleForgotPassword() {
-        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        int attempts = preferences.getInt(PREF_ATTEMPTS, 0);
-
-        if (attempts >= MAX_ATTEMPTS) {
+        if (attemptCount >= MAX_ATTEMPTS) {
             showMaxAttemptsReachedDialog();
         }
         else {

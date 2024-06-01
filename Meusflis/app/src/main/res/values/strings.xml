@@ -39,6 +39,7 @@
     <string name="etSignUpEmail">Email</string>
     <string name="etSignUpPassword">Password</string>
     <string name="etSignUpName">Name</string>
+    <string name="tvBirthYear">Birth Year</string>
     <string name="etSignUpTelephone">Telephone</string>
     <string name="etSignUpCard">Card</string>
     <string name="btnSignUp">Sign Up</string>
@@ -57,8 +58,11 @@
     <string name="validationTelephoneMessage">Please enter a valid telephone number</string>
     <string name="validationCard">Invalid card number</string>
     <string name="validationCardMessage">Please enter a valid card number</string>
+    <string name="signUpSuccessfully">Sign Up Successfully</string>
+    <string name="signUpError">Sign Up Error</string>
 
     <!-- activity_catalogue.xml -->
+    <string name="tvRecommended">Recommended</string>
     <string name="svSearchMultimediaContent">Search Title</string>
 
     <!-- Catalogue.java -->
@@ -85,17 +89,18 @@
     <string name="ctx_lightNovel">Light Novel</string>
 
     <!-- activity_profile.xml -->
+    <string name="tvProfileTitle">My Profile</string>
     <string name="etEmailProfile">Email</string>
     <string name="etPasswordProfile">Password</string>
     <string name="etNameProfile">Name</string>
+    <string name="tvBirthYearProfile">Birth Year</string>
     <string name="etTelephoneProfile">Telephone</string>
     <string name="etCardProfile">Card</string>
-    <string name="btnSaveChangesProfile">SAVE CHANGES</string>
-    <string name="btnBackCatalogueFromProfile">BACK TO CATALOGUE</string>
+    <string name="btnSaveChangesProfile">Save Changes</string>
+    <string name="btnBackCatalogueFromProfile">Back to Catalogue</string>
 
     <!-- ProfileActivity.java -->
     <string name="updateSuccessfully">Profile updated successfully</string>
     <string name="updateFailed">Profile update failed</string>
-
 
 </resources>
