@@ -41,6 +41,11 @@ public class ProfileActivity extends AppCompatActivity {
         configureButtons();
     }
 
+
+
+    /**
+     * Inicializa las vistas de la actividad y deshabilita el campo de email.
+     */
     private void initializeViews() {
         etEmailProfile = findViewById(R.id.etEmailProfile);
         etPasswordProfile = findViewById(R.id.etPasswordProfile);
@@ -54,6 +59,11 @@ public class ProfileActivity extends AppCompatActivity {
         etEmailProfile.setEnabled(false);
     }
 
+
+
+    /**
+     * Carga el perfil del usuario desde la base de datos y lo muestra en las vistas.
+     */
     private void loadUserProfile() {
         databaseHelper = new DatabaseHelper(this);
 
@@ -71,6 +81,11 @@ public class ProfileActivity extends AppCompatActivity {
         spBirthYearProfile.setAdapter(spinnerAdapter);
     }
 
+
+
+    /**
+     * Añade TextWatchers a los campos de texto para detectar cambios en los datos del perfil.
+     */
     private void addTextWatchers() {
         TextWatcher watcher = new TextWatcher() {
             @Override
@@ -92,6 +107,11 @@ public class ProfileActivity extends AppCompatActivity {
         etCardProfile.addTextChangedListener(watcher);
     }
 
+
+
+    /**
+     * Configura los botones de la actividad para guardar los cambios o regresar a la actividad anterior.
+     */
     private void configureButtons() {
         btnSaveChangesProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +144,13 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+
+
+    /**
+     * Valida la entrada del usuario en los campos de teléfono y tarjeta.
+     *
+     * @return true si la entrada es válida, false de lo contrario.
+     */
     private boolean validateInput() {
         String telephone = etTelephoneProfile.getText().toString();
         String card = etCardProfile.getText().toString();
@@ -141,11 +168,27 @@ public class ProfileActivity extends AppCompatActivity {
         return true;
     }
 
+
+
+    /**
+     * Verifica si el número de teléfono proporcionado es válido.
+     *
+     * @param telephone El número de teléfono a validar.
+     * @return true si el número de teléfono es válido, false de lo contrario.
+     */
     private boolean isValidTelephone(String telephone) {
         telephone = telephone.replaceAll("\\s", "");
         return telephone.matches("\\+\\d{1,3}\\d{9}");
     }
 
+
+
+    /**
+     * Verifica si el número de tarjeta proporcionado es válido usando el algoritmo de Luhn.
+     *
+     * @param cardNumber El número de tarjeta a validar.
+     * @return true si el número de tarjeta es válido, false de lo contrario.
+     */
     private boolean isValidCardNumber(String cardNumber) {
         int sum = 0;
         boolean alternate = false;

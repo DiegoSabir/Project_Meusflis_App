@@ -1,0 +1,24 @@
+Luli a veces puede saltarte este al hacer varias tareas de forma continuada y rápida por la memoria del teléfono.
+
+2024-06-01 16:23:04.455 13047-13047 AndroidRuntime          com.example.meusflis                 E  FATAL EXCEPTION: main
+                                                                                                    Process: com.example.meusflis, PID: 13047
+                                                                                                    java.lang.OutOfMemoryError: Failed to allocate a 1920012 byte allocation with 1619048 free bytes and 1581KB until OOM
+                                                                                                    	at dalvik.system.VMRuntime.newNonMovableArray(Native Method)
+                                                                                                    	at android.graphics.BitmapFactory.nativeDecodeByteArray(Native Method)
+                                                                                                    	at android.graphics.BitmapFactory.decodeByteArray(BitmapFactory.java:522)
+                                                                                                    	at android.graphics.BitmapFactory.decodeByteArray(BitmapFactory.java:545)
+                                                                                                    	at com.example.meusflis.database.DatabaseHelper.getMultimediaContentData(DatabaseHelper.java:315)
+                                                                                                    	at com.example.meusflis.activity.CatalogueActivity.setupMultimediaContentList(CatalogueActivity.java:137)
+                                                                                                    	at com.example.meusflis.activity.CatalogueActivity.onCreate(CatalogueActivity.java:59)
+                                                                                                    	at android.app.Activity.performCreate(Activity.java:6237)
+                                                                                                    	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1107)
+                                                                                                    	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2369)
+                                                                                                    	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2476)
+                                                                                                    	at android.app.ActivityThread.-wrap11(ActivityThread.java)
+                                                                                                    	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1344)
+                                                                                                    	at android.os.Handler.dispatchMessage(Handler.java:102)
+                                                                                                    	at android.os.Looper.loop(Looper.java:148)
+                                                                                                    	at android.app.ActivityThread.main(ActivityThread.java:5417)
+                                                                                                    	at java.lang.reflect.Method.invoke(Native Method)
+                                                                                                    	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:726)
+                                                                                                    	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:616)

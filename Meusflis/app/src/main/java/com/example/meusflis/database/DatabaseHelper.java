@@ -162,11 +162,18 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         Cursor cursor = null;
 
         try {
-            String query = "SELECT " + DatabaseConstants.COLUMN_COVER + " FROM " +
-                    DatabaseConstants.TABLE_MULTIMEDIA_CONTENT +
-                    " ORDER BY " + DatabaseConstants.COLUMN_LIKES + " DESC LIMIT ?";
-
-            cursor = db.rawQuery(query, new String[]{String.valueOf(limit)});
+            String[] columns = { DatabaseConstants.COLUMN_COVER };
+            String orderBy = DatabaseConstants.COLUMN_LIKES + " DESC";
+            String limitStr = String.valueOf(limit);
+            cursor = db.query(
+                    DatabaseConstants.TABLE_MULTIMEDIA_CONTENT,
+                    columns,
+                    null,
+                    null,
+                    null,
+                    null,
+                    orderBy,
+                    limitStr);
 
             if (cursor.moveToFirst()) {
                 do {
@@ -201,8 +208,17 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         HashMap<String, String> userDetails = new HashMap<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
+
         try {
-            cursor = db.query(DatabaseConstants.TABLE_USER, null, DatabaseConstants.COLUMN_EMAIL + "=?", new String[]{email}, null, null, null);
+            cursor = db.query(
+                    DatabaseConstants.TABLE_USER,
+                    null,
+                    DatabaseConstants.COLUMN_EMAIL + "=?",
+                    new String[]{email},
+                    null,
+                    null,
+                    null);
+
             if (cursor != null && cursor.moveToFirst()) {
                 int emailIndex = cursor.getColumnIndexOrThrow(DatabaseConstants.COLUMN_EMAIL);
                 int passwordIndex = cursor.getColumnIndexOrThrow(DatabaseConstants.COLUMN_PASSWORD);
@@ -421,14 +437,19 @@ public class DatabaseHelper extends SQLiteAssetHelper {
      */
     public boolean updateUserDetails(String email, String password, String name, String telephone, String card) {
         SQLiteDatabase db = this.getWritableDatabase();
+
         try {
             ContentValues values = new ContentValues();
             values.put(DatabaseConstants.COLUMN_PASSWORD, password);
             values.put(DatabaseConstants.COLUMN_NAME, name);
             values.put(DatabaseConstants.COLUMN_TELEPHONE, telephone);
             values.put(DatabaseConstants.COLUMN_CARD, card);
-            int rows = db.update(DatabaseConstants.TABLE_USER, values,
-                    DatabaseConstants.COLUMN_EMAIL + "=?", new String[]{email});
+
+            int rows = db.update(
+                    DatabaseConstants.TABLE_USER,
+                    values,
+                    DatabaseConstants.COLUMN_EMAIL + "=?",
+                    new String[]{email});
             return rows > 0;
         }
         finally {
