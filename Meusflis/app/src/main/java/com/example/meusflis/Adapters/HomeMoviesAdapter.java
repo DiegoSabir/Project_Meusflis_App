@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meusflis.Models.MoviesModel;
 import com.example.meusflis.R;
+import com.example.meusflis.Utils.ClassDialogs;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -37,6 +38,8 @@ public class HomeMoviesAdapter extends RecyclerView.Adapter<HomeMoviesAdapter.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
+        MoviesModel model = mDataList.get(position);
+
         try{
             Picasso.get().load(mDataList.get(position).getImageMovie()).resize(720, 720).onlyScaleDown().into(holder.imgMovie);
         }
@@ -47,7 +50,7 @@ public class HomeMoviesAdapter extends RecyclerView.Adapter<HomeMoviesAdapter.My
         holder.imgMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Mostrnado datos", Toast.LENGTH_SHORT).show();
+                ClassDialogs.showBottomDetailsMovie(context, model);
             }
         });
     }

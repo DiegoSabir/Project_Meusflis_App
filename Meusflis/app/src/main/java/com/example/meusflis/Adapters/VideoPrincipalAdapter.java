@@ -53,7 +53,7 @@ public class VideoPrincipalAdapter extends RecyclerView.Adapter<VideoPrincipalAd
         holder.linearShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Boton compartir", Toast.LENGTH_SHORT).show();
+                ClassDialogs.shareMovieWithImage(context, holder.imageVideoPrincipal, model.getIdMovie(), model.getTitleMovie());
             }
         });
 

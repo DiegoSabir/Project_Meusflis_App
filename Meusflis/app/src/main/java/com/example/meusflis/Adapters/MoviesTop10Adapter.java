@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.meusflis.Common.Common;
 import com.example.meusflis.Models.MoviesModel;
 import com.example.meusflis.R;
+import com.example.meusflis.Utils.ClassDialogs;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -74,7 +75,7 @@ public class MoviesTop10Adapter extends RecyclerView.Adapter<MoviesTop10Adapter.
         holder.imgMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, mData.get(position).getIdMovie(), Toast.LENGTH_SHORT).show();
+                ClassDialogs.showBottomDetailsMovieWithID(context, mData.get(position).getIdMovie());
             }
         });
     }
