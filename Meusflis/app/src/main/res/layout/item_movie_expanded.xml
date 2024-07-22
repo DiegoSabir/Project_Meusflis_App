@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="170dp"
+    android:layout_height="320dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="7dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/colorDeCarga"
+    app:cardElevation="0dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true">
+
+    <ImageView
+        android:id="@+id/imageThumbMovieExpanded"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@color/colorDeCarga"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="#23B1B1B1"
+        android:scaleType="fitXY"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/gradient_semi_bottom_top_bg"
+        android:scaleType="fitXY"
+        android:layout_gravity="bottom"/>
+
+</androidx.cardview.widget.CardView>

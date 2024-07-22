@@ -1,106 +1,11 @@
 <resources>
-    <!-- Nombre de la aplicacion -->
     <string name="app_name">Meusflis</string>
 
-    <!-- activity_login.xml -->
-    <string name="etLoginEmail">Email</string>
-    <string name="etLoginPassword">Password</string>
-    <string name="btnSignIn">Sign In</string>
-    <string name="chkRemember">Remember me</string>
-    <string name="tvForgotPassword">Forgot password?</string>
-    <string name="tvSignUpRedirect">Not yet registered? Sign Up</string>
-
-    <!-- LoginActivity.java -->
-    <string name="setListenerUserExists">Login successfully</string>
-    <string name="setListenerUserNotExists">Invalid email or password</string>
-    <string name="validateEmailIsEmpty">Email cannot be empty</string>
-    <string name="validatePasswordIsEmpty">Password cannot be empty</string>
-    <string name="titleAttemptDialog">Warning</string>
-    <string name="messageAttemptDialog">You have one try left.\nYou can close the app to reset the number of attempts or try again.</string>
-    <string name="lastMessageAttemptDialog">Maximum number of attempts reached.\nThe application will close.</string>
-    <string name="optionTryAttemptDialog">Try Again</string>
-    <string name="optionExitAttemptDialog">Exit</string>
-    <string name="optionOkAttemptDialog">Ok</string>
-
-    <!-- activity_forget.xml -->
-    <string name="tvTitleForgetActivity">Forget Password</string>
-    <string name="etForgetEmail">Email</string>
-    <string name="btnSend">Send</string>
-    <string name="tvLoginRedirect">Back to Login</string>
-
-    <!-- ForgetActivity.java -->
-    <string name="tvEmailForgetNotExist">Email does not exist</string>
-    <string name="tvEmailForgetIsEmpty">Please enter an email</string>
-    <string name="notifyTitleForgetPass">Password Recovery</string>
-    <string name="notifyMessageForgetPass">Password: </string>
-
-    <!-- activity_signup.xml -->
-    <string name="tvTitleSignUpActivity">Sign Up</string>
-    <string name="etSignUpEmail">Email</string>
-    <string name="etSignUpPassword">Password</string>
-    <string name="etSignUpName">Name</string>
-    <string name="tvBirthYear">Birth Year</string>
-    <string name="etSignUpTelephone">Telephone</string>
-    <string name="etSignUpCard">Card</string>
-    <string name="btnSignUp">Sign Up</string>
-    <string name="tvLoginRedirectFromSignUp">Already an user? Back to Login</string>
-
-    <!-- SignUpActivity.java -->
-    <string name="btnSignUpSuccessful">Sign Up Successful</string>
-    <string name="btnSignUpFailed">Sign Up Failed</string>
-    <string name="validationEmail">Invalid email</string>
-    <string name="validationEmailMessage">Please enter a valid email address</string>
-    <string name="validationPassword">Password cannot be empty</string>
-    <string name="validationPasswordMessage">Please enter a password</string>
-    <string name="validationName">"Name cannot be empty</string>
-    <string name="validationNameMessage">Please enter your name</string>
-    <string name="validationTelephone">Invalid telephone number</string>
-    <string name="validationTelephoneMessage">Please enter a valid telephone number</string>
-    <string name="validationCard">Invalid card number</string>
-    <string name="validationCardMessage">Please enter a valid card number</string>
-    <string name="signUpSuccessfully">Sign Up Successfully</string>
-    <string name="signUpError">Sign Up Error</string>
-
-    <!-- activity_catalogue.xml -->
-    <string name="tvRecommended">Recommended</string>
-    <string name="svSearchMultimediaContent">Search Title</string>
-
-    <!-- Catalogue.java -->
-    <string name="exitDialogTitle">Exit App</string>
-    <string name="exitDialogMessage">¿Do you want to exit the app or log out?</string>
-    <string name="contactUsPhone">+1234567890</string>
-    <string name="callPermisionDenied">Call permission denied</string>
-    <string name="optionExit">Exit</string>
-    <string name="optionLogOut">Log out</string>
-
-    <!-- main_menu.xml -->
-    <string name="option_profile">My Profile</string>
-    <string name="option_languages">Languages</string>
-    <string name="option_english">English</string>
-    <string name="option_spanish">Spanish</string>
-    <string name="option_galician">Galician</string>
-    <string name="option_japanese">Japanese</string>
-    <string name="option_contact">Contact Us</string>
-    <string name="option_exit">Exit</string>
-
-    <!-- contextual_menu.xml -->
-    <string name="ctx_manga">Manga</string>
-    <string name="ctx_anime">Anime</string>
-    <string name="ctx_lightNovel">Light Novel</string>
-
-    <!-- activity_profile.xml -->
-    <string name="tvProfileTitle">My Profile</string>
-    <string name="etEmailProfile">Email</string>
-    <string name="etPasswordProfile">Password</string>
-    <string name="etNameProfile">Name</string>
-    <string name="tvBirthYearProfile">Birth Year</string>
-    <string name="etTelephoneProfile">Telephone</string>
-    <string name="etCardProfile">Card</string>
-    <string name="btnSaveChangesProfile">Save Changes</string>
-    <string name="btnBackCatalogueFromProfile">Back to Catalogue</string>
-
-    <!-- ProfileActivity.java -->
-    <string name="updateSuccessfully">Profile updated successfully</string>
-    <string name="updateFailed">Profile update failed</string>
+    <string name="menu_inicio">Inicio</string>
+    <string name="menu_nuevo_popular">Popular</string>
+    <string name="menu_descargas">Descargas</string>
+    <string name="menu_perfil">Perfil</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

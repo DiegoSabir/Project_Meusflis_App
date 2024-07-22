@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="115dp"
+        android:layout_height="160dp"
+        app:cardCornerRadius="8dp"
+        app:cardUseCompatPadding="true"
+        app:cardBackgroundColor="@color/colorDeCarga"
+        app:cardElevation="6dp">
+
+        <ImageView
+            android:id="@+id/imageThumbMovieHome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@color/colorDeCarga"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="#23B1B1B1"
+            android:scaleType="fitXY"/>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
