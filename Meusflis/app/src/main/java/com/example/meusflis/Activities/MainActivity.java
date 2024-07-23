@@ -15,17 +15,27 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.meusflis.Common.Common;
 import com.example.meusflis.Fragments.DescargasFragment;
 import com.example.meusflis.Fragments.HomeFragment;
 import com.example.meusflis.Fragments.NuevoPopularFragment;
 import com.example.meusflis.Fragments.PerfilFragment;
 import com.example.meusflis.R;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
     private FrameLayout container;
     private BottomNavigationView bottomNavigationView;
+    public BadgeDrawable badgeDrawable;
+
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+        reference = FirebaseDatabase.getInstance().getReference();
+
         Fragment homeFragment = new HomeFragment();
         Fragment nuevopopularFragment = new NuevoPopularFragment();
         Fragment descargasFragment = new DescargasFragment();
@@ -52,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, homeFragment).commit();
         }
+
+        badgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.nav_nuevopopular);
+        badgeDrawable.setVisible(false);
+        badgeDrawable.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
+        cargarItemsEstrenos();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
 
@@ -76,5 +93,31 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         });
+    }
+
+    private void cargarItemsEstrenos() {
+        reference.child(Common.NODO_MOVIES)
+                .child(Common.NODO_ESTRENOS)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()){
+                            int quantity = (int) snapshot.getChildrenCount();
+
+                            if (quantity > 0){
+                                badgeDrawable.setVisible(true);
+                                badgeDrawable.setNumber(quantity);
+                            }
+                            else{
+                                badgeDrawable.setVisible(false);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 }

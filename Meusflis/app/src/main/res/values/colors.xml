@@ -8,4 +8,6 @@
     <color name="teal_700">#00796B</color>
     <color name="colorDeCarga">#74676666</color>
     <color name="text_secondary">#B3B3B3</color>
+    <color name="colorSemiTransparent">#79000000</color>
+    <color name="text_primary">#E6E6E6</color>
 </resources>

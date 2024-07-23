@@ -1,15 +1,20 @@
 package com.example.meusflis.Fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.meusflis.Adapters.HomeMoviesAdapter;
 import com.example.meusflis.Adapters.MoviesTop10Adapter;
@@ -19,6 +24,8 @@ import com.example.meusflis.Common.Common;
 import com.example.meusflis.Models.MoviesModel;
 import com.example.meusflis.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,6 +60,16 @@ public class HomeFragment extends Fragment {
 
     DatabaseReference databaseReference;
 
+    NestedScrollView nestedScrolling;
+
+    CollapsingToolbarLayout ctl;
+
+    AppBarLayout app_bar;
+
+    LinearLayout stickbar_layout;
+
+    TextView tvPeliculasHome, tvSeriesHome;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -82,7 +99,28 @@ public class HomeFragment extends Fragment {
         linearTop10 = root.findViewById(R.id.linearTop10);
         linearComedia = root.findViewById(R.id.linearComedia);
 
+        ctl = root.findViewById(R.id.ctl);
+
+        app_bar = root.findViewById(R.id.app_bar);
+
+        stickbar_layout = root.findViewById(R.id.stickbar_layout);
+
+        nestedScrolling = root.findViewById(R.id.nestedScrolling);
+
+        tvPeliculasHome = root.findViewById(R.id.tvPeliculasHome);
+        tvSeriesHome = root.findViewById(R.id.tvSeriesHome);
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        ctl.setStatusBarScrimColor(Color.TRANSPARENT);
+        app_bar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                float percentage = 1 - ((float)Math.abs(verticalOffset) / appBarLayout.getTotalScrollRange());
+                ctl.setAlpha(percentage);
+                stickbar_layout.setAlpha((float)Math.abs(verticalOffset) / appBarLayout.getTotalScrollRange());
+            }
+        });
 
         loadPrincipalVideo();
 
@@ -97,6 +135,26 @@ public class HomeFragment extends Fragment {
         showMoviesTop10();
 
         showMoviesComedia();
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        final Fragment moviesAllFragment = new MoviesFragment();
+        final Fragment seriesAllFragment = new MoviesFragment();
+
+        tvPeliculasHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, moviesAllFragment).addToBackStack(null).commit();
+            }
+        });
+
+        tvSeriesHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, seriesAllFragment).addToBackStack(null).commit();
+            }
+        });
 
         return root;
     }

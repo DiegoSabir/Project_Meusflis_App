@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    tools:context=".Fragments.MoviesFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:background="@color/colorSemiTransparent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="40dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:paddingHorizontal="16dp"
+                android:showDividers="middle">
+
+                <ImageView
+                    android:id="@+id/imageBackPrincipalHomeFromMovies"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/baseline_arrow_back_ios_new_24"/>
+
+                <EditText
+                    android:id="@+id/etSearchMovie"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_toStartOf="@+id/searchAllIcon"
+                    android:layout_toEndOf="@+id/imageBackPrincipalHomeFromMovies"
+                    android:background="@drawable/background_transparent_black"
+                    android:focusable="true"
+                    android:visibility="gone"
+                    android:fontFamily="@font/raleway"
+                    android:hint="Buscar pelicula"
+                    android:inputType="textCapCharacters"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="16sp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="4dp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"/>
+
+                <TextView
+                    android:id="@+id/textOfItems"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Peliculas"
+                    android:layout_toEndOf="@+id/imageBackPrincipalHomeFromMovies"
+                    android:layout_marginStart="5dp"
+                    android:textSize="22sp"
+                    android:layout_centerVertical="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/tommy"/>
+
+                <ImageView
+                    android:id="@+id/searchAllIcon"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="4dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/baseline_search_24"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/stickbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="15dp"
+            android:paddingHorizontal="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Peliculas"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
+
+            <LinearLayout
+                android:id="@+id/linearCategorySelection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="?android:attr/selectableItemBackground">
+
+                <TextView
+                    android:id="@+id/tvCategorySelected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:text="Todas las categorias"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"/>
+
+                <ImageView
+                    android:id="@+id/imgCategorySelect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_arrow_drop_down_24"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAllMovies"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="120dp"
+        android:paddingBottom="10dp"/>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="120dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="0dp"
+                    android:paddingBottom="15dp">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        app:riv_corner_radius="12dp"
+                        android:scaleType="centerCrop"
+                        android:layout_weight="1"
+                        android:src="@color/colorDeCarga"/>
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        app:riv_corner_radius="12dp"
+                        android:scaleType="centerCrop"
+                        android:layout_weight="1"
+                        android:src="@color/colorDeCarga"/>
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        app:riv_corner_radius="12dp"
+                        android:scaleType="centerCrop"
+                        android:layout_weight="1"
+                        android:src="@color/colorDeCarga"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="0dp"
+                    android:paddingBottom="15dp">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        app:riv_corner_radius="12dp"
+                        android:scaleType="centerCrop"
+                        android:layout_weight="1"
+                        android:src="@color/colorDeCarga"/>
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        app:riv_corner_radius="12dp"
+                        android:scaleType="centerCrop"
+                        android:layout_weight="1"
+                        android:src="@color/colorDeCarga"/>
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        app:riv_corner_radius="12dp"
+                        android:scaleType="centerCrop"
+                        android:layout_weight="1"
+                        android:src="@color/colorDeCarga"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="0dp"
+                    android:paddingBottom="15dp">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        app:riv_corner_radius="12dp"
+                        android:scaleType="centerCrop"
+                        android:layout_weight="1"
+                        android:src="@color/colorDeCarga"/>
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        app:riv_corner_radius="12dp"
+                        android:scaleType="centerCrop"
+                        android:layout_weight="1"
+                        android:src="@color/colorDeCarga"/>
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        app:riv_corner_radius="12dp"
+                        android:scaleType="centerCrop"
+                        android:layout_weight="1"
+                        android:src="@color/colorDeCarga"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:paddingEnd="15dp"
+                    android:paddingStart="0dp"
+                    android:paddingBottom="15dp">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        app:riv_corner_radius="12dp"
+                        android:scaleType="centerCrop"
+                        android:layout_weight="1"
+                        android:src="@color/colorDeCarga"/>
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        app:riv_corner_radius="12dp"
+                        android:scaleType="centerCrop"
+                        android:layout_weight="1"
+                        android:src="@color/colorDeCarga"/>
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        app:riv_corner_radius="12dp"
+                        android:scaleType="centerCrop"
+                        android:layout_weight="1"
+                        android:src="@color/colorDeCarga"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            
+        </ScrollView>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</RelativeLayout>
