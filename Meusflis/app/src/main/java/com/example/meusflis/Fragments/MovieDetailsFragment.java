@@ -1,5 +1,7 @@
 package com.example.meusflis.Fragments;
 
+import static com.example.meusflis.Utils.ClassDialogs.showVideoMovie;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -41,8 +43,7 @@ public class MovieDetailsFragment extends Fragment {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //showVideoMovie(getContext(), videoUrl);
+                showVideoMovie(getContext(), videoUrl);
             }
         });
 

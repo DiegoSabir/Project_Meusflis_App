@@ -116,6 +116,7 @@ public class MoviesFragment extends Fragment implements MoviesCategoriesAdapter.
 
             }
         });
+
         linearCategorySelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +135,6 @@ public class MoviesFragment extends Fragment implements MoviesCategoriesAdapter.
     }
 
     private void showAllMovies() {
-
         moviesModels = new ArrayList<>();
 
         reference.child(Common.NODO_MOVIES)
@@ -169,7 +169,6 @@ public class MoviesFragment extends Fragment implements MoviesCategoriesAdapter.
     }
 
     private void showDialogCategories() {
-
         View layout_dialog = LayoutInflater.from(getContext()).inflate(R.layout.layout_dialog_list_categories, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(layout_dialog);

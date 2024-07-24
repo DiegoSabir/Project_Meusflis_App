@@ -56,4 +56,8 @@ dependencies {
 
     //DEXTER PERMISOS
     implementation("com.karumi:dexter:6.2.3")
+
+    //EXOPLAYER
+    implementation("com.google.android.exoplayer:exoplayer-core:2.19.1")
+    implementation("com.google.android.exoplayer:exoplayer-ui:2.19.1")
 }

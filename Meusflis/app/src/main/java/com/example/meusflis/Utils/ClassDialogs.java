@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.meusflis.Activities.MainActivity;
+import com.example.meusflis.Activities.VideoPlayerOnlineActivity;
 import com.example.meusflis.Common.Common;
 import android.Manifest;
 
@@ -89,6 +90,13 @@ public class ClassDialogs {
             Picasso.get().load(R.drawable.baseline_image_not_supported_24).into(imgMovie);
         }
 
+        btnShowVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showVideoMovie(context, moviesModel.getVideoMovie());
+            }
+        });
+
         btnNoLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,6 +161,13 @@ public class ClassDialogs {
             app_installed = false;
         }
         return app_installed;
+    }
+
+
+    public static void showVideoMovie(Context context, String videoMovie) {
+        Intent intent = new Intent(context, VideoPlayerOnlineActivity.class);
+        intent.putExtra("videoUrl", videoMovie);
+        context.startActivity(intent);
     }
 
     public static void shareMovieWithImage(Context context, ImageView ImageVideoPrincipal, String idMovie, String titleMovie) {

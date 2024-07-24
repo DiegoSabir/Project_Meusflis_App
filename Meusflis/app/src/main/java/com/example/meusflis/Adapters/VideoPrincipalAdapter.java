@@ -1,5 +1,7 @@
 package com.example.meusflis.Adapters;
 
+import static com.example.meusflis.Utils.ClassDialogs.showVideoMovie;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,7 +69,7 @@ public class VideoPrincipalAdapter extends RecyclerView.Adapter<VideoPrincipalAd
         holder.linearPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Boton reproducir", Toast.LENGTH_SHORT).show();
+                showVideoMovie(context, model.getVideoMovie());
             }
         });
     }
