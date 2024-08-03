@@ -1,4 +1,4 @@
-package com.sabir.meusflis;
+package com.sabir.meusflis.Activities;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +21,7 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.sabir.meusflis.R;
 
 public class PlayerActivity extends AppCompatActivity {
 

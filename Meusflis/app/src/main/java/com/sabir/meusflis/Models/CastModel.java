@@ -1,4 +1,4 @@
-package com.sabir.meusflis;
+package com.sabir.meusflis.Models;
 
 public class CastModel {
 

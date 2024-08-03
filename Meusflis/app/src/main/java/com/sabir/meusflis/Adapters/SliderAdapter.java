@@ -1,4 +1,4 @@
-package com.sabir.meusflis;
+package com.sabir.meusflis.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.sabir.meusflis.Activities.PlayerActivity;
+import com.sabir.meusflis.Models.DataModel;
+import com.sabir.meusflis.R;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.ArrayList;

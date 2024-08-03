@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/purple_500"
-    tools:context=".DetailsActivity">
+    tools:context=".Activities.DetailsActivity">
     
     <ScrollView
         android:layout_width="match_parent"

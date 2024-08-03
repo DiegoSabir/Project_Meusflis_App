@@ -1,4 +1,4 @@
-package com.sabir.meusflis;
+package com.sabir.meusflis.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-
-import org.w3c.dom.Text;
+import com.sabir.meusflis.Models.CastModel;
+import com.sabir.meusflis.R;
 
 import java.util.List;
 

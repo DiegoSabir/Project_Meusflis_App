@@ -1,4 +1,4 @@
-package com.sabir.meusflis;
+package com.sabir.meusflis.Adapters;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +13,9 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.sabir.meusflis.Activities.DetailsActivity;
+import com.sabir.meusflis.R;
+import com.sabir.meusflis.Models.SeriesModel;
 
 import java.util.List;
 

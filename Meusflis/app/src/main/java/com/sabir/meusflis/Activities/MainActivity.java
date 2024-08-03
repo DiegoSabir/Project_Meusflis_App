@@ -1,4 +1,4 @@
-package com.sabir.meusflis;
+package com.sabir.meusflis.Activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +16,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sabir.meusflis.Adapters.FeaturedAdapter;
+import com.sabir.meusflis.Models.DataModel;
+import com.sabir.meusflis.Models.FeatureModel;
+import com.sabir.meusflis.R;
+import com.sabir.meusflis.Adapters.SeriesAdapter;
+import com.sabir.meusflis.Models.SeriesModel;
+import com.sabir.meusflis.Adapters.SliderAdapter;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;

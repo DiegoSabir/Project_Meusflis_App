@@ -1,4 +1,4 @@
-package com.sabir.meusflis;
+package com.sabir.meusflis.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sabir.meusflis.Adapters.CastAdapter;
+import com.sabir.meusflis.Adapters.EpisodeAdapter;
+import com.sabir.meusflis.Models.EpisodeModel;
+import com.sabir.meusflis.Models.CastModel;
+import com.sabir.meusflis.R;
 
 import java.util.ArrayList;
 import java.util.List;

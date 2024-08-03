@@ -1,4 +1,4 @@
-package com.sabir.meusflis;
+package com.sabir.meusflis.Adapters;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.sabir.meusflis.Models.EpisodeModel;
+import com.sabir.meusflis.Activities.PlayerActivity;
+import com.sabir.meusflis.R;
 
 import java.util.List;
 
