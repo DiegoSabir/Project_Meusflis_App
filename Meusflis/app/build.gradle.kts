@@ -42,11 +42,11 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    implementation("com.github.smarteist:autoimageslider:1.4.0")
+    implementation(libs.autoimageslider)
 
+    implementation(libs.glide)
 
-    implementation("com.github.bumptech.glide:glide:4.11.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
+    annotationProcessor(libs.glide.compiler)
 
-    implementation("com.google.android.exoplayer:exoplayer:2.11.7")
+    implementation(libs.exoplayer)
 }
