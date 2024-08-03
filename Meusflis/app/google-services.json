@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1003687122717",
+    "project_id": "meusflis-c2586",
+    "storage_bucket": "meusflis-c2586.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003687122717:android:98f424db13133d0653b3f4",
+        "android_client_info": {
+          "package_name": "com.sabir.meusflis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFM8vA1ScM68PfdpkCAT7Hf8vmR5p58p0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
