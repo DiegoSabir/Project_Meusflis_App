@@ -2,14 +2,13 @@ package com.sabir.meusflis.Models;
 
 public class EpisodeModel {
 
-    String part, url, vidUrl;
+    String part, vidUrl;
 
     public EpisodeModel() {
     }
 
-    public EpisodeModel(String part, String url, String vidUrl) {
+    public EpisodeModel(String part, String vidUrl) {
         this.part = part;
-        this.url = url;
         this.vidUrl = vidUrl;
     }
 
@@ -19,14 +18,6 @@ public class EpisodeModel {
 
     public void setPart(String part) {
         this.part = part;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getVidUrl() {

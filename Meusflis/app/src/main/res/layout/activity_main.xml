@@ -2,19 +2,19 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/purple_700"
     tools:context=".Activities.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/tbAppName"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:titleTextColor="@color/white"
-        android:background="@android:color/transparent"/>
+        android:background="@color/color_bg_blue"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:background="@color/purple_700">
 
             <com.smarteist.autoimageslider.SliderView
-                android:id="@+id/sliderView"
+                android:id="@+id/svCarousel"
                 android:layout_width="0dp"
                 android:layout_height="255dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -41,14 +41,16 @@
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Featured Movies"
+                android:text="Occidental"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:layout_margin="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginBottom="15dp"
+                android:paddingVertical="5dp"
+                android:paddingStart="15dp"
+                android:background="@color/color_bg_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sliderView" />
+                app:layout_constraintTop_toBottomOf="@+id/svCarousel" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView2"
@@ -65,10 +67,13 @@
                 android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Web Series"
+                android:text="Oriental"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:layout_margin="16dp"
+                android:layout_marginVertical="15dp"
+                android:paddingVertical="5dp"
+                android:paddingStart="15dp"
+                android:background="@color/color_bg_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />

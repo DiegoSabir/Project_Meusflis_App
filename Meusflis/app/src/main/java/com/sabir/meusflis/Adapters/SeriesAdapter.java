@@ -36,20 +36,20 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull SeriesAdapter.MyViewHolder holder, int position) {
-        holder.title.setText(modelList.get(position).getStitle());
-        Glide.with(holder.imageView.getContext()).load(modelList.get(position).getSthumb()).into(holder.imageView);
+        holder.title.setText(modelList.get(position).getTitle());
+        Glide.with(holder.imageView.getContext()).load(modelList.get(position).getCover()).into(holder.imageView);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent sendDataToDetailsActivity = new Intent(holder.itemView.getContext(), DetailsActivity.class);
-                sendDataToDetailsActivity.putExtra("title", modelList.get(position).getStitle());
-                sendDataToDetailsActivity.putExtra("link", modelList.get(position).getSlink());
-                sendDataToDetailsActivity.putExtra("cover", modelList.get(position).getScover());
-                sendDataToDetailsActivity.putExtra("thumb", modelList.get(position).getSthumb());
-                sendDataToDetailsActivity.putExtra("desc", modelList.get(position).getSdesc());
-                sendDataToDetailsActivity.putExtra("cast", modelList.get(position).getScast());
-                sendDataToDetailsActivity.putExtra("t_link", modelList.get(position).getTlink());
+                sendDataToDetailsActivity.putExtra("title", modelList.get(position).getTitle());
+                sendDataToDetailsActivity.putExtra("episodes", modelList.get(position).getEpisodes());
+                sendDataToDetailsActivity.putExtra("background", modelList.get(position).getBackground());
+                sendDataToDetailsActivity.putExtra("cover", modelList.get(position).getCover());
+                sendDataToDetailsActivity.putExtra("synopsis", modelList.get(position).getSynopsis());
+                sendDataToDetailsActivity.putExtra("cast", modelList.get(position).getCast());
+                sendDataToDetailsActivity.putExtra("trailer", modelList.get(position).getTrailer());
 
                 ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity)holder.itemView.getContext(), holder.imageView, "imageMain");
 

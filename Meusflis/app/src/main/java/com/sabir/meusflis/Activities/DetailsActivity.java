@@ -41,58 +41,58 @@ public class DetailsActivity extends AppCompatActivity {
 
     private EpisodeAdapter episodeAdapter;
 
-    private RecyclerView episodeRecyclerView, castRecyclerView;
+    private RecyclerView rvEpisodes, rvCast;
 
-    private ImageView thumb, cover;
+    private ImageView ivCover, ivBackground;
 
-    private TextView title, desc;
+    private TextView tvTitle, tvSynopsis;
 
-    private FloatingActionButton actionButton;
+    private FloatingActionButton fabTrailer;
 
-    private String title_movie, des_movie, thumb_movie, link_movie, cover_movie, cast_movie, trailer_movie;
+    private String titleData, synopsisData, coverData, episodesData, backgroundData, castData, trailerData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        episodeRecyclerView = findViewById(R.id.recyclerViewEpisodes);
-        castRecyclerView = findViewById(R.id.recyclerViewCast);
+        rvEpisodes = findViewById(R.id.rvEpisodes);
+        rvCast = findViewById(R.id.rvCast);
 
-        thumb = findViewById(R.id.thumb);
-        cover = findViewById(R.id.cover);
-        title = findViewById(R.id.title);
-        desc = findViewById(R.id.desc);
-        actionButton = findViewById(R.id.floatingActionButton2);
+        ivCover = findViewById(R.id.ivCover);
+        ivBackground = findViewById(R.id.ivBackground);
+        tvTitle = findViewById(R.id.tvTitle);
+        tvSynopsis = findViewById(R.id.tvSynopsis);
+        fabTrailer = findViewById(R.id.fabTrailer);
 
-        title_movie = getIntent().getStringExtra("title");
-        des_movie = getIntent().getStringExtra("des");
-        thumb_movie = getIntent().getStringExtra("thumb");
-        link_movie = getIntent().getStringExtra("link");
-        cover_movie = getIntent().getStringExtra("cover");
-        cast_movie = getIntent().getStringExtra("cast");
-        trailer_movie = getIntent().getStringExtra("t_link");
+        titleData = getIntent().getStringExtra("title");
+        synopsisData = getIntent().getStringExtra("synopsis");
+        coverData = getIntent().getStringExtra("cover");
+        episodesData = getIntent().getStringExtra("episodes");
+        backgroundData = getIntent().getStringExtra("background");
+        castData = getIntent().getStringExtra("cast");
+        trailerData = getIntent().getStringExtra("trailer");
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.tbAppName);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(title_movie);
+        getSupportActionBar().setTitle(titleData);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Glide.with(this).load(thumb_movie).into(thumb);
-        Glide.with(this).load(cover_movie).into(cover);
-        thumb.setAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_animation));
-        cover.setAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_animation));
+        Glide.with(this).load(coverData).into(ivCover);
+        Glide.with(this).load(backgroundData).into(ivBackground);
+        ivCover.setAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_animation));
+        ivBackground.setAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_animation));
 
-        title.setText(title_movie);
-        desc.setText(des_movie);
+        tvTitle.setText(titleData);
+        tvSynopsis.setText(synopsisData);
 
-        actionButton.setOnClickListener(new View.OnClickListener() {
+        fabTrailer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseDatabase database = FirebaseDatabase.getInstance("https://meusflis-c2586-default-rtdb.europe-west1.firebasedatabase.app");
                 DatabaseReference myRef = database.getReference();
-                myRef.child("link").child(trailer_movie).addValueEventListener(new ValueEventListener() {
+                myRef.child("link").child(trailerData).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String vidUrl = snapshot.getValue(String.class);
@@ -118,13 +118,13 @@ public class DetailsActivity extends AppCompatActivity {
         DatabaseReference castRef = database.getReference();
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        castRecyclerView.setLayoutManager(layoutManager);
+        rvCast.setLayoutManager(layoutManager);
 
         castModels = new ArrayList<>();
         castAdapter = new CastAdapter(castModels);
-        castRecyclerView.setAdapter(castAdapter);
+        rvCast.setAdapter(castAdapter);
 
-        castRef.child("cast").child(cast_movie).addValueEventListener(new ValueEventListener() {
+        castRef.child("cast").child(castData).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot content : snapshot.getChildren()){
@@ -145,14 +145,14 @@ public class DetailsActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://meusflis-c2586-default-rtdb.europe-west1.firebasedatabase.app");
         DatabaseReference episodeRef = database.getReference();
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        episodeRecyclerView.setLayoutManager(layoutManager);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        rvEpisodes.setLayoutManager(layoutManager);
 
         episodeModels = new ArrayList<>();
         episodeAdapter = new EpisodeAdapter(episodeModels);
-        episodeRecyclerView.setAdapter(episodeAdapter);
+        rvEpisodes.setAdapter(episodeAdapter);
 
-        episodeRef.child("link").child(link_movie).addValueEventListener(new ValueEventListener() {
+        episodeRef.child("link").child(episodesData).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot content : snapshot.getChildren()){

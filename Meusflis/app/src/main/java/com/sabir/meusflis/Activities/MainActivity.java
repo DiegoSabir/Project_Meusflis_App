@@ -51,21 +51,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        Toolbar tbAppName = findViewById(R.id.tbAppName);
+        setSupportActionBar(tbAppName);
         getSupportActionBar().setTitle("Meusflis");
 
         FirebaseApp.initializeApp(this);
 
-        SliderView sliderView = findViewById(R.id.sliderView);
+        SliderView svCarousel = findViewById(R.id.svCarousel);
 
         sliderAdapter = new SliderAdapter(this);
-        sliderView.setSliderAdapter(sliderAdapter);
-        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
-        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
-        sliderView.setScrollTimeInSec(6);
-        renewItems(sliderView);
+        svCarousel.setSliderAdapter(sliderAdapter);
+        svCarousel.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        svCarousel.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        svCarousel.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
+        svCarousel.setScrollTimeInSec(6);
+        renewItems(svCarousel);
 
         //Load data from firebase
         loadFirebaseForSlider();

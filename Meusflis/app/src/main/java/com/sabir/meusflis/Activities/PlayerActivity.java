@@ -37,7 +37,7 @@ public class PlayerActivity extends AppCompatActivity {
         VIDEO_URL = getIntent().getStringExtra("vid");
         VIDEO_TITLE = getIntent().getStringExtra("title");
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.tbAppName);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(VIDEO_TITLE);
 

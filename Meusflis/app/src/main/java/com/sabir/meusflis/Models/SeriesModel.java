@@ -2,74 +2,74 @@ package com.sabir.meusflis.Models;
 
 public class SeriesModel {
 
-    String Scast, Scover, Sdesc, Slink, Sthumb, Stitle, Tlink;
+    String background, cast, cover, episodes, synopsis, title, trailer;
 
     public SeriesModel() {
     }
 
-    public SeriesModel(String scast, String scover, String sdesc, String slink, String sthumb, String stitle, String tlink) {
-        Scast = scast;
-        Scover = scover;
-        Sdesc = sdesc;
-        Slink = slink;
-        Sthumb = sthumb;
-        Stitle = stitle;
-        Tlink = tlink;
+    public SeriesModel(String background, String cast, String cover, String episodes, String synopsis, String title, String trailer) {
+        this.background = background;
+        this.cast = cast;
+        this.cover = cover;
+        this.episodes = episodes;
+        this.synopsis = synopsis;
+        this.title = title;
+        this.trailer = trailer;
     }
 
-    public String getScast() {
-        return Scast;
+    public String getBackground() {
+        return background;
     }
 
-    public void setScast(String scast) {
-        Scast = scast;
+    public void setBackground(String background) {
+        this.background = background;
     }
 
-    public String getScover() {
-        return Scover;
+    public String getCast() {
+        return cast;
     }
 
-    public void setScover(String scover) {
-        Scover = scover;
+    public void setCast(String cast) {
+        this.cast = cast;
     }
 
-    public String getSdesc() {
-        return Sdesc;
+    public String getCover() {
+        return cover;
     }
 
-    public void setSdesc(String sdesc) {
-        Sdesc = sdesc;
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
-    public String getSlink() {
-        return Slink;
+    public String getEpisodes() {
+        return episodes;
     }
 
-    public void setSlink(String slink) {
-        Slink = slink;
+    public void setEpisodes(String episodes) {
+        this.episodes = episodes;
     }
 
-    public String getSthumb() {
-        return Sthumb;
+    public String getSynopsis() {
+        return synopsis;
     }
 
-    public void setSthumb(String sthumb) {
-        Sthumb = sthumb;
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
     }
 
-    public String getStitle() {
-        return Stitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setStitle(String stitle) {
-        Stitle = stitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getTlink() {
-        return Tlink;
+    public String getTrailer() {
+        return trailer;
     }
 
-    public void setTlink(String tlink) {
-        Tlink = tlink;
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
     }
 }
