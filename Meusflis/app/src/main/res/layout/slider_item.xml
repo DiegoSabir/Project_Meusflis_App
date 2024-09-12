@@ -29,7 +29,7 @@
         app:srcCompat="@drawable/ic_play_button"/>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ivProfileDecoration"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"
@@ -50,7 +50,7 @@
         android:layout_marginEnd="24dp"
         android:paddingBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/imageView2"
-        app:layout_constraintStart_toStartOf="@id/imageView2"/>
+        app:layout_constraintEnd_toEndOf="@id/ivProfileDecoration"
+        app:layout_constraintStart_toStartOf="@id/ivProfileDecoration"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

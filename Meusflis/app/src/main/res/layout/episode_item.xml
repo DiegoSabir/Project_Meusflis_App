@@ -5,19 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/episode_name"
+        android:id="@+id/tvEpisodeTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="episode"
-        android:textColor="@color/white"
-        android:padding="8dp"
-        android:background="#1A243F"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Episode Title"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:ellipsize="end"
+        android:maxLines="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

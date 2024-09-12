@@ -2,29 +2,30 @@ package com.sabir.meusflis.Models;
 
 public class CastModel {
 
-    String cname, curl;
+    private String name;
+    private String url;
 
     public CastModel() {
     }
 
-    public CastModel(String cname, String curl) {
-        this.cname = cname;
-        this.curl = curl;
+    public CastModel(String name, String url) {
+        this.name = name;
+        this.url = url;
     }
 
-    public String getCname() {
-        return cname;
+    public String getName() {
+        return name;
     }
 
-    public void setCname(String cname) {
-        this.cname = cname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCurl() {
-        return curl;
+    public String getUrl() {
+        return url;
     }
 
-    public void setCurl(String curl) {
-        this.curl = curl;
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

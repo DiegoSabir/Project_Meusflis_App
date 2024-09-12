@@ -1,5 +1,6 @@
 package com.sabir.meusflis.Adapters;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,52 +10,58 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sabir.meusflis.Models.EpisodeModel;
 import com.sabir.meusflis.Activities.PlayerActivity;
+import com.sabir.meusflis.Models.EpisodeModel;
 import com.sabir.meusflis.R;
 
 import java.util.List;
 
-public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.MyViewHolder> {
+public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeViewHolder> {
 
-    private List<EpisodeModel> models;
+    private final Context context;
+    private final List<EpisodeModel> episodeList;
 
-    public EpisodeAdapter(List<EpisodeModel> models) {
-        this.models = models;
+    public EpisodeAdapter(Context context, List<EpisodeModel> episodeList) {
+        this.context = context;
+        this.episodeList = episodeList;
     }
 
     @NonNull
     @Override
-    public EpisodeAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.episode_item, parent, false);
-        return new MyViewHolder(view);
+    public EpisodeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.episode_item, parent, false);
+        return new EpisodeViewHolder(view);
+    }
+
+    public void updateEpisodes(List<EpisodeModel> newEpisodes) {
+        episodeList.clear();
+        episodeList.addAll(newEpisodes);
+        notifyDataSetChanged();
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EpisodeAdapter.MyViewHolder holder, int position) {
-        holder.episode_name.setText(models.get(position).getPart());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), PlayerActivity.class);
-                intent.putExtra("title", models.get(position).getPart());
-                intent.putExtra("vid", models.get(position).getVidUrl());
-                holder.itemView.getContext().startActivity(intent);
-            }
+    public void onBindViewHolder(@NonNull EpisodeViewHolder holder, int position) {
+        EpisodeModel episode = episodeList.get(position);
+        holder.tvEpisodeTitle.setText(episode.getEpisodeTitle());
+
+        // Agregar un OnClickListener para manejar el clic en cada episodio
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, PlayerActivity.class);
+            intent.putExtra("vid", episode.getEpisodeUrl());
+            context.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return models.size();
+        return episodeList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView episode_name;
-
-        public MyViewHolder(@NonNull View itemView) {
+    public static class EpisodeViewHolder extends RecyclerView.ViewHolder {
+        TextView tvEpisodeTitle;
+        public EpisodeViewHolder(@NonNull View itemView) {
             super(itemView);
-            episode_name = itemView.findViewById(R.id.episode_name);
+            tvEpisodeTitle = itemView.findViewById(R.id.tvEpisodeTitle);
         }
     }
 }

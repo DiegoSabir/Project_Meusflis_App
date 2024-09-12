@@ -11,30 +11,30 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sabir.meusflis.Activities.PlayerActivity;
-import com.sabir.meusflis.Models.DataModel;
+import com.sabir.meusflis.Models.CarouselModel;
 import com.sabir.meusflis.R;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SliderAdapter extends SliderViewAdapter<SliderAdapter.MyViewHolder> {
+public class CarouselAdapter extends SliderViewAdapter<CarouselAdapter.MyViewHolder> {
 
     private Context context;
 
-    public SliderAdapter(Context context) {
+    public CarouselAdapter(Context context) {
         this.context = context;
     }
 
-    private List<DataModel> dataModels = new ArrayList<>();
+    private List<CarouselModel> carouselModels = new ArrayList<>();
 
-    public void renewItems(List<DataModel> dataModels){
-        this.dataModels = dataModels;
+    public void renewItems(List<CarouselModel> carouselModels){
+        this.carouselModels = carouselModels;
         notifyDataSetChanged();
     }
 
     public void deleteItems(int position){
-        this.dataModels.remove(position);
+        this.carouselModels.remove(position);
         notifyDataSetChanged();
     }
 
@@ -46,18 +46,18 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.MyViewHolder>
 
     @Override
     public void onBindViewHolder(MyViewHolder viewHolder, int position) {
-        viewHolder.trailer_title.setText(dataModels.get(position).getTtitle());
+        viewHolder.trailer_title.setText(carouselModels.get(position).getTtitle());
 
         Glide.with(viewHolder.itemView)
-                .load(dataModels.get(position).getTurl())
+                .load(carouselModels.get(position).getTurl())
                 .into(viewHolder.slider_image);
 
         viewHolder.play_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent trailer_video = new Intent(context, PlayerActivity.class);
-                trailer_video.putExtra("vid", dataModels.get(position).getTvid());
-                trailer_video.putExtra("title", dataModels.get(position).getTtitle());
+                trailer_video.putExtra("vid", carouselModels.get(position).getTvid());
+                trailer_video.putExtra("title", carouselModels.get(position).getTtitle());
                 v.getContext().startActivity(trailer_video);
             }
         });
@@ -65,7 +65,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.MyViewHolder>
 
     @Override
     public int getCount() {
-        return dataModels.size();
+        return carouselModels.size();
     }
 
     public class MyViewHolder extends SliderViewAdapter.ViewHolder{

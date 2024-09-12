@@ -5,17 +5,17 @@
     android:layout_height="wrap_content">
     
     <ImageView
-        android:id="@+id/cast_image"
+        android:id="@+id/ivCastImage"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_background"/>
 
     <TextView
-        android:id="@+id/cast_name"
+        android:id="@+id/tvCastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cast_image"
+        android:layout_below="@+id/ivCastImage"
         android:text="cast"
         android:textColor="@color/white"
         android:gravity="center"

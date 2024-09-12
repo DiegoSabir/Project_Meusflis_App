@@ -12,6 +12,9 @@ firebaseDatabase = "21.0.0"
 autoimageslider = "1.4.0"
 glide = "4.11.0"
 exoplayer = "2.11.7"
+navigationFragment = "2.6.0"
+navigationUi = "2.6.0"
+firebaseAuth = "23.0.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -26,6 +29,9 @@ autoimageslider = { group = "com.github.smarteist", name = "autoimageslider", ve
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
 exoplayer = { group = "com.google.android.exoplayer", name = "exoplayer", version.ref = "exoplayer" }
+navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
+navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationUi" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

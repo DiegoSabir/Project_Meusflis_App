@@ -1,13 +1,13 @@
 package com.sabir.meusflis.Models;
 
-public class DataModel {
+public class CarouselModel {
 
     private String Ttitle, Turl, Tvid;
 
-    public DataModel() {
+    public CarouselModel() {
     }
 
-    public DataModel(String ttitle, String turl, String tvid) {
+    public CarouselModel(String ttitle, String turl, String tvid) {
         Ttitle = ttitle;
         Turl = turl;
         Tvid = tvid;

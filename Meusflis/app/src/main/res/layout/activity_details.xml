@@ -19,7 +19,7 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/tbAppName"
+                android:id="@+id/tbTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
@@ -73,29 +73,36 @@
                     app:layout_constraintTop_toTopOf="@+id/ivBackground"
                     app:srcCompat="@drawable/ic_play_button"/>
 
-                <TextView
-                    android:id="@+id/tvTitle"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvGenre"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:text="TextView"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
+                    android:orientation="horizontal"
+                    tools:listitem="@layout/genre_item"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btnLike"
                     app:layout_constraintStart_toEndOf="@+id/ivCover"
                     app:layout_constraintTop_toBottomOf="@+id/ivBackground" />
+
+                <ImageButton
+                    android:id="@+id/btnLike"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivBackground"
+                    app:srcCompat="@drawable/baseline_unlike_24" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
             
             <View
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:background="@color/color_bg_blue"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"/>
+                android:background="@color/color_bg_blue"/>
 
             <TextView
                 android:id="@+id/tvSynopsis"
@@ -107,28 +114,31 @@
                 android:lineSpacingExtra="8dp"
                 android:layout_margin="10dp"/>
 
-            <TextView
-                android:id="@+id/textView4"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Episodios"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:layout_marginTop="16dp"
-                android:background="@color/color_bg_blue"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"/>
+                android:orientation="horizontal"
+                android:background="@color/color_bg_blue">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Episodios"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"/>
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvEpisodes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="8dp"
+                android:layout_marginVertical="8dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -136,12 +146,9 @@
                 android:text="Elenco"
                 android:textColor="@color/white"
                 android:textSize="24sp"
-                android:layout_marginTop="16dp"
                 android:background="@color/color_bg_blue"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"/>
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCast"

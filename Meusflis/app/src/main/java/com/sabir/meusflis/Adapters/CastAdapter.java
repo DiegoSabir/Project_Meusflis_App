@@ -1,5 +1,6 @@
 package com.sabir.meusflis.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,43 +14,44 @@ import com.bumptech.glide.Glide;
 import com.sabir.meusflis.Models.CastModel;
 import com.sabir.meusflis.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CastAdapter extends RecyclerView.Adapter<CastAdapter.MyViewHolder> {
+public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder> {
 
-    private List<CastModel> castModels;
+    private List<CastModel> castList;
 
-    public CastAdapter(List<CastModel> castModels) {
-        this.castModels = castModels;
+    public CastAdapter(List<CastModel> castList) {
+        this.castList = castList != null ? castList : new ArrayList<>();
     }
 
     @NonNull
     @Override
-    public CastAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CastViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cast_item, parent, false);
-        return new MyViewHolder(view);
+        return new CastViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CastAdapter.MyViewHolder holder, int position) {
-        holder.cast_name.setText(castModels.get(position).getCname());
-        Glide.with(holder.itemView).load(castModels.get(position).getCurl()).into(holder.cast_image);
+    public void onBindViewHolder(@NonNull CastViewHolder holder, int position) {
+        holder.tvCastName.setText(castList.get(position).getName());
+        Glide.with(holder.itemView).load(castList.get(position).getUrl()).into(holder.ivCastImage);
     }
 
     @Override
     public int getItemCount() {
-        return castModels.size();
+        return castList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class CastViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView cast_image;
-        TextView cast_name;
+        ImageView ivCastImage;
+        TextView tvCastName;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public CastViewHolder(@NonNull View itemView) {
             super(itemView);
-            cast_image = itemView.findViewById(R.id.cast_image);
-            cast_name = itemView.findViewById(R.id.cast_name);
+            ivCastImage = itemView.findViewById(R.id.ivCastImage);
+            tvCastName = itemView.findViewById(R.id.tvCastName);
         }
     }
 }
