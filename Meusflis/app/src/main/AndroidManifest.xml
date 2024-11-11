@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,12 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Meusflis"
         tools:targetApi="31">
+
         <activity
-            android:name=".Activities.ForgotPasswordActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Meusflis" />
-        <activity
-            android:name=".Activities.LoginActivity"
+            android:name=".Activities.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,9 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Activities.DetailsActivity"
             android:exported="false" />
+
         <activity
             android:name=".Activities.PlayerActivity"
             android:exported="false"
@@ -40,9 +37,13 @@
             android:supportsPictureInPicture="true"
             android:theme="@style/Theme.AppCompat.FullScreen"
             tools:targetApi="n" />
+
         <activity
             android:name=".Activities.MainActivity"
-            android:exported="false"></activity>
+            android:exported="true">
+
+        </activity>
+
     </application>
 
 </manifest>

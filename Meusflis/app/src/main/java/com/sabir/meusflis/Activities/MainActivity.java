@@ -1,7 +1,6 @@
 package com.sabir.meusflis.Activities;
 
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -9,9 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.FirebaseApp;
 import com.sabir.meusflis.Fragments.HomeFragment;
-import com.sabir.meusflis.Fragments.ProfileFragment;
 import com.sabir.meusflis.Fragments.SearchFragment;
 import com.sabir.meusflis.R;
 
@@ -25,11 +22,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar tbAppName = findViewById(R.id.tbTitle);
-        setSupportActionBar(tbAppName);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Meusflis");
-
-        FirebaseApp.initializeApp(this);
 
         bnvMenu = findViewById(R.id.bnvMenu);
 
@@ -37,11 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment homeFragment = new HomeFragment();
         Fragment searchFragment = new SearchFragment();
-        Fragment profileFragment = new ProfileFragment();
 
-        Bundle bundle = new Bundle();
-        bundle.putString("userId", userId);
-        homeFragment.setArguments(bundle);
+         Bundle bundle = new Bundle();
+         bundle.putString("userId", userId);
+         homeFragment.setArguments(bundle);
 
         if (savedInstanceState == null){
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -49,9 +43,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         bnvMenu.setOnNavigationItemSelectedListener(item -> {
-
             FragmentManager fragmentManager = getSupportFragmentManager();
-
             if (item.getItemId() == R.id.nav_home){
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 homeFragment.setArguments(bundle);
@@ -62,11 +54,13 @@ public class MainActivity extends AppCompatActivity {
                 searchFragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.fragment_container, searchFragment).commit();
             }
-            else if (item.getItemId() == R.id.nav_profile){
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, profileFragment).commit();
-            }
             return true;
         });
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
     }
 }

@@ -16,16 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.auth.FirebaseAuth;
 
 import com.sabir.meusflis.R;
 
-public class LoginActivity extends AppCompatActivity {
-
-    FirebaseDatabase database = FirebaseDatabase.getInstance("https://meusflis-c2586-default-rtdb.europe-west1.firebasedatabase.app");
-    DatabaseReference databaseReference = database.getReference("user");
+public class SignInActivity extends AppCompatActivity {
 
     private EditText etUser, etPassword;
     private MaterialButton btnLogin;
@@ -39,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_in);
 
         etUser = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
@@ -60,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                 validateLogin(email, password);
             }
             else {
-                Toast.makeText(LoginActivity.this, "Introduzca los campos faltantes", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignInActivity.this, "Introduzca los campos faltantes", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -79,30 +74,29 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void validateLogin(String email, String password) {
-        auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        if (cbRememberUser.isChecked()) {
-                            savePreferences(email, password);
-                        }
-                        else {
-                            clearPreferences();
-                        }
-                        String userId = auth.getCurrentUser().getUid();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("userId", userId);
-                        intent.putExtra("email", email);
-                        startActivity(intent);
-                        finish();
-                    }
-                    else {
-                        Toast.makeText(LoginActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, task -> {
+            if (task.isSuccessful()) {
+                if (cbRememberUser.isChecked()) {
+                    savePreferences(email, password);
+                }
+                else {
+                    clearPreferences();
+                }
+                String userId = auth.getCurrentUser().getUid();
+                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                intent.putExtra("userId", userId);
+                intent.putExtra("email", email);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                Toast.makeText(SignInActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void showForgotPasswordDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(SignInActivity.this);
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_forgot, null);
         EditText emailBox = dialogView.findViewById(R.id.etEmailBox);
 
@@ -113,18 +107,18 @@ public class LoginActivity extends AppCompatActivity {
             String userEmail = emailBox.getText().toString();
 
             if (TextUtils.isEmpty(userEmail) || !Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
-                Toast.makeText(LoginActivity.this, "Introduzca el correo electronico del usuario", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignInActivity.this, "Introduzca el correo electronico del usuario", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             auth.sendPasswordResetEmail(userEmail)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Comprueba el correo electrónico", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignInActivity.this, "Comprueba el correo electrónico", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         }
                         else {
-                            Toast.makeText(LoginActivity.this, "No se ha detectado ningun correo electronico", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignInActivity.this, "No se ha detectado ningun correo electronico", Toast.LENGTH_SHORT).show();
                         }
                     });
         });

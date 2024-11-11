@@ -1,0 +1,9 @@
+Android key (auto created by Firebase)
+Para usar esta clave en tu aplicación, transfiérela con el parámetro key=API_KEY.
+AIzaSyBg650V3PgeHB5BkWju2VOiyvILiOR1SrM
+
+------------------------------
+
+Browser key (auto created by Firebase)
+Para usar esta clave en tu aplicación, transfiérela con el parámetro key=API_KEY.
+AIzaSyApRiC0dPvHtc2_B0HBcWnRX9E8jBdTsIc

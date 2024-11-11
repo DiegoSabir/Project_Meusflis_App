@@ -1,37 +1,39 @@
 package com.sabir.meusflis.Models;
 
-import java.util.Map;
-
 public class SeriesModel {
 
-    private String background, cover, id, synopsis, title, trailer;
-    private Map<String, String> cast;
-    private Map<String, String> genre;
-    private int likeCounter;
-    private Map<String, EpisodeModel> episode;
+    private String idSeries, cast, cover, synopsis, episodes, thumb, title, trailer;
+    private int like;
 
     public SeriesModel() {
     }
 
-    public SeriesModel(String background, String id, String cover, String synopsis, String title, String trailer, Map<String, String> cast, Map<String, String> genre, int likeCounter, Map<String, EpisodeModel> episode) {
-        this.background = background;
-        this.id = id;
+    public SeriesModel(String idSeries, String cast, String cover, String synopsis, String episodes, String thumb, String title, String trailer, int like) {
+        this.idSeries = idSeries;
+        this.cast = cast;
         this.cover = cover;
         this.synopsis = synopsis;
+        this.episodes = episodes;
+        this.thumb = thumb;
         this.title = title;
         this.trailer = trailer;
+        this.like = like;
+    }
+
+    public String getIdSeries() {
+        return idSeries;
+    }
+
+    public void setIdSeries(String idSeries) {
+        this.idSeries = idSeries;
+    }
+
+    public String getCast() {
+        return cast;
+    }
+
+    public void setCast(String cast) {
         this.cast = cast;
-        this.genre = genre;
-        this.likeCounter = likeCounter;
-        this.episode = episode;
-    }
-
-    public String getBackground() {
-        return background;
-    }
-
-    public void setBackground(String background) {
-        this.background = background;
     }
 
     public String getCover() {
@@ -42,20 +44,28 @@ public class SeriesModel {
         this.cover = cover;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getSynopsis() {
         return synopsis;
     }
 
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
+    }
+
+    public String getEpisodes() {
+        return episodes;
+    }
+
+    public void setEpisodes(String episodes) {
+        this.episodes = episodes;
+    }
+
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
     }
 
     public String getTitle() {
@@ -74,35 +84,11 @@ public class SeriesModel {
         this.trailer = trailer;
     }
 
-    public Map<String, String> getCast() {
-        return cast;
+    public int getLike() {
+        return like;
     }
 
-    public void setCast(Map<String, String> cast) {
-        this.cast = cast;
-    }
-
-    public Map<String, String> getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Map<String, String> genre) {
-        this.genre = genre;
-    }
-
-    public Map<String, EpisodeModel> getEpisode() {
-        return episode;
-    }
-
-    public void setEpisode(Map<String, EpisodeModel> episode) {
-        this.episode = episode;
-    }
-
-    public int getLikeCounter() {
-        return likeCounter;
-    }
-
-    public void setLikeCounter(int likeCounter) {
-        this.likeCounter = likeCounter;
+    public void setLike(int like) {
+        this.like = like;
     }
 }

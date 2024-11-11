@@ -2,30 +2,29 @@ package com.sabir.meusflis.Models;
 
 public class CastModel {
 
-    private String name;
-    private String url;
+    String nameCast, imageCast;
 
     public CastModel() {
     }
 
-    public CastModel(String name, String url) {
-        this.name = name;
-        this.url = url;
+    public CastModel(String nameCast, String imageCast) {
+        this.nameCast = nameCast;
+        this.imageCast = imageCast;
     }
 
-    public String getName() {
-        return name;
+    public String getNameCast() {
+        return nameCast;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameCast(String nameCast) {
+        this.nameCast = nameCast;
     }
 
-    public String getUrl() {
-        return url;
+    public String getImageCast() {
+        return imageCast;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setImageCast(String imageCast) {
+        this.imageCast = imageCast;
     }
 }

@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
-    android:layout_height="wrap_content">
-    
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="5dp"
+    android:background="@color/color_bg_blue">
+
     <ImageView
-        android:id="@+id/ivCastImage"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:id="@+id/itemCastImage"
+        android:layout_width="90dp"
+        android:layout_height="70dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background"/>
 
     <TextView
-        android:id="@+id/tvCastName"
-        android:layout_width="match_parent"
+        android:id="@+id/itemCastName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ivCastImage"
-        android:text="cast"
+        android:text="Character Name"
         android:textColor="@color/white"
         android:gravity="center"
-        android:padding="8dp"
-        android:background="#1A243F"/>
+        android:padding="2dp"
+        android:background="#1A243F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemCastImage"/>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@
     tools:context=".Activities.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tbTitle"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/color_bg_blue"
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="-8dp"
-        android:layout_below="@id/tbTitle"
+        android:layout_below="@id/toolbar"
         android:layout_above="@+id/bnvMenu"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

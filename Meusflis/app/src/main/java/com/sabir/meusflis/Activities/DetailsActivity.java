@@ -2,6 +2,7 @@ package com.sabir.meusflis.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -24,9 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.sabir.meusflis.Adapters.CastAdapter;
-import com.sabir.meusflis.Adapters.EpisodeAdapter;
-import com.sabir.meusflis.Adapters.GenreAdapter;
 import com.sabir.meusflis.Models.CastModel;
+import com.sabir.meusflis.Adapters.EpisodeAdapter;
 import com.sabir.meusflis.Models.EpisodeModel;
 import com.sabir.meusflis.R;
 
@@ -35,26 +35,24 @@ import java.util.List;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance("https://meusflis-c2586-default-rtdb.europe-west1.firebasedatabase.app");
-    private DatabaseReference seriesRef, userRef;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    private List<String> genreList;
     private List<CastModel> castModels;
     private List<EpisodeModel> episodeModels;
 
-    private GenreAdapter genreAdapter;
     private CastAdapter castAdapter;
     private EpisodeAdapter episodeAdapter;
 
-    private RecyclerView rvGenre, rvEpisodes, rvCast;
-    private ImageView ivCover, ivBackground;
-    private TextView tvSynopsis;
+    private RecyclerView rvEpisodes, rvCast;
+
+    private ImageView ivThumb, ivCover;
+    private TextView tvDescription;
     private FloatingActionButton fabTrailer;
-    private ImageButton btnLike;
+    private ImageButton ibLike;
+
+    private String id_data, title_data, description_data, thumb_data, link_data, cover_data, cast_data, trailer_data;
 
     private String userId;
-    private String idData, titleData, synopsisData, coverData, backgroundData, trailerData;
-
     private boolean isLiked = false;
 
     @Override
@@ -62,123 +60,60 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        initViews();
-
-        receiveDataFromIntent();
-
-        setUpUI();
-
-        setupRecyclerView();
-
-        setupLikeButton();
-
-        playTrailer();
-    }
-
-    private void initViews() {
-        rvGenre = findViewById(R.id.rvGenre);
-        rvEpisodes = findViewById(R.id.rvEpisodes);
-        rvCast = findViewById(R.id.rvCast);
-
+        ivThumb = findViewById(R.id.ivThumb);
         ivCover = findViewById(R.id.ivCover);
-        ivBackground = findViewById(R.id.ivBackground);
-
-        tvSynopsis = findViewById(R.id.tvSynopsis);
-
-        btnLike = findViewById(R.id.btnLike);
-
+        tvDescription = findViewById(R.id.tvDescription);
         fabTrailer = findViewById(R.id.fabTrailer);
-    }
+        ibLike = findViewById(R.id.ibLike);
 
-    private void receiveDataFromIntent() {
-        Intent intent = getIntent();
-        userId = intent.getStringExtra("userId");
+        rvCast = findViewById(R.id.rvCast);
+        rvEpisodes = findViewById(R.id.rvEpisodes);
 
-        titleData = intent.getStringExtra("title");
-        synopsisData = intent.getStringExtra("synopsis");
-        coverData = intent.getStringExtra("cover");
-        backgroundData = intent.getStringExtra("background");
-        trailerData = intent.getStringExtra("trailer");
-        idData = intent.getStringExtra("id");
+        id_data = getIntent().getStringExtra("idSeries");
+        title_data = getIntent().getStringExtra("title");
+        description_data = getIntent().getStringExtra("description");
+        thumb_data = getIntent().getStringExtra("thumb");
+        link_data = getIntent().getStringExtra("link");
+        cover_data = getIntent().getStringExtra("cover");
+        cast_data = getIntent().getStringExtra("cast");
+        trailer_data = getIntent().getStringExtra("trailer");
 
-        castModels = new ArrayList<>();
-        Bundle castBundle = intent.getBundleExtra("cast");
-        if (castBundle != null) {
-            int castSize = castBundle.size() / 2;
-            for (int i = 0; i < castSize; i++) {
-                String name = castBundle.getString("c_name" + i);
-                String url = castBundle.getString("c_url" + i);
-                castModels.add(new CastModel(name, url));
-            }
-        }
+        userId = getIntent().getStringExtra("userId");
 
-        episodeModels = new ArrayList<>();
-        Bundle episodesBundle = intent.getBundleExtra("episode");
-        if (episodesBundle != null) {
-            int episodeCount = episodesBundle.getInt("episode_count", 0);
-            for (int i = 0; i < episodeCount; i++) {
-                String episodeId = episodesBundle.getString("episode_id" + i);
-                String episodeTitle = episodesBundle.getString("episode_title" + i);
-                String episodeUrl = episodesBundle.getString("episode_url" + i);
-                episodeModels.add(new EpisodeModel(episodeId, episodeTitle, episodeUrl));
-            }
-        }
-    }
-
-    private void setUpUI() {
-        Toolbar tbTitle = findViewById(R.id.tbTitle);
-        setSupportActionBar(tbTitle);
-        getSupportActionBar().setTitle(titleData);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(title_data);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Glide.with(this).load(coverData).into(ivCover);
-        Glide.with(this).load(backgroundData).into(ivBackground);
+        String coverUrl = "https://drive.google.com/uc?export=download&id=" + cover_data;
+        String thumbUrl = "https://drive.google.com/uc?export=download&id=" + thumb_data;
+        Glide.with(this).load(thumbUrl).into(ivThumb);
+        Glide.with(this).load(coverUrl).into(ivCover);
+        ivThumb.setAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_animation));
         ivCover.setAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_animation));
-        ivBackground.setAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_animation));
 
-        tvSynopsis.setText(synopsisData);
+        tvDescription.setText(description_data);
 
-        setupGenreRecyclerView();
-    }
-
-    private void setupGenreRecyclerView() {
-        genreList = new ArrayList<>();
-        Bundle genreBundle = getIntent().getBundleExtra("genre");
-        if (genreBundle != null) {
-            for (String key : genreBundle.keySet()) {
-                genreList.add(genreBundle.getString(key));
-            }
-        }
-
-        genreAdapter = new GenreAdapter(this, genreList);
-        rvGenre.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        rvGenre.setAdapter(genreAdapter);
-    }
-
-    private void setupRecyclerView() {
-        castAdapter = new CastAdapter(castModels);
-        rvCast.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        rvCast.setAdapter(castAdapter);
-
-        episodeAdapter = new EpisodeAdapter(this, episodeModels);
-        rvEpisodes.setLayoutManager(new LinearLayoutManager(this));
-        rvEpisodes.setAdapter(episodeAdapter);
+        setupLikeButton();
+        loadTrailer();
+        loadCast();
+        loadEpisode();
     }
 
     private void setupLikeButton() {
-        seriesRef = database.getReference("series").child(idData);
-        userRef = database.getReference("user").child(userId);
+        DatabaseReference seriesReference = database.getReference("series").child(id_data);
+        DatabaseReference userReference = database.getReference("user").child(userId);
 
-        userRef.child("like_series").addListenerForSingleValueEvent(new ValueEventListener() {
+        userReference.child("likeSeries").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChild(idData)) {
+                if (snapshot.hasChild(id_data)) {
                     isLiked = true;
-                    btnLike.setImageResource(R.drawable.baseline_like_24);
+                    ibLike.setImageResource(R.drawable.like_on);
                 } else {
                     isLiked = false;
-                    btnLike.setImageResource(R.drawable.baseline_unlike_24);
+                    ibLike.setImageResource(R.drawable.like_off);
                 }
             }
 
@@ -188,47 +123,93 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
-        btnLike.setOnClickListener(v -> {
+        ibLike.setOnClickListener(v -> {
             if (isLiked) {
-                unlikeSeries();
+                isLiked = false;
+                ibLike.setImageResource(R.drawable.like_off);
+                seriesReference.child("like").setValue(ServerValue.increment(-1));
+                userReference.child("likeSeries").child(id_data).removeValue();
             }
             else {
-                likeSeries();
+                isLiked = true;
+                ibLike.setImageResource(R.drawable.like_on);
+                seriesReference.child("like").setValue(ServerValue.increment(1));
+                userReference.child("likeSeries").child(id_data).setValue(id_data);
             }
         });
     }
 
-    private void likeSeries() {
-        isLiked = true;
-        btnLike.setImageResource(R.drawable.baseline_like_24);
-        seriesRef.child("like_counter").setValue(ServerValue.increment(1));
-        userRef.child("like_series").child(idData).setValue(idData);
-    }
-
-    private void unlikeSeries() {
-        isLiked = false;
-        btnLike.setImageResource(R.drawable.baseline_unlike_24);
-        seriesRef.child("like_counter").setValue(ServerValue.increment(-1));
-        userRef.child("like_series").child(idData).removeValue();
-    }
-
-    private void playTrailer() {
+    private void loadTrailer() {
         fabTrailer.setOnClickListener(v -> {
-            if (trailerData != null && !trailerData.isEmpty()) {
+            if (trailer_data != null && !trailer_data.isEmpty()) {
                 Intent intent = new Intent(DetailsActivity.this, PlayerActivity.class);
-                intent.putExtra("vid", trailerData);
+                intent.putExtra("vid", trailer_data); // Usamos trailer_data directamente
+                intent.putExtra("title", title_data);
                 startActivity(intent);
-            }
-            else {
+            } else {
                 Toast.makeText(DetailsActivity.this, "Trailer no disponible", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
+
+    private void loadEpisode() {
+        DatabaseReference episodeReference = database.getReference();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        rvEpisodes.setLayoutManager(layoutManager);
+
+        episodeModels = new ArrayList<>();
+        episodeAdapter = new EpisodeAdapter(episodeModels);
+        rvEpisodes.setAdapter(episodeAdapter);
+
+        episodeReference.child("episode").child(link_data).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot content:snapshot.getChildren()){
+                    EpisodeModel episodeModel = content.getValue(EpisodeModel.class);
+                    episodeModels.add(episodeModel);
+                }
+                episodeAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void loadCast() {
+        DatabaseReference castReference = database.getReference();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        rvCast.setLayoutManager(layoutManager);
+
+        castModels = new ArrayList<>();
+        castAdapter = new CastAdapter(castModels);
+        rvCast.setAdapter(castAdapter);
+
+        castReference.child("cast").child(cast_data).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot content:snapshot.getChildren()){
+                    CastModel castModel = content.getValue(CastModel.class);
+                    castModels.add(castModel);
+                }
+                castAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home){
             finish();
         }
         return super.onOptionsItemSelected(item);

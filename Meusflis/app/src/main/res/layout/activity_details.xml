@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/purple_500"
     tools:context=".Activities.DetailsActivity">
-    
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -19,7 +19,7 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/tbTitle"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/ivBackground"
+                    android:id="@+id/ivCover"
                     android:layout_width="0dp"
                     android:layout_height="275dp"
                     android:scaleType="centerCrop"
@@ -41,24 +41,24 @@
                     app:srcCompat="@drawable/ic_launcher_background"/>
 
                 <ImageView
-                    android:id="@+id/ivDecoration"
+                    android:id="@+id/decoration"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivBackground"
-                    app:layout_constraintEnd_toEndOf="@+id/ivBackground"
-                    app:layout_constraintStart_toStartOf="@+id/ivBackground"
-                    app:srcCompat="@drawable/gradiant_bg"/>
+                    app:layout_constraintBottom_toBottomOf="@+id/ivCover"
+                    app:layout_constraintEnd_toEndOf="@+id/ivCover"
+                    app:layout_constraintStart_toStartOf="@+id/ivCover"
+                    app:srcCompat="@drawable/gradient_bg"/>
 
                 <ImageView
-                    android:id="@+id/ivCover"
+                    android:id="@+id/ivThumb"
                     android:layout_width="125dp"
                     android:layout_height="175dp"
                     android:layout_marginStart="16dp"
                     android:scaleType="centerCrop"
-                    android:transitionName="imageMain"
+                    android:transitionName="ImageMain"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/ivDecoration"
-                    app:layout_constraintTop_toTopOf="@+id/ivDecoration"
+                    app:layout_constraintStart_toStartOf="@+id/decoration"
+                    app:layout_constraintTop_toTopOf="@+id/decoration"
                     app:srcCompat="@drawable/ic_launcher_background"/>
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -67,99 +67,74 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:focusable="true"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivBackground"
-                    app:layout_constraintEnd_toEndOf="@+id/ivBackground"
-                    app:layout_constraintStart_toStartOf="@+id/ivBackground"
-                    app:layout_constraintTop_toTopOf="@+id/ivBackground"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivCover"
+                    app:layout_constraintEnd_toEndOf="@+id/ivCover"
+                    app:layout_constraintStart_toStartOf="@+id/ivCover"
+                    app:layout_constraintTop_toTopOf="@+id/ivCover"
                     app:srcCompat="@drawable/ic_play_button"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvGenre"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="15dp"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal"
-                    tools:listitem="@layout/genre_item"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/btnLike"
-                    app:layout_constraintStart_toEndOf="@+id/ivCover"
-                    app:layout_constraintTop_toBottomOf="@+id/ivBackground" />
-
                 <ImageButton
-                    android:id="@+id/btnLike"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ivBackground"
-                    app:srcCompat="@drawable/baseline_unlike_24" />
-
+                    android:id="@+id/ibLike"
+                    android:layout_width="60dp"
+                    android:layout_height="70dp"
+                    android:background="@color/purple_500"
+                    android:src="@drawable/like_off"
+                    app:layout_constraintBottom_toBottomOf="@id/ivThumb"
+                    app:layout_constraintStart_toEndOf="@id/ivThumb"
+                    app:layout_constraintTop_toTopOf="@id/ivThumb"
+                    app:layout_constraintVertical_bias="1.0"
+                    android:visibility="visible"/>
+¡
             </androidx.constraintlayout.widget.ConstraintLayout>
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:background="@color/color_bg_blue"/>
 
             <TextView
-                android:id="@+id/tvSynopsis"
+                android:id="@+id/tvCast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description"
-                android:textColor="@color/color_text_blue"
-                android:textSize="16sp"
-                android:lineSpacingExtra="8dp"
-                android:layout_margin="10dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@color/color_bg_blue">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Episodios"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp"/>
-
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvEpisodes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginVertical="8dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Elenco"
+                android:layout_marginTop="15dp"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="15dp"
+                android:text="Cast"
                 android:textColor="@color/white"
                 android:textSize="24sp"
-                android:background="@color/color_bg_blue"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"/>
+                android:background="@color/color_bg_blue"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"/>
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Description"
+                android:textColor="@color/color_text_blue"
+                android:lineSpacingExtra="8dp"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/tvEpisodes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="15dp"
+                android:text="Episodes"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:background="@color/color_bg_blue"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvEpisodes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"/>
 
         </LinearLayout>
-
+        
     </ScrollView>
 
 </LinearLayout>

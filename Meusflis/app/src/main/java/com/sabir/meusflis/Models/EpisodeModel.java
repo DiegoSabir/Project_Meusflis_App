@@ -2,40 +2,38 @@ package com.sabir.meusflis.Models;
 
 public class EpisodeModel {
 
-    private String episode_id;
-    private String episode_title;
-    private String episode_url;
+    String titleEpisode, imageEpisode, videoEpisode;
 
     public EpisodeModel() {
     }
 
-    public EpisodeModel(String episode_id, String episode_title, String episode_url) {
-        this.episode_id = episode_id;
-        this.episode_title = episode_title;
-        this.episode_url = episode_url;
+    public EpisodeModel(String titleEpisode, String imageEpisode, String videoEpisode) {
+        this.titleEpisode = titleEpisode;
+        this.imageEpisode = imageEpisode;
+        this.videoEpisode = videoEpisode;
     }
 
-    public String getEpisodeId() {
-        return episode_id;
+    public String getTitleEpisode() {
+        return titleEpisode;
     }
 
-    public void setEpisodeId(String episode_id) {
-        this.episode_id = episode_id;
+    public void setTitleEpisode(String titleEpisode) {
+        this.titleEpisode = titleEpisode;
     }
 
-    public String getEpisodeTitle() {
-        return episode_title;
+    public String getImageEpisode() {
+        return imageEpisode;
     }
 
-    public void setEpisodeTitle(String episode_title) {
-        this.episode_title = episode_title;
+    public void setImageEpisode(String imageEpisode) {
+        this.imageEpisode = imageEpisode;
     }
 
-    public String getEpisodeUrl() {
-        return episode_url;
+    public String getVideoEpisode() {
+        return videoEpisode;
     }
 
-    public void setEpisodeUrl(String episode_url) {
-        this.episode_url = episode_url;
+    public void setVideoEpisode(String videoEpisode) {
+        this.videoEpisode = videoEpisode;
     }
 }

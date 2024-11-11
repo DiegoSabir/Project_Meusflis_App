@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.sabir.meusflis"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -30,19 +30,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    buildFeatures {
-        viewBinding = true
-    }
 }
 
 dependencies {
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.firebase.database)
-    implementation(libs.navigation.fragment)
-    implementation(libs.navigation.ui)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -50,16 +46,13 @@ dependencies {
     implementation(libs.autoimageslider)
 
     implementation(libs.glide)
-
-    annotationProcessor(libs.glide.compiler)
+    annotationProcessor(libs.compiler)
 
     implementation(libs.exoplayer)
 
-    implementation ("com.google.firebase:firebase-auth:21.0.0")
+    implementation (libs.firebase.auth)
 
-    implementation("com.squareup.picasso:picasso:2.71828")
+    implementation(libs.shimmer)
 
-    implementation("com.facebook.shimmer:shimmer:0.5.0")
-
-    implementation("com.makeramen:roundedimageview:2.3.0")
+    implementation(libs.roundedimageview)
 }
