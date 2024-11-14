@@ -19,7 +19,7 @@ import java.util.List;
 
 public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.MyViewHolder> {
 
-    private List<EpisodeModel> episodeModels;
+    private final List<EpisodeModel> episodeModels;
 
     public EpisodeAdapter(List<EpisodeModel> episodeModels) {
         this.episodeModels = episodeModels;
@@ -35,7 +35,11 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.itemEpisodeTitle.setText(episodeModels.get(position).getTitleEpisode());
-        Glide.with(holder.itemView).load(episodeModels.get(position).getImageEpisode()).into(holder.itemEpisodeImage);
+
+        String imageEpisodeUrl = "https://drive.google.com/uc?export=download&id=" + episodeModels.get(position).getImageEpisode();
+        Glide.with(holder.itemEpisodeImage.getContext()).load(imageEpisodeUrl).into(holder.itemEpisodeImage);
+
+        //Glide.with(holder.itemView).load(episodeModels.get(position).getImageEpisode()).into(holder.itemEpisodeImage);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), PlayerActivity.class);
@@ -50,7 +54,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.MyViewHo
         return episodeModels.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         ImageView itemEpisodeImage;
         TextView itemEpisodeTitle;

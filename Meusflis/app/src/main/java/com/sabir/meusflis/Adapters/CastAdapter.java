@@ -33,7 +33,9 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.itemCastName.setText(castModels.get(position).getNameCast());
-        Glide.with(holder.itemView).load(castModels.get(position).getImageCast()).into(holder.itemCastImage);
+
+        String imageUrl = "https://drive.google.com/uc?export=download&id=" + castModels.get(position).getImageCast();
+        Glide.with(holder.itemCastImage.getContext()).load(imageUrl).into(holder.itemCastImage);
     }
 
     @Override

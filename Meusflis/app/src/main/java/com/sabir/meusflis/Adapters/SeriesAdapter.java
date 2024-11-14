@@ -21,7 +21,7 @@ import java.util.List;
 
 public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.MyViewHolder>{
 
-    private List<SeriesModel> modelList;
+    private final List<SeriesModel> modelList;
     private final String userId;
 
     public SeriesAdapter(List<SeriesModel> modelList, String userId) {
